@@ -11,9 +11,6 @@ telescope.setup {
             no_ignore = true, -- Show files ignored by `.gitignore`.
         },
     },
-    file_ignore_patterns = {
-        ".git/*", "node_modules/",
-    },
     defaults = {
         vimgrep_arguments = {
             'rg',
@@ -26,6 +23,9 @@ telescope.setup {
             '--hidden',
             '--glob', '!.git/', -- Exclude from grep.
             '--glob', '!node_modules/', -- Exclude from grep.
+        },
+        file_ignore_patterns = {
+            ".git/", "node_modules/",
         },
     },
     extensions = {

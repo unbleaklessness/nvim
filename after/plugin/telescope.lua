@@ -4,13 +4,15 @@ vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
 
 local telescope = require('telescope')
 
-telescope.load_extension "file_browser"
-
 telescope.setup {
     pickers = {
         find_files = {
-            hidden = true,
+            hidden = true, -- Show hidden files (such as dot files).
+            no_ignore = true, -- Show files ignored by `.gitignore`.
         },
+    },
+    file_ignore_patterns = {
+        ".git/*", "node_modules/",
     },
     defaults = {
         vimgrep_arguments = {
@@ -22,9 +24,18 @@ telescope.setup {
             '--column',
             '--smart-case',
             '--hidden',
+            '--glob', '!.git/', -- Exclude from grep.
+            '--glob', '!node_modules/', -- Exclude from grep.
+        },
+    },
+    extensions = {
+        file_browser = {
+            hidden = true, -- Show hidden files (such as dot files).
         },
     },
 }
+
+telescope.load_extension "file_browser"
 
 vim.api.nvim_set_keymap(
     "n",

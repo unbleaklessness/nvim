@@ -2,12 +2,11 @@
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
-require("nvim-tree").setup()
-
--- vim.api.nvim_del_keymap(
---     "n",
---     "<leader>ft"
--- )
+require("nvim-tree").setup({
+    git = {
+        ignore = false, -- Show files ignored by `.gitignore`.
+    },
+})
 
 vim.api.nvim_set_keymap(
     "n",

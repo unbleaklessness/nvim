@@ -25,7 +25,9 @@ telescope.setup {
             '--glob', '!node_modules/', -- Exclude from grep.
         },
         file_ignore_patterns = {
-            ".git/", "node_modules/",
+            '.git/',
+            'node_modules/',
+            'venv/',
         },
     },
     extensions = {

@@ -4,8 +4,7 @@ vim.opt.nu = true -- Enable line numbers.
 vim.opt.relativenumber = true -- Enable negative line numbers.
 
 vim.opt.tabstop = 4 -- Number of spaces that a <Tab> in the file counts for.
-vim.opt.softtabstop = 4 -- Number of spaces that a <Tab> counts for while performing editing
-	                -- operations, like inserting a <Tab> or using <BS>
+vim.opt.softtabstop = 4 -- Number of spaces that a <Tab> counts for while performing editing operations, like inserting a <Tab> or using <BS>
 vim.opt.shiftwidth = 4 -- Number of spaces to use for each step of (auto)indent.
 vim.opt.expandtab = true -- In Insert mode: Use the appropriate number of spaces to insert a <Tab>.
 
@@ -36,8 +35,9 @@ vim.opt.iminsert = 0 -- Do not use the Russian keyboard layout when NeoVim initi
 
 vim.opt.guifont = "UbuntuMono Nerd Font:h20" -- Set font and font size for GUI NeoVim.
 
--- pcall(function ()
---     vim.api.nvim_exec('language en_US', true)
--- end)
-
+-- vim.api.nvim_exec('language en_US', true)
 vim.api.nvim_exec('language en_US.UTF-8', true) -- Set NeoVim language to English.
+
+vim.opt.list = true
+vim.opt.listchars:append "space:·"
+vim.opt.listchars:append "eol:↴"

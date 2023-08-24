@@ -41,3 +41,4 @@ vim.api.nvim_exec('language en_US.UTF-8', true) -- Set NeoVim language to Englis
 vim.opt.list = true
 vim.opt.listchars:append "space:·"
 vim.opt.listchars:append "eol:↴"
+vim.opt.listchars:append "tab:▸·"

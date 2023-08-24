@@ -38,7 +38,8 @@ vim.opt.guifont = "UbuntuMono Nerd Font:h20" -- Set font and font size for GUI N
 -- vim.api.nvim_exec('language en_US', true)
 vim.api.nvim_exec('language en_US.UTF-8', true) -- Set NeoVim language to English.
 
-vim.opt.list = true
-vim.opt.listchars:append "space:·"
-vim.opt.listchars:append "eol:↴"
-vim.opt.listchars:append "tab:▸·"
+-- Display whitespace characters.
+-- vim.opt.list = true
+-- vim.opt.listchars:append "space:·"
+-- vim.opt.listchars:append "eol:↴"
+-- vim.opt.listchars:append "tab:▸·"

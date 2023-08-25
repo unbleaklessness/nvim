@@ -6,11 +6,24 @@ require("nvim-tree").setup({
     git = {
         ignore = false, -- Show files ignored by `.gitignore`.
     },
+    view = {
+        relativenumber = true,
+        number = true,
+        adaptive_size = true,
+        centralize_selection = true,
+        preserve_window_proportions = true,
+        signcolumn = "no",
+    },
+    renderer = {
+        icons = {
+            git_placement = "after",
+        },
+    },
 })
 
 vim.api.nvim_set_keymap(
     "n",
     "<leader>ft",
-    ":NvimTreeToggle<CR>",
+    ":NvimTreeFindFileToggle<CR>",
     { noremap = false }
 )

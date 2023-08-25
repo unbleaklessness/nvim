@@ -13,6 +13,11 @@ return require('packer').startup(function (use)
         requires = { {'nvim-lua/plenary.nvim'} },
     }
 
+    use {
+        "nvim-telescope/telescope-file-browser.nvim",
+        requires = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
+    }
+
     use 'tpope/vim-fugitive'
 
     use {
@@ -30,8 +35,6 @@ return require('packer').startup(function (use)
         }
     }
 
-    use "williamboman/mason.nvim"
-
     use {
         "nvim-tree/nvim-tree.lua",
         requires = {
@@ -41,13 +44,11 @@ return require('packer').startup(function (use)
 
     use 'folke/tokyonight.nvim'
 
-    use {
-        "nvim-telescope/telescope-file-browser.nvim",
-        requires = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
-    }
-
     use 'm4xshen/autoclose.nvim'
 
     use "lukas-reineke/indent-blankline.nvim"
 
+    use 'mfussenegger/nvim-dap'
+
+    use "airblade/vim-gitgutter"
 end)

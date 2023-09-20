@@ -21,7 +21,7 @@ vim.opt.incsearch = true -- While typing a search command, show where the patter
 vim.opt.termguicolors = true -- Enables 24-bit RGB color in the TUI.
 
 vim.opt.scrolloff = 10 -- Minimal number of screen lines to keep above and below the cursor.
-vim.opt.sidescrolloff = 9999 -- The minimal number of screen columns to keep to the left and to the right of the cursor.
+vim.opt.sidescrolloff = 20 -- The minimal number of screen columns to keep to the left and to the right of the cursor.
 vim.opt.signcolumn = "yes" -- When and how to draw the sign column.
 
 vim.opt.updatetime = 50 -- If this many milliseconds nothing is typed the swap file will be written to disk.

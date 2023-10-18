@@ -48,7 +48,9 @@ return require('packer').startup(function (use)
 
     use "lukas-reineke/indent-blankline.nvim"
 
-    use 'mfussenegger/nvim-dap'
+    use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } }
 
     use "airblade/vim-gitgutter"
+
+    use 'numToStr/Comment.nvim'
 end)

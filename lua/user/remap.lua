@@ -4,3 +4,10 @@ vim.api.nvim_set_keymap(
     ":source $MYVIMRC<CR>",
     { noremap = true }
 )
+
+vim.api.nvim_set_keymap(
+    "n",
+    "<leader>tt",
+    ":!gnome-terminal<CR><CR>",
+    { noremap = true }
+)

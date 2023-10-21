@@ -43,7 +43,7 @@ vim.api.nvim_set_keymap(
     "n",
     "<leader>ft",
     ":NvimTreeFindFileToggle<CR>",
-    { noremap = false }
+    { noremap = true, silent = true }
 )
 
 

@@ -1,6 +1,6 @@
 vim.cmd.colorscheme("tokyonight-night")
 
--- -- Make background of inactive buffers darker.
+-- Make background of inactive buffers darker.
 vim.cmd([[
     highlight ActiveBufferBG guibg=#1A1B26
     highlight ActiveBufferFG guifg=#1A1B26
@@ -8,8 +8,8 @@ vim.cmd([[
     highlight ActiveBufferColorColumn guibg=#15161E
 ]])
 vim.cmd([[
-    highlight InactiveBufferBG guibg=#000000
-    highlight InactiveBufferFG guifg=#000000
+    highlight InactiveBufferBG guibg=#010101
+    highlight InactiveBufferFG guifg=#010101
     highlight InactiveBufferCursorLine guibg=#292E42
     highlight InactiveBufferColorColumn guibg=#15161E
 ]])

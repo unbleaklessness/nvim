@@ -1,3 +1,9 @@
+-- Set the color of the icons.
+-- local icons = require'nvim-web-devicons'.get_icons()
+-- for _, value in pairs(icons) do
+--     value.color = "#A9B1D6"
+-- end
+
 -- Disable NetRW.
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
@@ -12,10 +18,14 @@ require("nvim-tree").setup({
         adaptive_size = true,
         centralize_selection = true,
         preserve_window_proportions = true,
-        signcolumn = "no",
+        signcolumn = "auto",
+    },
+    diagnostics = {
+        enable = true,
     },
     renderer = {
         root_folder_label = ":p:~",
+        highlight_diagnostics = true,
         icons = {
             git_placement = "after",
             show = {
@@ -35,3 +45,5 @@ vim.api.nvim_set_keymap(
     ":NvimTreeFindFileToggle<CR>",
     { noremap = false }
 )
+
+

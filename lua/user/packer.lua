@@ -53,4 +53,21 @@ return require('packer').startup(function (use)
     use "airblade/vim-gitgutter"
 
     use 'numToStr/Comment.nvim'
+
+    use 'Shatur/neovim-session-manager'
+
+    use({
+        "kylechui/nvim-surround",
+        tag = "*",
+        config = function()
+            require("nvim-surround").setup({})
+        end
+    })
+
+    use({
+        "Pocco81/auto-save.nvim",
+        config = function()
+            require("auto-save").setup {}
+        end,
+    })
 end)

@@ -28,8 +28,6 @@ vim.opt.updatetime = 50 -- If this many milliseconds nothing is typed the swap f
 
 vim.opt.colorcolumn = "80" -- Is a comma-separated list of screen columns that are highlighted.
 
-vim.opt.clipboard = "unnamedplus" -- Use system clipboard for all yank, delete, change and put operations.
-
 vim.opt.keymap = "russian-jcukenwin" -- Built-in Russian keyboard layout.
 vim.opt.iminsert = 0 -- Do not use the Russian keyboard layout when NeoVim initially starts.
 

@@ -28,6 +28,8 @@ telescope.setup {
             '.git/',
             'node_modules/',
             'venv/',
+            'build/',
+            '.cache/',
         },
     },
     extensions = {

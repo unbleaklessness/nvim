@@ -15,8 +15,13 @@ require("nvim-tree").setup({
         signcolumn = "no",
     },
     renderer = {
+        root_folder_label = ":p:~",
         icons = {
             git_placement = "after",
+        },
+        indent_markers = {
+            enable = true,
+            inline_arrows = false,
         },
     },
 })

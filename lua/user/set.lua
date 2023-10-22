@@ -10,6 +10,13 @@ vim.opt.expandtab = true -- In Insert mode: Use the appropriate number of spaces
 
 vim.opt.smartindent = true -- Do smart autoindenting when starting a new line.
 
+-- Case-insensitive search, unless '\C' or a capital letter is present in the search.
+vim.o.ignorecase = true
+vim.o.smartcase = true
+
+vim.o.updatetime = 250 -- If this many milliseconds nothing is typed the swap file will be written to disk. Also used for the 'CursorHold' event.
+vim.o.timeoutlen = 1000 -- Time in milliseconds to wait for a mapped sequence to complete.
+
 vim.opt.wrap = false -- When on, lines longer than the width of the window will wrap and displaying continues on the next line.
 
 vim.opt.backup = false -- Make a backup before overwriting a file. Leave it around after the file has been successfully written.

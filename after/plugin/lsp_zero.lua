@@ -41,3 +41,6 @@ cmp.setup({
     },
 })
 
+vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>ln", vim.lsp.buf.rename, { noremap = true, silent = true })
+

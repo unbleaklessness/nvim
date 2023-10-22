@@ -86,8 +86,15 @@ vim.api.nvim_set_keymap(
 
 vim.api.nvim_set_keymap(
     "n",
-    "<leader>b",
+    "<leader>?",
     ":Telescope oldfiles<CR>",
+    { noremap = true, silent = true }
+)
+
+vim.api.nvim_set_keymap(
+    "n",
+    "<leader>b",
+    ":Telescope buffers<CR>",
     { noremap = true, silent = true }
 )
 

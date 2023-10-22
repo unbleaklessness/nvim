@@ -1,6 +1,22 @@
 local lsp = require('lsp-zero')
 
 lsp.preset('recommended')
+
+lsp.ensure_installed({
+    'lua_ls',
+    'clangd',
+    'gopls',
+    'neocmake',
+})
+
+vim.diagnostic.config({
+    virtual_text = {
+        prefix = '▎',
+    }
+})
+
+require'lspconfig'.lua_ls.setup(lsp.nvim_lua_ls())
+
 lsp.setup()
 
 vim.cmd [[
@@ -14,8 +30,14 @@ vim.cmd [[
     sign define DiagnosticSignHint text= texthl=DiagnosticSignHint linehl= numhl=MyDiagnosticHint
 ]]
 
-vim.diagnostic.config({
-    virtual_text = {
-        prefix = '▎',
-    }
+local cmp = require('cmp')
+local cmp_action = lsp.cmp_action()
+
+cmp.setup({
+    mapping = {
+        -- Navigate between snippet placeholders.
+        ['<C-f>'] = cmp_action.luasnip_jump_forward(),
+        ['<C-b>'] = cmp_action.luasnip_jump_backward(),
+    },
 })
+

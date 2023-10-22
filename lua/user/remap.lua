@@ -1,7 +1,7 @@
 vim.api.nvim_set_keymap(
     "n",
     "<leader>tt",
-    ":!gnome-terminal<CR><CR>",
+    ":silent !kitty &<CR>",
     { noremap = true, silent = true }
 )
 

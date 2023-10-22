@@ -50,8 +50,6 @@ return require('packer').startup(function (use)
 
     use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } }
 
-    use "airblade/vim-gitgutter"
-
     use 'numToStr/Comment.nvim'
 
     use 'Shatur/neovim-session-manager'
@@ -70,4 +68,6 @@ return require('packer').startup(function (use)
             require("auto-save").setup {}
         end,
     })
+
+    use "lewis6991/gitsigns.nvim"
 end)

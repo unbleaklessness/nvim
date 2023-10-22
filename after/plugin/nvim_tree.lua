@@ -18,23 +18,25 @@ require("nvim-tree").setup({
         adaptive_size = true,
         centralize_selection = true,
         preserve_window_proportions = true,
-        signcolumn = "auto",
+        signcolumn = "yes",
     },
     diagnostics = {
         enable = true,
+        show_on_dirs = true,
     },
     renderer = {
         root_folder_label = ":p:~",
+        special_files = {},
         highlight_diagnostics = true,
         icons = {
             git_placement = "after",
             show = {
                 folder_arrow = false,
+                diagnostics = false,
             },
         },
         indent_markers = {
             enable = true,
-            inline_arrows = false,
         },
     },
 })

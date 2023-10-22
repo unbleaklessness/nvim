@@ -70,4 +70,6 @@ return require('packer').startup(function (use)
     })
 
     use "lewis6991/gitsigns.nvim"
+
+    use "debugloop/telescope-undo.nvim"
 end)

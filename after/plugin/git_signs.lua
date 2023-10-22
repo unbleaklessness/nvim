@@ -13,7 +13,7 @@ require('gitsigns').setup({
             if vim.wo.diff then
                 return ']c'
             end
-            vim.schedule(function() git_signs.next_hunk({ preview = true }) end)
+            vim.schedule(function() git_signs.next_hunk() end)
             return '<Ignore>'
         end, { expr = true })
 
@@ -21,7 +21,7 @@ require('gitsigns').setup({
             if vim.wo.diff then
                 return '[c'
             end
-            vim.schedule(function() git_signs.prev_hunk({ preview = true }) end)
+            vim.schedule(function() git_signs.prev_hunk() end)
             return '<Ignore>'
         end, { expr = true })
 

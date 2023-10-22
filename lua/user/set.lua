@@ -22,9 +22,7 @@ vim.opt.termguicolors = true -- Enables 24-bit RGB color in the TUI.
 
 vim.opt.scrolloff = 10 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.sidescrolloff = 20 -- The minimal number of screen columns to keep to the left and to the right of the cursor.
-vim.opt.signcolumn = "auto:3" -- When and how to draw the sign column.
-
-vim.opt.updatetime = 50 -- If this many milliseconds nothing is typed the swap file will be written to disk.
+vim.opt.signcolumn = "yes:1" -- When and how to draw the sign column.
 
 vim.opt.colorcolumn = "80" -- Is a comma-separated list of screen columns that are highlighted.
 
@@ -33,7 +31,7 @@ vim.opt.iminsert = 0 -- Do not use the Russian keyboard layout when NeoVim initi
 
 vim.opt.guifont = "Ubuntu Nerd Font:h20" -- Set font and font size for GUI NeoVim.
 
--- vim.api.nvim_exec('language en_US', true)
+-- vim.api.nvim_exec('language en_US', true) -- Set NeoVim language to English.
 vim.api.nvim_exec('language en_US.UTF-8', true) -- Set NeoVim language to English.
 
 -- Display whitespace characters.
@@ -42,7 +40,6 @@ vim.api.nvim_exec('language en_US.UTF-8', true) -- Set NeoVim language to Englis
 -- vim.opt.listchars:append "eol:↴"
 -- vim.opt.listchars:append "tab:▸·"
 
-vim.opt.autowriteall = true -- Write the contents of the file, if it has been modified.
-
 vim.opt.cursorline = true -- Highlight the text line of the cursor.
 
+vim.opt.undofile = true -- When on, Vim automatically saves undo history to an undo file when writing a buffer to a file, and restores undo history from the same file on buffer read.

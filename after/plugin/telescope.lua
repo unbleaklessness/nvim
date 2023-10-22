@@ -40,6 +40,7 @@ telescope.setup {
 }
 
 telescope.load_extension "file_browser"
+telescope.load_extension "undo"
 
 vim.api.nvim_set_keymap(
     "n",
@@ -59,5 +60,75 @@ vim.api.nvim_set_keymap(
     "n",
     "<leader>fg",
     ":Telescope live_grep<CR>",
+    { noremap = true, silent = true }
+)
+
+vim.api.nvim_set_keymap(
+    "n",
+    "<leader>lr",
+    ":Telescope lsp_references<CR>",
+    { noremap = true, silent = true }
+)
+
+vim.api.nvim_set_keymap(
+    "n",
+    "<leader>ls",
+    ":Telescope lsp_dynamic_workspace_symbols<CR>",
+    { noremap = true, silent = true }
+)
+
+vim.api.nvim_set_keymap(
+    "n",
+    "<leader>/",
+    ":Telescope current_buffer_fuzzy_find<CR>",
+    { noremap = true, silent = true }
+)
+
+vim.api.nvim_set_keymap(
+    "n",
+    "<leader>b",
+    ":Telescope oldfiles<CR>",
+    { noremap = true, silent = true }
+)
+
+vim.api.nvim_set_keymap(
+    "n",
+    "<leader>gi",
+    ":Telescope git_status<CR>",
+    { noremap = true, silent = true }
+)
+
+vim.api.nvim_set_keymap(
+    "n",
+    "<leader>gb",
+    ":Telescope git_branches<CR>",
+    { noremap = true, silent = true }
+)
+
+vim.api.nvim_set_keymap(
+    "n",
+    "<leader>gc",
+    ":Telescope git_commits<CR>",
+    { noremap = true, silent = true }
+)
+
+vim.api.nvim_set_keymap(
+    "n",
+    "<leader>gC",
+    ":Telescope git_bcommits<CR>",
+    { noremap = true, silent = true }
+)
+
+vim.api.nvim_set_keymap(
+    "n",
+    "<leader>gt",
+    ":Telescope git_stash<CR>",
+    { noremap = true, silent = true }
+)
+
+vim.api.nvim_set_keymap(
+    "n",
+    "<leader>u",
+    ":Telescope undo<CR>",
     { noremap = true, silent = true }
 )

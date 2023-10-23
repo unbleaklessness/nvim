@@ -50,3 +50,4 @@ vim.api.nvim_exec('language en_US.UTF-8', true) -- Set NeoVim language to Englis
 vim.opt.cursorline = true -- Highlight the text line of the cursor.
 
 vim.opt.undofile = true -- When on, Vim automatically saves undo history to an undo file when writing a buffer to a file, and restores undo history from the same file on buffer read.
+vim.opt.undolevels = 3000 -- Maximum number of changes that can be undone.

@@ -1,3 +1,10 @@
+require("tokyonight").setup({
+    styles = {
+        comments = { italic = false },
+        keywords = { italic = false },
+    },
+})
+
 vim.cmd.colorscheme("tokyonight-night")
 
 -- Make background of inactive buffers darker.

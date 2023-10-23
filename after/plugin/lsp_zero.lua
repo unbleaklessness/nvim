@@ -44,11 +44,11 @@ local cmp = require('cmp')
 local cmp_action = lsp.cmp_action()
 
 cmp.setup({
-    mapping = cmp.mapping.preset.insert({
+    mapping = {
         -- Navigate between snippet placeholders.
         ['<C-f>'] = cmp_action.luasnip_jump_forward(),
         ['<C-b>'] = cmp_action.luasnip_jump_backward(),
-    }),
+    },
 })
 
 vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, { noremap = true, silent = true })

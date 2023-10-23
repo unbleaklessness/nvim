@@ -5,6 +5,18 @@ vim.api.nvim_set_keymap(
     { noremap = true, silent = true }
 )
 
+-- vim.api.nvim_set_keymap("v", "y", "ygv<Esc>", { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap("v", "Y", "Ygv<Esc>", { noremap = true, silent = true })
+--
+-- vim.api.nvim_set_keymap("n", "<leader>y", "\"+ygv<Esc>", { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap("n", "<leader>Y", "\"+Ygv<Esc>", { noremap = true, silent = true })
+--
+-- vim.api.nvim_set_keymap("v", "<leader>y", "\"+ygv<Esc>", { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap("v", "<leader>Y", "\"+Ygv<Esc>", { noremap = true, silent = true })
+
+vim.api.nvim_set_keymap("v", "y", "y", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("v", "Y", "Y", { noremap = true, silent = true })
+
 vim.api.nvim_set_keymap("n", "<leader>y", "\"+y", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>Y", "\"+Y", { noremap = true, silent = true })
 

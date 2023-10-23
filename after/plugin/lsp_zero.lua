@@ -19,6 +19,14 @@ require('neodev').setup()
 
 require'lspconfig'.lua_ls.setup(lsp.nvim_lua_ls())
 
+require'lspconfig'.glslls.setup{
+    cmd = { "glslls", "--stdin", "--target-env", "opengl" }
+}
+-- NeoVim fails to identify the correct type for `frag` and `vert` extensions.
+vim.cmd [[
+    au BufNewFile,BufRead *.frag,*.vert,*.glsl set filetype=glsl
+]]
+
 lsp.setup()
 
 vim.cmd [[

@@ -8,22 +8,35 @@ require("tokyonight").setup({
 vim.cmd.colorscheme("tokyonight-night")
 
 -- Make background of inactive buffers darker.
+
 vim.cmd([[
     highlight ActiveBufferBG guibg=#1A1B26
     highlight ActiveBufferFG guifg=#1A1B26
     highlight ActiveBufferCursorLine guibg=#292E42
     highlight ActiveBufferColorColumn guibg=#15161E
 ]])
+
 vim.cmd([[
     highlight InactiveBufferBG guibg=#010101
     highlight InactiveBufferFG guifg=#010101
     highlight InactiveBufferCursorLine guibg=#292E42
     highlight InactiveBufferColorColumn guibg=#15161E
 ]])
+
 vim.cmd([[
     augroup HighlightActiveBufferBG
         autocmd!
-        autocmd WinEnter,BufEnter * setlocal winhighlight=Normal:ActiveBufferBG,EndOfBuffer:ActiveBufferFG,SignColumn:ActiveBufferBG,CursorLine:ActiveBufferCursorLine,ColorColumn:ActiveBufferColorColumn
-        autocmd WinLeave,BufLeave * setlocal winhighlight=Normal:InactiveBufferBG,EndOfBuffer:InactiveBufferFG,SignColumn:InactiveBufferBG,CursorLine:InactiveBufferCursorLine,ColorColumn:InactiveBufferColorColumn
+
+        autocmd WinEnter,BufEnter * setlocal winhighlight=Normal:ActiveBufferBG
+        autocmd WinEnter,BufEnter * setlocal winhighlight+=EndOfBuffer:ActiveBufferFG
+        autocmd WinEnter,BufEnter * setlocal winhighlight+=SignColumn:ActiveBufferBG
+        autocmd WinEnter,BufEnter * setlocal winhighlight+=CursorLine:ActiveBufferCursorLine
+        autocmd WinEnter,BufEnter * setlocal winhighlight+=ColorColumn:ActiveBufferColorColumn
+
+        autocmd WinLeave,BufLeave * setlocal winhighlight=Normal:InactiveBufferBG
+        autocmd WinLeave,BufLeave * setlocal winhighlight+=EndOfBuffer:InactiveBufferFG
+        autocmd WinLeave,BufLeave * setlocal winhighlight+=SignColumn:InactiveBufferBG
+        autocmd WinLeave,BufLeave * setlocal winhighlight+=CursorLine:InactiveBufferCursorLine
+        autocmd WinLeave,BufLeave * setlocal winhighlight+=ColorColumn:InactiveBufferColorColumn
     augroup END
 ]])

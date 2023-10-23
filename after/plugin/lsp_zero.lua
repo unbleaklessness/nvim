@@ -15,6 +15,8 @@ vim.diagnostic.config({
     }
 })
 
+require('neodev').setup()
+
 require'lspconfig'.lua_ls.setup(lsp.nvim_lua_ls())
 
 lsp.setup()
@@ -34,11 +36,11 @@ local cmp = require('cmp')
 local cmp_action = lsp.cmp_action()
 
 cmp.setup({
-    mapping = {
+    mapping = cmp.mapping.preset.insert({
         -- Navigate between snippet placeholders.
         ['<C-f>'] = cmp_action.luasnip_jump_forward(),
         ['<C-b>'] = cmp_action.luasnip_jump_backward(),
-    },
+    }),
 })
 
 vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, { noremap = true, silent = true })

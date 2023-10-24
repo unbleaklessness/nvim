@@ -80,4 +80,6 @@ return require('packer').startup(function (use)
     }
 
     use 'nanozuki/tabby.nvim'
+
+    use 'Civitasv/cmake-tools.nvim'
 end)

@@ -12,6 +12,7 @@ telescope.setup {
         },
     },
     defaults = {
+        path_display = { "truncate" },
         vimgrep_arguments = {
             'rg',
             '--color=never',
@@ -74,6 +75,13 @@ vim.api.nvim_set_keymap(
     "n",
     "<leader>ls",
     ":Telescope lsp_dynamic_workspace_symbols<CR>",
+    { noremap = true, silent = true }
+)
+
+vim.api.nvim_set_keymap(
+    "n",
+    "<leader>r",
+    ":Telescope resume<CR>",
     { noremap = true, silent = true }
 )
 

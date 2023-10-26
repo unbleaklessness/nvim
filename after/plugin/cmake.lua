@@ -7,6 +7,7 @@ require("cmake-tools").setup({
         runInTerminal = true,
         console = "integratedTerminal",
     },
+    cmake_build_directory = "build/${variant:buildType}",
 })
 
 vim.api.nvim_set_keymap(

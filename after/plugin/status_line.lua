@@ -10,4 +10,16 @@ require('lualine').setup({
             'dapui_watches',
         },
     },
+    sections = {
+        lualine_c = {
+            {
+                'filename',
+                path = 0,
+            },
+            {
+                'filename',
+                path = 1,
+            }
+        },
+    },
 })

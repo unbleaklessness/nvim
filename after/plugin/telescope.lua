@@ -10,6 +10,9 @@ telescope.setup {
             hidden = true, -- Show hidden files (such as dot files).
             no_ignore = true, -- Show files ignored by `.gitignore`.
         },
+        buffers = {
+            sort_lastused = true,
+        },
     },
     defaults = {
         path_display = { "truncate" },

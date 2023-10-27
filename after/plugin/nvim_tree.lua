@@ -28,6 +28,7 @@ require("nvim-tree").setup({
         root_folder_label = ":p:~",
         special_files = {},
         highlight_diagnostics = true,
+        symlink_destination = false,
         icons = {
             git_placement = "after",
             show = {

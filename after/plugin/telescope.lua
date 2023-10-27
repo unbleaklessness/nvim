@@ -83,7 +83,7 @@ vim.api.nvim_set_keymap(
 
 vim.api.nvim_set_keymap(
     "n",
-    "<leader>r",
+    "<leader>tr",
     ":Telescope resume<CR>",
     { noremap = true, silent = true }
 )
@@ -97,14 +97,14 @@ vim.api.nvim_set_keymap(
 
 vim.api.nvim_set_keymap(
     "n",
-    "<leader>?",
+    "<leader>tf",
     ":Telescope oldfiles<CR>",
     { noremap = true, silent = true }
 )
 
 vim.api.nvim_set_keymap(
     "n",
-    "<leader>b",
+    "<leader>tb",
     ":Telescope buffers<CR>",
     { noremap = true, silent = true }
 )
@@ -146,7 +146,7 @@ vim.api.nvim_set_keymap(
 
 vim.api.nvim_set_keymap(
     "n",
-    "<leader>u",
+    "<leader>tu",
     ":Telescope undo<CR>",
     { noremap = true, silent = true }
 )

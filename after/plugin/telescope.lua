@@ -123,9 +123,9 @@ local find_in_directory = function(options)
             '--exclude', '.idea/',
         }, {}),
 
-        sorter = config.generic_sorter(),
+        sorter = config.generic_sorter {},
 
-        previewer = config.file_previewer(),
+        previewer = config.file_previewer {},
         -- previewer = previewers.new_termopen_previewer({
         --     get_command = function(entry, status)
         --         return { 'ls', '-a1', entry.value }

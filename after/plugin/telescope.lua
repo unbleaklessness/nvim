@@ -6,6 +6,7 @@ local actions = require "telescope.actions"
 local action_state = require "telescope.actions.state"
 local telescope = require('telescope')
 local path = require('plenary.path')
+local previewers = require("telescope.previewers")
 
 vim.keymap.set('n', '<leader>ff', builtin.find_files, { noremap = true, silent = true })
 
@@ -72,6 +73,13 @@ telescope.setup {
         file_browser = {
             hidden = true, -- Show hidden files (such as dot files).
         },
+        undo = {
+            mappings = {
+                i = {
+                    ["<CR>"] = require("telescope-undo.actions").restore,
+                },
+            },
+        },
     },
 }
 
@@ -101,7 +109,7 @@ local find_in_directory = function(options)
             "--type", "directory",
 
             -- Other.
-            "--max-depth", "5",
+            "--max-depth", "3",
             "--hidden", -- Show hidden files (such as dot files).
             "--no-ignore", -- Show files ignored by `.gitignore`.
 
@@ -115,8 +123,14 @@ local find_in_directory = function(options)
             '--exclude', '.idea/',
         }, {}),
 
-        sorter = config.generic_sorter(options),
-        previewer = config.file_previewer(options),
+        sorter = config.generic_sorter(),
+
+        previewer = config.file_previewer(),
+        -- previewer = previewers.new_termopen_previewer({
+        --     get_command = function(entry, status)
+        --         return { 'ls', '-a1', entry.value }
+        --     end,
+        -- }),
 
         attach_mappings = function(prompt_buffer_number, _)
             actions.select_default:replace(function()

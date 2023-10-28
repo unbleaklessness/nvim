@@ -21,6 +21,7 @@ return require('packer').startup(function (use)
                 'nvim-telescope/telescope-fzf-native.nvim',
                 run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
             },
+            { "debugloop/telescope-undo.nvim" },
         },
     }
 
@@ -90,8 +91,6 @@ return require('packer').startup(function (use)
     })
 
     use "lewis6991/gitsigns.nvim"
-
-    use "debugloop/telescope-undo.nvim"
 
     use {
         'nvim-lualine/lualine.nvim',

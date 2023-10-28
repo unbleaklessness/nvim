@@ -5,6 +5,27 @@ vim.api.nvim_set_keymap(
     { noremap = true, silent = true }
 )
 
+vim.api.nvim_set_keymap(
+    "n",
+    "<leader>qc",
+    ":cclose<CR>",
+    { noremap = true, silent = true }
+)
+
+vim.api.nvim_set_keymap(
+    "n",
+    "<leader>qn",
+    ":cnext<CR>",
+    { noremap = true, silent = true }
+)
+
+vim.api.nvim_set_keymap(
+    "n",
+    "<leader>qp",
+    ":cprevious<CR>",
+    { noremap = true, silent = true }
+)
+
 -- vim.api.nvim_set_keymap("v", "y", "ygv<Esc>", { noremap = true, silent = true })
 -- vim.api.nvim_set_keymap("v", "Y", "Ygv<Esc>", { noremap = true, silent = true })
 --

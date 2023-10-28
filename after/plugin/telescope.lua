@@ -1,8 +1,13 @@
 local builtin = require('telescope.builtin')
+local pickers = require "telescope.pickers"
+local finders = require "telescope.finders"
+local config = require("telescope.config").values
+local actions = require "telescope.actions"
+local action_state = require "telescope.actions.state"
+local telescope = require('telescope')
+local path = require('plenary.path')
 
 vim.keymap.set('n', '<leader>ff', builtin.find_files, { noremap = true, silent = true })
-
-local telescope = require('telescope')
 
 telescope.setup {
     pickers = {
@@ -10,6 +15,10 @@ telescope.setup {
             find_command = {
                 "fdfind",
 
+                -- Required by Telescope.
+                "--color", "never",
+
+                -- What to search.
                 "--type", "file",
                 "--type", "symlink",
 
@@ -25,6 +34,7 @@ telescope.setup {
                 '--exclude', 'build/',
                 '--exclude', 'cmake-build-debug/',
                 '--exclude', '.cache/',
+                '--exclude', '.idea/',
             },
         },
         buffers = {
@@ -55,6 +65,7 @@ telescope.setup {
             '--glob', '!build/',
             '--glob', '!cmake-build-debug/',
             '--glob', '!.cache/',
+            '--glob', '!.idea/',
         },
     },
     extensions = {
@@ -67,6 +78,86 @@ telescope.setup {
 telescope.load_extension "file_browser"
 telescope.load_extension "undo"
 telescope.load_extension "fzf"
+
+local find_in_directory = function(options)
+    options = options or {
+        path = vim.env.HOME .. "/",
+    }
+    pickers.new(options, {
+        prompt_title = "Find in Directory",
+        default_text = options.path,
+
+        finder = finders.new_oneshot_job({
+            "fdfind",
+
+            -- Required by this.
+            "--base-directory", options.path,
+            "--absolute-path",
+
+            -- Required by Telescope.
+            "--color", "never",
+
+            -- What to search.
+            "--type", "directory",
+
+            -- Other.
+            "--max-depth", "5",
+            "--hidden", -- Show hidden files (such as dot files).
+            "--no-ignore", -- Show files ignored by `.gitignore`.
+
+            -- Exclude from find.
+            '--exclude', '.git/',
+            '--exclude', 'node_modules/',
+            '--exclude', 'venv/',
+            '--exclude', 'build/',
+            '--exclude', 'cmake-build-debug/',
+            '--exclude', '.cache/',
+            '--exclude', '.idea/',
+        }, {}),
+
+        sorter = config.generic_sorter(options),
+        previewer = config.file_previewer(options),
+
+        attach_mappings = function(prompt_buffer_number, _)
+            actions.select_default:replace(function()
+                actions.close(prompt_buffer_number)
+                local selection = action_state.get_selected_entry()
+                if selection then
+                    builtin.find_files({ cwd = selection[1] })
+                end
+            end)
+            return true
+        end,
+    }):find()
+end
+
+vim.keymap.set(
+    "n",
+    "<leader>fih",
+    function() find_in_directory({ path = vim.env.HOME .. "/" }) end,
+    { noremap = true, silent = true }
+)
+
+vim.keymap.set(
+    "n",
+    "<leader>fid",
+    function() find_in_directory({ path = vim.fn.getcwd() .. "/" }) end,
+    { noremap = true, silent = true }
+)
+
+vim.keymap.set(
+    "n",
+    "<leader>fir",
+    function() find_in_directory({ path = "/" }) end,
+    { noremap = true, silent = true }
+)
+
+vim.keymap.set(
+    "n",
+    "<leader>fic",
+    function() builtin.find_files { cwd = path.new(vim.env.MYVIMRC):parent().filename } end,
+    { noremap = true, silent = true }
+)
 
 vim.api.nvim_set_keymap(
     "n",

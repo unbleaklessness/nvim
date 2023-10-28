@@ -7,8 +7,25 @@ local telescope = require('telescope')
 telescope.setup {
     pickers = {
         find_files = {
-            hidden = true, -- Show hidden files (such as dot files).
-            no_ignore = true, -- Show files ignored by `.gitignore`.
+            find_command = {
+                "fdfind",
+
+                "--type", "file",
+                "--type", "symlink",
+
+                -- Other.
+                "--strip-cwd-prefix", -- Do not show the `./` prefix.
+                "--hidden", -- Show hidden files (such as dot files).
+                "--no-ignore", -- Show files ignored by `.gitignore`.
+
+                -- Exclude from find.
+                '--exclude', '.git/',
+                '--exclude', 'node_modules/',
+                '--exclude', 'venv/',
+                '--exclude', 'build/',
+                '--exclude', 'cmake-build-debug/',
+                '--exclude', '.cache/',
+            },
         },
         buffers = {
             sort_lastused = true,
@@ -18,22 +35,26 @@ telescope.setup {
         path_display = { "truncate" },
         vimgrep_arguments = {
             'rg',
+
+            -- Required by Telescope.
             '--color=never',
             '--no-heading',
             '--with-filename',
             '--line-number',
             '--column',
+
+            -- Other.
             '--smart-case',
-            '--hidden',
-            '--glob', '!.git/', -- Exclude from grep.
-            '--glob', '!node_modules/', -- Exclude from grep.
-        },
-        file_ignore_patterns = {
-            '.git/',
-            'node_modules/',
-            'venv/',
-            'build/',
-            '.cache/',
+            '--hidden', -- Show hidden files (such as dot files).
+            '--no-ignore-vcs', -- Show files ignored by `.gitignore`.
+
+            -- Exclude from grep.
+            '--glob', '!.git/',
+            '--glob', '!node_modules/',
+            '--glob', '!venv/',
+            '--glob', '!build/',
+            '--glob', '!cmake-build-debug/',
+            '--glob', '!.cache/',
         },
     },
     extensions = {

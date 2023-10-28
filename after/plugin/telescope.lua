@@ -5,8 +5,7 @@ local config = require("telescope.config").values
 local actions = require "telescope.actions"
 local action_state = require "telescope.actions.state"
 local telescope = require('telescope')
-local path = require('plenary.path')
-local previewers = require("telescope.previewers")
+local plenary_path = require('plenary.path')
 
 vim.keymap.set('n', '<leader>ff', builtin.find_files, { noremap = true, silent = true })
 
@@ -88,18 +87,22 @@ telescope.load_extension "undo"
 telescope.load_extension "fzf"
 
 local find_in_directory = function(options)
-    options = options or {
-        path = vim.env.HOME .. "/",
-    }
+
+    options = options or {}
+    local grep = options.grep or false
+    local path = options.path or (vim.env.HOME .. "/")
+
     pickers.new(options, {
         prompt_title = "Find in Directory",
-        default_text = options.path,
+        default_text = path,
+        sorter = config.generic_sorter {},
+        previewer = config.file_previewer {},
 
         finder = finders.new_oneshot_job({
             "fdfind",
 
             -- Required by this.
-            "--base-directory", options.path,
+            "--base-directory", path,
             "--absolute-path",
 
             -- Required by Telescope.
@@ -123,20 +126,16 @@ local find_in_directory = function(options)
             '--exclude', '.idea/',
         }, {}),
 
-        sorter = config.generic_sorter {},
-
-        previewer = config.file_previewer {},
-        -- previewer = previewers.new_termopen_previewer({
-        --     get_command = function(entry, status)
-        --         return { 'ls', '-a1', entry.value }
-        --     end,
-        -- }),
-
         attach_mappings = function(prompt_buffer_number, _)
             actions.select_default:replace(function()
                 actions.close(prompt_buffer_number)
                 local selection = action_state.get_selected_entry()
-                if selection then
+                if not selection then
+                    return
+                end
+                if grep then
+                    builtin.live_grep({ cwd = selection[1] })
+                else
                     builtin.find_files({ cwd = selection[1] })
                 end
             end)
@@ -151,11 +150,24 @@ vim.keymap.set(
     function() find_in_directory({ path = vim.env.HOME .. "/" }) end,
     { noremap = true, silent = true }
 )
+vim.keymap.set(
+    "n",
+    "<leader>Fih",
+    function() find_in_directory({ path = vim.env.HOME .. "/", grep = true }) end,
+    { noremap = true, silent = true }
+)
 
 vim.keymap.set(
     "n",
     "<leader>fid",
     function() find_in_directory({ path = vim.fn.getcwd() .. "/" }) end,
+    { noremap = true, silent = true }
+)
+
+vim.keymap.set(
+    "n",
+    "<leader>Fid",
+    function() find_in_directory({ path = vim.fn.getcwd() .. "/", grep = true }) end,
     { noremap = true, silent = true }
 )
 
@@ -168,8 +180,22 @@ vim.keymap.set(
 
 vim.keymap.set(
     "n",
+    "<leader>Fir",
+    function() find_in_directory({ path = "/", grep = true }) end,
+    { noremap = true, silent = true }
+)
+
+vim.keymap.set(
+    "n",
     "<leader>fic",
-    function() builtin.find_files { cwd = path.new(vim.env.MYVIMRC):parent().filename } end,
+    function() builtin.find_files { cwd = plenary_path.new(vim.env.MYVIMRC):parent().filename } end,
+    { noremap = true, silent = true }
+)
+
+vim.keymap.set(
+    "n",
+    "<leader>Fic",
+    function() builtin.find_files { cwd = plenary_path.new(vim.env.MYVIMRC):parent().filename, grep = true } end,
     { noremap = true, silent = true }
 )
 

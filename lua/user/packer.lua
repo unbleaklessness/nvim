@@ -6,16 +6,30 @@ return require('packer').startup(function (use)
 
     use({ 'nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' }})
 
-    use 'nvim-treesitter/nvim-treesitter-context'
+    use {
+        'nvim-treesitter/nvim-treesitter-context',
+        config = function()
+            require'treesitter-context'.setup{}
+        end,
+    }
 
     use {
         'nvim-telescope/telescope.nvim', tag = '0.1.2',
-        requires = { {'nvim-lua/plenary.nvim'} },
+        requires = {
+            { 'nvim-lua/plenary.nvim' },
+            {
+                'nvim-telescope/telescope-fzf-native.nvim',
+                run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
+            },
+        },
     }
 
     use {
         "nvim-telescope/telescope-file-browser.nvim",
-        requires = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
+        requires = {
+            "nvim-telescope/telescope.nvim",
+            "nvim-lua/plenary.nvim"
+        }
     }
 
     use 'tpope/vim-fugitive'
@@ -51,7 +65,12 @@ return require('packer').startup(function (use)
 
     use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } }
 
-    use 'numToStr/Comment.nvim'
+    use {
+        'numToStr/Comment.nvim',
+        config = function()
+            require('Comment').setup()
+        end,
+    }
 
     use 'Shatur/neovim-session-manager'
 
@@ -59,8 +78,8 @@ return require('packer').startup(function (use)
         "kylechui/nvim-surround",
         tag = "*",
         config = function()
-            require("nvim-surround").setup({})
-        end
+            require("nvim-surround").setup()
+        end,
     })
 
     use({

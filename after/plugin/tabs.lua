@@ -15,14 +15,18 @@ require('tabby.tabline').set(function(line)
         },
         line.tabs().foreach(function(tab)
             local hl = tab.is_current() and theme.current_tab or theme.tab
+            local tab_name = "[ No Name ]"
+            local windows = line.wins_in_tab(tab.id).wins
+            for _, window in pairs(windows) do
+                if window.is_current() then
+                    tab_name = window.buf_name()
+                    break
+                end
+            end
             return {
                 line.sep('', hl, theme.fill),
                 tab.number(),
-                line.wins_in_tab(tab.id).foreach(function(window)
-                    if window.is_current() then
-                        return window.buf_name()
-                    end
-                end),
+                tab_name,
                 line.sep('', hl, theme.fill),
                 hl = hl,
                 margin = ' ',

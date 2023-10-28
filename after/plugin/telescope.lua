@@ -45,6 +45,7 @@ telescope.setup {
 
 telescope.load_extension "file_browser"
 telescope.load_extension "undo"
+telescope.load_extension "fzf"
 
 vim.api.nvim_set_keymap(
     "n",

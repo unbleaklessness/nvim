@@ -1,9 +1,19 @@
 local dap = require('dap')
 
+local open_debug_path = ""
+local os_name = vim.loop.os_uname().sysname
+if os_name == "Linux" then
+    open_debug_path = '/home/sorokinoleg/CodeLLDB/extension/debugAdapters/bin/OpenDebugAD7'
+elseif os_name == "Windows" then
+    error('NeoVim is not configured for Windows')
+else
+    error(string.format('Unknown OS: `%s`', os_name))
+end
+
 dap.adapters.cppdbg = {
     id = 'cppdbg',
     type = 'executable',
-    command = '/home/sorokinoleg/CodeLLDB/extension/debugAdapters/bin/OpenDebugAD7',
+    command = open_debug_path,
 }
 
 dap.configurations.cpp = {

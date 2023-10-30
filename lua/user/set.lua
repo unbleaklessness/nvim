@@ -36,7 +36,7 @@ vim.opt.colorcolumn = "80" -- Is a comma-separated list of screen columns that a
 vim.opt.keymap = "russian-jcukenwin" -- Built-in Russian keyboard layout.
 vim.opt.iminsert = 0 -- Do not use the Russian keyboard layout when NeoVim initially starts.
 
-vim.opt.guifont = "Ubuntu Nerd Font:h20" -- Set font and font size for GUI NeoVim.
+vim.opt.guifont = "JetBrainsMono Nerd Font:h15" -- Set font and font size for GUI NeoVim.
 
 -- vim.api.nvim_exec('language en_US', true) -- Set NeoVim language to English.
 vim.api.nvim_exec('language en_US.UTF-8', true) -- Set NeoVim language to English.

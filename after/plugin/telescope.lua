@@ -9,11 +9,21 @@ local plenary_path = require('plenary.path')
 
 vim.keymap.set('n', '<leader>ff', builtin.find_files, { noremap = true, silent = true })
 
+local fd_executable = ""
+local os_name = vim.loop.os_uname().sysname
+if os_name == "Linux" then
+    fd_executable = 'fdfind'
+elseif os_name == "Windows_NT" then
+    fd_executable = 'fd'
+else
+    error(string.format('Unknown OS: `%s`', os_name))
+end
+
 telescope.setup {
     pickers = {
         find_files = {
             find_command = {
-                "fdfind",
+                fd_executable,
 
                 -- Required by Telescope.
                 "--color", "never",

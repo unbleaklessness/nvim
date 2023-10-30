@@ -4,8 +4,8 @@ local open_debug_path = ""
 local os_name = vim.loop.os_uname().sysname
 if os_name == "Linux" then
     open_debug_path = '/home/sorokinoleg/CodeLLDB/extension/debugAdapters/bin/OpenDebugAD7'
-elseif os_name == "Windows" then
-    error('NeoVim is not configured for Windows')
+elseif os_name == "Windows_NT" then
+    open_debug_path = 'C:/Users/Oleg/cpptools-win64/extension/debugAdapters/bin/OpenDebugAD7'
 else
     error(string.format('Unknown OS: `%s`', os_name))
 end

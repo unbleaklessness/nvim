@@ -9,6 +9,8 @@ require'nvim-treesitter.configs'.setup {
         "vimdoc",
         "query",
         "org",
+        "python",
+        "bash",
     },
     sync_install = false,
     auto_install = true,

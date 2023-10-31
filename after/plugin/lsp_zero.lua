@@ -9,6 +9,7 @@ lsp.ensure_installed({
     'clangd',
     'gopls',
     'neocmake',
+    'pyright',
 })
 
 vim.diagnostic.config({
@@ -28,6 +29,16 @@ require'lspconfig'.glslls.setup{
 vim.cmd [[
     au BufNewFile,BufRead *.frag,*.vert,*.glsl set filetype=glsl
 ]]
+
+require'lspconfig'.pyright.setup {
+    settings = {
+        python = {
+            analysis = {
+                typeCheckingMode = 'off',
+            },
+        },
+    },
+}
 
 lsp.setup()
 

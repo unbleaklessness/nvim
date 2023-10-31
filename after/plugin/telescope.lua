@@ -45,6 +45,7 @@ telescope.setup {
                 '--exclude', 'cmake-build-debug/',
                 '--exclude', '.cache/',
                 '--exclude', '.idea/',
+                '--exclude', '__init__.py',
             },
         },
         buffers = {
@@ -76,6 +77,7 @@ telescope.setup {
             '--glob', '!cmake-build-debug/',
             '--glob', '!.cache/',
             '--glob', '!.idea/',
+            '--glob', '!__init__.py',
         },
     },
     extensions = {

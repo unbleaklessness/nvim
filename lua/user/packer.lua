@@ -97,4 +97,6 @@ return require('packer').startup(function (use)
     use 'Civitasv/cmake-tools.nvim'
 
     use 'voldikss/vim-mma'
+
+    use 'nvim-orgmode/orgmode'
 end)

@@ -51,3 +51,5 @@ vim.opt.cursorline = true -- Highlight the text line of the cursor.
 
 vim.opt.undofile = true -- When on, Vim automatically saves undo history to an undo file when writing a buffer to a file, and restores undo history from the same file on buffer read.
 vim.opt.undolevels = 3000 -- Maximum number of changes that can be undone.
+
+vim.opt.autoread = true -- When a file has been detected to have been changed outside of Vim and it has not been changed inside of Vim, automatically read it again.

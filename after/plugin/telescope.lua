@@ -73,6 +73,7 @@ telescope.setup {
     extensions = {
         file_browser = {
             hidden = true, -- Show hidden files (such as dot files).
+            respect_gitignore = false,
         },
         undo = {
             mappings = {

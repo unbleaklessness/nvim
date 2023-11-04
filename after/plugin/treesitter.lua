@@ -1,3 +1,7 @@
+local function disable_function(language, buffer_number)
+    return vim.fn.getfsize(vim.api.nvim_buf_get_name(buffer_number)) > 50000
+end
+
 require'nvim-treesitter.configs'.setup {
     ensure_installed = {
         "javascript",
@@ -16,5 +20,6 @@ require'nvim-treesitter.configs'.setup {
     highlight = {
         enable = true,
         additional_vim_regex_highlighting = { 'org' },
+        disable = disable_function,
     },
 }

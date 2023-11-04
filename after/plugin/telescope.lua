@@ -6,8 +6,24 @@ local actions = require "telescope.actions"
 local action_state = require "telescope.actions.state"
 local telescope = require('telescope')
 local plenary_path = require('plenary.path')
+local previewers = require('telescope.previewers')
+local previewers_utils = require('telescope.previewers.utils')
 
-vim.keymap.set('n', '<leader>ff', builtin.find_files, { noremap = true, silent = true })
+local truncate_large_files = function(file_path, buffer_number, options)
+    options = options or {}
+    file_path = vim.fn.expand(file_path)
+    if type(file_path) ~= "string" then return end
+    vim.loop.fs_stat(file_path, function(_, stats)
+        if not stats then return end
+        local max_size = 50000
+        if stats.size > max_size then
+            local command = {"head", "-c", max_size, file_path}
+            previewers_utils.job_maker(command, buffer_number, options)
+        else
+            previewers.buffer_previewer_maker(file_path, buffer_number, options)
+        end
+    end)
+end
 
 telescope.setup {
     pickers = {
@@ -69,6 +85,7 @@ telescope.setup {
             '--glob', '!.idea/',
             '--glob', '!__init__.py',
         },
+        buffer_previewer_maker = truncate_large_files,
     },
     extensions = {
         file_browser = {
@@ -146,6 +163,8 @@ local find_in_directory = function(options)
         end,
     }):find()
 end
+
+vim.keymap.set('n', '<leader>ff', builtin.find_files, { noremap = true, silent = true })
 
 vim.keymap.set(
     "n",
@@ -304,5 +323,12 @@ vim.api.nvim_set_keymap(
     "n",
     "<leader>tu",
     ":Telescope undo<CR>",
+    { noremap = true, silent = true }
+)
+
+vim.api.nvim_set_keymap(
+    "n",
+    "<leader>th",
+    ":Telescope help_tags<CR>",
     { noremap = true, silent = true }
 )

@@ -7,8 +7,6 @@ vim.api.nvim_create_autocmd({ "BufReadPre" }, {
         local ok, stats = pcall(vim.loop.fs_stat, buffer_name)
         if ok and stats and stats.size > 50000 then
             vim.cmd [[ syntax off ]]
-            vim.cmd [[ IBLDisable ]]
-            vim.cmd [[ TSContextDisable ]]
         end
     end,
     group = group,

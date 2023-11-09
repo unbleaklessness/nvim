@@ -1,5 +1,11 @@
 require("chatgpt").setup({
     api_key_cmd = 'cat ' .. vim.fn.expand("$HOME") .. '/gpt_api_key.txt',
+    chat = {
+        sessions_window = {
+            active_sign = " + ",
+            inactive_sign = " - ",
+        },
+    },
     openai_params = {
         model = "gpt-3.5-turbo-16k",
         frequency_penalty = 0,

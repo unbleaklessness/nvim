@@ -24,7 +24,6 @@ vim.cmd([[
 ]])
 
 vim.cmd([[
-
     function s:is_floating(id) abort
         let l:config = nvim_win_get_config(a:id)
         return !empty(l:config.relative) || l:config.external

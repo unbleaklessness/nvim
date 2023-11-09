@@ -24,19 +24,35 @@ vim.cmd([[
 ]])
 
 vim.cmd([[
-    augroup HighlightActiveBufferBG
+
+    function s:is_floating(id) abort
+        let l:config = nvim_win_get_config(a:id)
+        return !empty(l:config.relative) || l:config.external
+    endfunction
+
+    function s:my_function()
+        if !s:is_floating(win_getid())
+            setlocal winhighlight=Normal:ActiveBufferBG
+            setlocal winhighlight+=EndOfBuffer:ActiveBufferFG
+            setlocal winhighlight+=SignColumn:ActiveBufferBG
+            setlocal winhighlight+=CursorLine:ActiveBufferCursorLine
+            setlocal winhighlight+=ColorColumn:ActiveBufferColorColumn
+        endif
+    endfunction
+
+    function s:reset_winhighlight()
+        if !s:is_floating(win_getid())
+            setlocal winhighlight=Normal:InactiveBufferBG
+            setlocal winhighlight+=EndOfBuffer:InactiveBufferFG
+            setlocal winhighlight+=SignColumn:InactiveBufferBG
+            setlocal winhighlight+=CursorLine:InactiveBufferCursorLine
+            setlocal winhighlight+=ColorColumn:InactiveBufferColorColumn
+        endif
+    endfunction
+
+    augroup ExcludeBuffers
         autocmd!
-
-        autocmd WinEnter,BufEnter * setlocal winhighlight=Normal:ActiveBufferBG
-        autocmd WinEnter,BufEnter * setlocal winhighlight+=EndOfBuffer:ActiveBufferFG
-        autocmd WinEnter,BufEnter * setlocal winhighlight+=SignColumn:ActiveBufferBG
-        autocmd WinEnter,BufEnter * setlocal winhighlight+=CursorLine:ActiveBufferCursorLine
-        autocmd WinEnter,BufEnter * setlocal winhighlight+=ColorColumn:ActiveBufferColorColumn
-
-        autocmd WinLeave,BufLeave * setlocal winhighlight=Normal:InactiveBufferBG
-        autocmd WinLeave,BufLeave * setlocal winhighlight+=EndOfBuffer:InactiveBufferFG
-        autocmd WinLeave,BufLeave * setlocal winhighlight+=SignColumn:InactiveBufferBG
-        autocmd WinLeave,BufLeave * setlocal winhighlight+=CursorLine:InactiveBufferCursorLine
-        autocmd WinLeave,BufLeave * setlocal winhighlight+=ColorColumn:InactiveBufferColorColumn
+        autocmd WinEnter,BufEnter * call s:my_function()
+        autocmd WinLeave,BufLeave * call s:reset_winhighlight()
     augroup END
 ]])

@@ -32,3 +32,10 @@ vim.keymap.set(
     ":ChatGPTEditWithInstructions<CR>",
     { noremap = true, silent = true }
 )
+
+vim.keymap.set(
+    "n",
+    "<leader>aa",
+    ":ChatGPTActAs<CR>",
+    { noremap = true, silent = true }
+)

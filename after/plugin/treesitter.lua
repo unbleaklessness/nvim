@@ -1,5 +1,6 @@
 local function disable_function(language, buffer_number)
-    return vim.fn.getfsize(vim.api.nvim_buf_get_name(buffer_number)) > 50000
+    local size = vim.fn.getfsize(vim.api.nvim_buf_get_name(buffer_number))
+    return size > 75000 and language == "cpp"
 end
 
 require'nvim-treesitter.configs'.setup {

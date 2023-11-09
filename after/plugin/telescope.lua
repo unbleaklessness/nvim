@@ -15,7 +15,7 @@ local truncate_large_files = function(file_path, buffer_number, options)
     if type(file_path) ~= "string" then return end
     vim.loop.fs_stat(file_path, function(_, stats)
         if not stats then return end
-        local max_size = 50000
+        local max_size = 100000
         if stats.size > max_size then
             local command = {"head", "-c", max_size, file_path}
             previewers_utils.job_maker(command, buffer_number, options)
@@ -52,6 +52,7 @@ telescope.setup {
                 '--exclude', '.cache/',
                 '--exclude', '.idea/',
                 '--exclude', '__init__.py',
+                '--exclude', 'dependencies/installations/',
             },
         },
         buffers = {
@@ -84,6 +85,7 @@ telescope.setup {
             '--glob', '!.cache/',
             '--glob', '!.idea/',
             '--glob', '!__init__.py',
+            '--glob', '!dependencies/installations/',
         },
         buffer_previewer_maker = truncate_large_files,
     },

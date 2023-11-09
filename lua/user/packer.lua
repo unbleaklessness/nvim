@@ -101,4 +101,13 @@ return require('packer').startup(function (use)
     use 'voldikss/vim-mma'
 
     use 'nvim-orgmode/orgmode'
+
+    use({
+        "jackMort/ChatGPT.nvim",
+        requires = {
+            "MunifTanjim/nui.nvim",
+            "nvim-lua/plenary.nvim",
+            "nvim-telescope/telescope.nvim",
+        },
+    })
 end)

@@ -16,7 +16,7 @@ require("chatgpt").setup({
             select_session = "<CR>",
             delete_session = "<leader>ad",
             delete_message = "<leader>ad",
-            close = "<leader>ac",
+            close = "<leader>aq",
             yank_last = "<leader>ay",
             yank_last_code = "<leader>aY",
             cycle_modes = "<leader>am",
@@ -30,6 +30,16 @@ require("chatgpt").setup({
             toggle_message_role = "<leader>ar",
             toggle_system_role_open = "<leader>aR",
         }
+    },
+    edit_with_instructions = {
+        keymaps = {
+            close = "<leader>aq",
+            accept = "<leader>ay",
+            toggle_diff = "<leader>ad",
+            toggle_settings = "<leader>as",
+            cycle_windows = "<Tab>",
+            use_output_as_input = "<leader>ai",
+        },
     },
     openai_params = {
         model = "gpt-3.5-turbo-16k",

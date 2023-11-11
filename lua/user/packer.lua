@@ -103,7 +103,8 @@ return require('packer').startup(function (use)
     use 'nvim-orgmode/orgmode'
 
     use({
-        "jackMort/ChatGPT.nvim",
+        "unbleaklessness/ChatGPT.nvim",
+        branch = "development",
         requires = {
             "MunifTanjim/nui.nvim",
             "nvim-lua/plenary.nvim",

@@ -23,7 +23,7 @@ require("chatgpt").setup({
             toggle_settings = "<leader>as",
             next_message = "<leader>an",
             prev_message = "<leader>ap",
-            rename_session = "<leader>ar",
+            rename_session = "<leader>ac",
             stop_generating = "<leader>ax",
             new_session = "<leader>an",
             cycle_windows = "<Tab>",

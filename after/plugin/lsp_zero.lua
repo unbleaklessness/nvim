@@ -10,6 +10,7 @@ lsp.ensure_installed({
     'gopls',
     'neocmake',
     'pyright',
+    'arduino_language_server',
 })
 
 vim.diagnostic.config({
@@ -37,6 +38,16 @@ require'lspconfig'.pyright.setup {
                 typeCheckingMode = 'off',
             },
         },
+    },
+}
+
+local MY_FQBN = "arduino:avr:uno"
+require'lspconfig'.arduino_language_server.setup {
+    cmd = {
+        "arduino-language-server",
+        -- "-cli-config", "/path/to/arduino-cli.yaml",
+        "-fqbn",
+        MY_FQBN,
     },
 }
 

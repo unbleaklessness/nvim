@@ -111,4 +111,6 @@ return require('packer').startup(function (use)
             "nvim-telescope/telescope.nvim",
         },
     })
+
+    use 'Vimjas/vim-python-pep8-indent'
 end)

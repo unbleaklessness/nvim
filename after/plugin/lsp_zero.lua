@@ -11,6 +11,7 @@ lsp.ensure_installed({
     'neocmake',
     'pyright',
     'arduino_language_server',
+    'emmet_ls',
 })
 
 vim.diagnostic.config({

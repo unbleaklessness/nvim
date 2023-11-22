@@ -321,10 +321,12 @@ vim.api.nvim_set_keymap(
     { noremap = true, silent = true }
 )
 
-vim.api.nvim_set_keymap(
+vim.keymap.set(
     "n",
     "<leader>tu",
-    ":Telescope undo<CR>",
+    function()
+        require("telescope").extensions.undo.undo()
+    end,
     { noremap = true, silent = true }
 )
 

@@ -244,10 +244,12 @@ vim.api.nvim_set_keymap(
     { noremap = true, silent = true }
 )
 
-vim.api.nvim_set_keymap(
+vim.keymap.set(
     "n",
     "<leader>lr",
-    ":Telescope lsp_references<CR>",
+    function()
+        builtin.lsp_references({ trim_text = true, show_line = false })
+    end,
     { noremap = true, silent = true }
 )
 

@@ -42,14 +42,52 @@ require'lspconfig'.pyright.setup {
     },
 }
 
-local MY_FQBN = "arduino:avr:uno"
+-- local MY_FQBN = "arduino:avr:uno"
+-- require'lspconfig'.arduino_language_server.setup {
+--     cmd = {
+--         "arduino-language-server",
+--         -- "-cli-config", "/path/to/arduino-cli.yaml",
+--         "-fqbn",
+--         MY_FQBN,
+--     },
+-- }
+
+local function file_exists(file_path)
+    local file = io.open(file_path, "rb")
+    if file then file:close() end
+    return file ~= nil
+end
+
+local function read_lines(file_path)
+    if not file_exists(file_path) then return {} end
+    local lines = {}
+    for line in io.lines(file_path) do
+        lines[#lines + 1] = line
+    end
+    return lines
+end
+
+local function trim_string(s)
+    return s:gsub("%s+", "")
+end
+
 require'lspconfig'.arduino_language_server.setup {
-    cmd = {
-        "arduino-language-server",
-        -- "-cli-config", "/path/to/arduino-cli.yaml",
-        "-fqbn",
-        MY_FQBN,
-    },
+    on_new_config = function(config, _)
+        local lines = read_lines(vim.fn.getcwd() .. '/.fqbn')
+        local fqbn = 'arduino:avr:uno'
+        if #lines >= 1 then
+            fqbn = trim_string(lines[1])
+        end
+        require('notify')(('FQBN = %s'):format(fqbn), vim.log.levels.INFO, {
+            title = 'Arduino Language Server',
+            timeout = 10000,
+            render = 'simple',
+        })
+        config.cmd = {
+            'arduino-language-server',
+            '-fqbn', fqbn
+        }
+    end
 }
 
 require'lspconfig'.tsserver.setup {}

@@ -54,7 +54,14 @@ vim.opt.undolevels = 3000 -- Maximum number of changes that can be undone.
 
 vim.opt.autoread = true -- When a file has been detected to have been changed outside of Vim and it has not been changed inside of Vim, automatically read it again.
 
-vim.cmd [[
+vim.cmd([[
     autocmd FocusGained,BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
     autocmd FileChangedShellPost * echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
-]]
+]])
+
+vim.cmd([[
+    augroup
+        autocmd!
+        autocmd! InsertLeave * silent !xkb-switch -s "us(qwerty)"
+    augroup END
+]])

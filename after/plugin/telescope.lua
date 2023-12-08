@@ -121,7 +121,7 @@ local find_in_directory = function(options)
         previewer = config.file_previewer {},
 
         finder = finders.new_oneshot_job({
-            "fdfind",
+            "fd",
 
             -- Required by this.
             "--base-directory", path,

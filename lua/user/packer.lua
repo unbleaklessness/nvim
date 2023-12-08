@@ -115,4 +115,9 @@ return require('packer').startup(function (use)
     use 'Vimjas/vim-python-pep8-indent'
 
     use 'rcarriga/nvim-notify'
+
+    use {
+        'Vonr/align.nvim',
+        branch = "v2",
+    }
 end)

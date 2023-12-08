@@ -80,7 +80,7 @@ require'lspconfig'.arduino_language_server.setup {
         end
         require('notify')(('FQBN = %s'):format(fqbn), vim.log.levels.INFO, {
             title = 'Arduino Language Server',
-            timeout = 10000,
+            timeout = 5000,
             render = 'simple',
         })
         config.cmd = {

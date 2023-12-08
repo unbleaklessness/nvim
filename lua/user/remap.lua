@@ -44,6 +44,12 @@ vim.api.nvim_set_keymap("n", "<leader>Y", "\"+Y", { noremap = true, silent = tru
 vim.api.nvim_set_keymap("v", "<leader>y", "\"+y", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("v", "<leader>Y", "\"+Y", { noremap = true, silent = true })
 
+vim.api.nvim_set_keymap("n", "<leader>d", "\"+d", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>D", "\"+D", { noremap = true, silent = true })
+
+vim.api.nvim_set_keymap("v", "<leader>d", "\"+d", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("v", "<leader>D", "\"+D", { noremap = true, silent = true })
+
 local function bind_formatting_paste()
     vim.api.nvim_set_keymap("n", "p", "pmt`[v`]=`t", { noremap = true, silent = true })
     vim.api.nvim_set_keymap("n", "P", "Pmt`[v`]=`t", { noremap = true, silent = true })

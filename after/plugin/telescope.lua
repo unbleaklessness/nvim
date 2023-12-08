@@ -97,7 +97,7 @@ telescope.setup {
         undo = {
             mappings = {
                 i = {
-                    ["<CR>"] = require("telescope-undo.actions").restore,
+                    ["<C-y>"] = require("telescope-undo.actions").restore,
                 },
             },
         },

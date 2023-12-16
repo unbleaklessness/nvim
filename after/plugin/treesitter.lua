@@ -23,4 +23,8 @@ require'nvim-treesitter.configs'.setup {
         additional_vim_regex_highlighting = { 'org' },
         disable = disable_function,
     },
+    indent = {
+        enable = true,
+    },
 }
+

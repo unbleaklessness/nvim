@@ -42,16 +42,6 @@ require'lspconfig'.pyright.setup {
     },
 }
 
--- local MY_FQBN = "arduino:avr:uno"
--- require'lspconfig'.arduino_language_server.setup {
---     cmd = {
---         "arduino-language-server",
---         -- "-cli-config", "/path/to/arduino-cli.yaml",
---         "-fqbn",
---         MY_FQBN,
---     },
--- }
-
 local function file_exists(file_path)
     local file = io.open(file_path, "rb")
     if file then file:close() end

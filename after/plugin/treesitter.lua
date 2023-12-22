@@ -1,6 +1,8 @@
+local large_files = require('user.large_files')
+
 local function disable_function(language, buffer_number)
     local size = vim.fn.getfsize(vim.api.nvim_buf_get_name(buffer_number))
-    return size > 75000 and language == "cpp"
+    return size > large_files.LARGE_FILE_SIZE and language == "cpp"
 end
 
 require'nvim-treesitter.configs'.setup {
@@ -25,6 +27,7 @@ require'nvim-treesitter.configs'.setup {
     },
     indent = {
         enable = true,
+        disable = disable_function,
     },
 }
 

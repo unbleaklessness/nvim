@@ -8,6 +8,7 @@ local telescope = require('telescope')
 local plenary_path = require('plenary.path')
 local previewers = require('telescope.previewers')
 local previewers_utils = require('telescope.previewers.utils')
+local large_files = require('user.large_files')
 
 local truncate_large_files = function(file_path, buffer_number, options)
     options = options or {}
@@ -15,7 +16,7 @@ local truncate_large_files = function(file_path, buffer_number, options)
     if type(file_path) ~= "string" then return end
     vim.loop.fs_stat(file_path, function(_, stats)
         if not stats then return end
-        local max_size = 100000
+        local max_size = large_files.LARGE_FILE_SIZE
         if stats.size > max_size then
             local command = {"head", "-c", max_size, file_path}
             previewers_utils.job_maker(command, buffer_number, options)

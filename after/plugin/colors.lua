@@ -55,3 +55,8 @@ vim.cmd([[
         autocmd WinLeave,BufLeave * call s:reset_winhighlight()
     augroup END
 ]])
+
+-- Highlight matched characters inside Telescope with the red color.
+vim.cmd([[
+    highlight TelescopeMatching guifg=#ff0000
+]])

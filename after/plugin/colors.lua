@@ -7,6 +7,14 @@ require("tokyonight").setup({
 
 vim.cmd.colorscheme("tokyonight-night")
 
+-- require("bluloco").setup({
+-- style = "dark",
+-- transparent = false,
+-- italics = false,
+-- })
+--
+-- vim.cmd.colorscheme("bluloco")
+
 -- Make background of inactive buffers darker.
 
 vim.cmd([[

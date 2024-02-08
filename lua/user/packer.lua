@@ -58,6 +58,11 @@ return require('packer').startup(function (use)
 
     use 'folke/tokyonight.nvim'
 
+    use {
+        'uloco/bluloco.nvim',
+        requires = { 'rktjmp/lush.nvim' }
+    }
+
     use 'm4xshen/autoclose.nvim'
 
     use "lukas-reineke/indent-blankline.nvim"
@@ -121,4 +126,6 @@ return require('packer').startup(function (use)
         'Vonr/align.nvim',
         branch = "v2",
     }
+
+    use 'ThePrimeagen/vim-apm'
 end)

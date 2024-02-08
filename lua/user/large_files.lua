@@ -1,6 +1,7 @@
 local group = vim.api.nvim_create_augroup("large_buffers", { clear = true })
 
-LARGE_FILE_SIZE = 75000
+-- LARGE_FILE_SIZE = 75000
+LARGE_FILE_SIZE = 1000000
 
 vim.api.nvim_create_autocmd({ "BufReadPre" }, {
     callback = function()

@@ -22,9 +22,11 @@ vim.diagnostic.config({
 
 require('neodev').setup()
 
-require'lspconfig'.lua_ls.setup(lsp.nvim_lua_ls())
+local lsp_config = require'lspconfig'
 
-require'lspconfig'.glslls.setup{
+lsp_config.lua_ls.setup(lsp.nvim_lua_ls())
+
+lsp_config.glslls.setup{
     cmd = { "glslls", "--stdin", "--target-env", "opengl" }
 }
 -- NeoVim fails to identify the correct type for `frag` and `vert` extensions.
@@ -32,7 +34,7 @@ vim.cmd [[
     au BufNewFile,BufRead *.frag,*.vert,*.glsl set filetype=glsl
 ]]
 
-require'lspconfig'.pyright.setup {
+lsp_config.pyright.setup {
     settings = {
         python = {
             analysis = {
@@ -61,7 +63,7 @@ local function trim_string(s)
     return s:gsub("%s+", "")
 end
 
-require'lspconfig'.arduino_language_server.setup {
+lsp_config.arduino_language_server.setup {
     on_new_config = function(config, _)
         local lines = read_lines(vim.fn.getcwd() .. '/.fqbn')
         local fqbn = 'arduino:avr:uno'
@@ -80,7 +82,9 @@ require'lspconfig'.arduino_language_server.setup {
     end
 }
 
-require'lspconfig'.tsserver.setup {}
+lsp_config.tsserver.setup {}
+
+lsp_config.clangd.setup {}
 
 lsp.setup()
 

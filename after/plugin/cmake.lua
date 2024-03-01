@@ -54,28 +54,28 @@ vim.api.nvim_set_keymap(
 
 vim.api.nvim_set_keymap(
     "n",
-    "<leader>cs",
-    ":CMakeStop<CR>",
+    "<leader>cq",
+    ":CMakeStopExecutor<CR>:CMakeStopRunner<CR>",
     { noremap = true, silent = true }
 )
 
 vim.api.nvim_set_keymap(
     "n",
-    "<leader>ct",
+    "<leader>cbt",
     ":CMakeSelectBuildTarget<CR>",
     { noremap = true, silent = true }
 )
 
 vim.api.nvim_set_keymap(
     "n",
-    "<leader>cl",
+    "<leader>clt",
     ":CMakeSelectLaunchTarget<CR>",
     { noremap = true, silent = true }
 )
 
 vim.api.nvim_set_keymap(
     "n",
-    "<leader>cT",
+    "<leader>cbT",
     ":CMakeSelectBuildType<CR>",
     { noremap = true, silent = true }
 )

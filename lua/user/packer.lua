@@ -144,6 +144,8 @@ return require('packer').startup(function (use)
 
     use 'ThePrimeagen/vim-apm'
 
+    use { "mistricky/codesnap.nvim", run = "make" }
+
     if packer_bootstrap then
         require('packer').sync()
     end

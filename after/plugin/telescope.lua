@@ -327,7 +327,7 @@ vim.api.nvim_set_keymap(
 
 vim.api.nvim_set_keymap(
     "n",
-    "<leader>gt",
+    "<leader>gh",
     ":Telescope git_stash<CR>",
     { noremap = true, silent = true }
 )

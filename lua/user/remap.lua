@@ -1,7 +1,7 @@
 vim.api.nvim_set_keymap(
     "n",
     "<leader>tt",
-    ":silent !kitty --single-instance --detach tmux<CR>",
+    ":silent !kitty --single-instance<CR>",
     { noremap = true, silent = true }
 )
 

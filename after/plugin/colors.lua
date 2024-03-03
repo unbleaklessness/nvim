@@ -7,14 +7,6 @@ require("tokyonight").setup({
 
 vim.cmd.colorscheme("tokyonight-night")
 
--- require("bluloco").setup({
--- style = "dark",
--- transparent = false,
--- italics = false,
--- })
---
--- vim.cmd.colorscheme("bluloco")
-
 -- Make background of inactive buffers darker.
 
 vim.cmd([[
@@ -37,7 +29,7 @@ vim.cmd([[
         return !empty(l:config.relative) || l:config.external
     endfunction
 
-    function s:my_function()
+    function s:highlight_active()
         if !s:is_floating(win_getid())
             setlocal winhighlight=Normal:ActiveBufferBG
             setlocal winhighlight+=EndOfBuffer:ActiveBufferFG
@@ -47,7 +39,7 @@ vim.cmd([[
         endif
     endfunction
 
-    function s:reset_winhighlight()
+    function s:highlight_inactive()
         if !s:is_floating(win_getid())
             setlocal winhighlight=Normal:InactiveBufferBG
             setlocal winhighlight+=EndOfBuffer:InactiveBufferFG
@@ -59,8 +51,8 @@ vim.cmd([[
 
     augroup ExcludeBuffers
         autocmd!
-        autocmd WinEnter,BufEnter * call s:my_function()
-        autocmd WinLeave,BufLeave * call s:reset_winhighlight()
+        autocmd WinEnter,BufEnter * call s:highlight_active()
+        autocmd WinLeave,BufLeave * call s:highlight_inactive()
     augroup END
 ]])
 

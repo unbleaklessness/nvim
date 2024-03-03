@@ -82,8 +82,6 @@ return require('packer').startup(function (use)
         end,
     }
 
-    -- use 'Shatur/neovim-session-manager'
-
     use {
         'rmagatti/auto-session',
     }
@@ -141,8 +139,6 @@ return require('packer').startup(function (use)
         'Vonr/align.nvim',
         branch = "v2",
     }
-
-    use 'ThePrimeagen/vim-apm'
 
     use { "mistricky/codesnap.nvim", run = "make" }
 

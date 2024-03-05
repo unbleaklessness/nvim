@@ -1,4 +1,6 @@
 require("cmake-tools").setup({
+    cmake_regenerate_on_save = false,
+    cmake_build_options = { "-j 12" },
     cmake_dap_configuration = {
         name = "cpp",
         type = "cppdbg",

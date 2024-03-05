@@ -31,7 +31,7 @@ vim.opt.scrolloff = 10 -- Minimal number of screen lines to keep above and below
 vim.opt.sidescrolloff = 20 -- The minimal number of screen columns to keep to the left and to the right of the cursor.
 vim.opt.signcolumn = "yes:1" -- When and how to draw the sign column.
 
-vim.opt.colorcolumn = "80" -- Is a comma-separated list of screen columns that are highlighted.
+vim.opt.colorcolumn = "" -- Is a comma-separated list of screen columns that are highlighted.
 
 vim.opt.keymap = "russian-jcukenwin" -- Built-in Russian keyboard layout.
 vim.opt.iminsert = 0 -- Do not use the Russian keyboard layout when NeoVim initially starts.

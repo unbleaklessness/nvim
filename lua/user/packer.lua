@@ -142,6 +142,8 @@ return require('packer').startup(function (use)
 
     use { "mistricky/codesnap.nvim", run = "make" }
 
+    use { "xiyaowong/transparent.nvim" }
+
     if packer_bootstrap then
         require('packer').sync()
     end

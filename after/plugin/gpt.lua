@@ -17,8 +17,8 @@ require("chatgpt").setup({
             delete_session = "<leader>ad",
             delete_message = "<leader>ad",
             close = "<leader>aq",
-            yank_last = "<leader>ay",
-            yank_last_code = "<leader>aY",
+            yank_last_code = "<leader>ay",
+            yank_last = "<leader>aY",
             cycle_modes = "<leader>am",
             toggle_settings = "<leader>as",
             next_message = "<leader>an",
@@ -27,8 +27,8 @@ require("chatgpt").setup({
             stop_generating = "<leader>ax",
             new_session = "<leader>an",
             cycle_windows = "<Tab>",
-            toggle_message_role = "<leader>ar",
-            toggle_system_role_open = "<leader>aR",
+            toggle_message_role = "<leader>at",
+            toggle_system_role_open = "<leader>aS",
         }
     },
     edit_with_instructions = {
@@ -38,7 +38,7 @@ require("chatgpt").setup({
             toggle_diff = "<leader>ad",
             toggle_settings = "<leader>as",
             cycle_windows = "<Tab>",
-            use_output_as_input = "<leader>ai",
+            use_output_as_input = "<leader>au",
         },
     },
     openai_params = {
@@ -64,6 +64,20 @@ vim.keymap.set(
     "n",
     "<leader>ac",
     ":ChatGPT<CR>",
+    { noremap = true, silent = true }
+)
+
+vim.keymap.set(
+    "n",
+    "<leader>aC",
+    ":ChatGPTCompleteCode<CR>",
+    { noremap = true, silent = true }
+)
+
+vim.keymap.set(
+    "n",
+    "<leader>ar",
+    ":ChatGPTRun ",
     { noremap = true, silent = true }
 )
 

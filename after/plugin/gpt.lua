@@ -1,6 +1,8 @@
 require("chatgpt").setup({
     api_key_cmd = 'cat ' .. vim.fn.expand("$HOME") .. '/gpt_api_key.txt',
     chat = {
+        border_left_sign = "",
+        border_right_sign = "",
         sessions_window = {
             -- Default signs are broken with the NerdFont version that I am using.
             active_sign = " + ",

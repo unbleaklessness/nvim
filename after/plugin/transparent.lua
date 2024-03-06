@@ -20,6 +20,32 @@ require("transparent").setup({
         "NormalFloat",
         "FloatBorder",
         "FloatTitle",
+
+        -- CMake Tools.
+        "NormalSB",
+        "SignColumnSB",
+
+        -- NVim Notify.
+        "NotifyERRORBody",
+        "NotifyWARNBody",
+        "NotifyINFOBody",
+        "NotifyDEBUGBody",
+        "NotifyTRACEBody",
+        "NotifyERRORBorder",
+        "NotifyWARNBorder",
+        "NotifyINFOBorder",
+        "NotifyDEBUGBorder",
+        "NotifyTRACEBorder",
+        "NotifyERRORIcon",
+        "NotifyWARNIcon",
+        "NotifyINFOIcon",
+        "NotifyDEBUGIcon",
+        "NotifyTRACEIcon",
+        "NotifyERRORTitle",
+        "NotifyWARNTitle",
+        "NotifyINFOTitle",
+        "NotifyDEBUGTitle",
+        "NotifyTRACETitle",
     },
     exclude_groups = {},
 })

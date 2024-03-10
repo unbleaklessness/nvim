@@ -21,6 +21,20 @@ vim.api.nvim_set_keymap(
 
 vim.api.nvim_set_keymap(
     "n",
+    "<leader>ce",
+    ":CMakeOpenExecutor<CR>",
+    { noremap = true, silent = true }
+)
+
+vim.api.nvim_set_keymap(
+    "n",
+    "<leader>cR",
+    ":CMakeOpenRunner<CR>",
+    { noremap = true, silent = true }
+)
+
+vim.api.nvim_set_keymap(
+    "n",
     "<leader>cd",
     ":CMakeDebug<CR>",
     { noremap = true, silent = true }
@@ -63,21 +77,21 @@ vim.api.nvim_set_keymap(
 
 vim.api.nvim_set_keymap(
     "n",
-    "<leader>cbt",
+    "<leader>ctb",
     ":CMakeSelectBuildTarget<CR>",
     { noremap = true, silent = true }
 )
 
 vim.api.nvim_set_keymap(
     "n",
-    "<leader>clt",
+    "<leader>ctl",
     ":CMakeSelectLaunchTarget<CR>",
     { noremap = true, silent = true }
 )
 
 vim.api.nvim_set_keymap(
     "n",
-    "<leader>cbT",
+    "<leader>cTb",
     ":CMakeSelectBuildType<CR>",
     { noremap = true, silent = true }
 )

@@ -84,7 +84,15 @@ lsp_config.arduino_language_server.setup {
 
 lsp_config.tsserver.setup {}
 
-lsp_config.clangd.setup {}
+lsp_config.clangd.setup {
+    cmd = {
+        "clangd",
+        "--background-index",
+        "--suggest-missing-includes",
+        "--clang-tidy",
+        "--header-insertion=iwyu",
+    },
+}
 
 lsp.setup()
 

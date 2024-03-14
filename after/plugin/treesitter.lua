@@ -17,6 +17,7 @@ require'nvim-treesitter.configs'.setup {
         "query",
         "python",
         "bash",
+        "reason",
     },
     sync_install = false,
     auto_install = true,

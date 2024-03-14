@@ -15,7 +15,7 @@ return require('packer').startup(function (use)
 
     use 'wbthomason/packer.nvim'
 
-    use({ 'nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' }})
+    use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 
     use { 'nvim-treesitter/nvim-treesitter-context' }
 
@@ -143,6 +143,8 @@ return require('packer').startup(function (use)
     use { "mistricky/codesnap.nvim", run = "make" }
 
     use { "xiyaowong/transparent.nvim" }
+
+    use 'danielo515/nvim-treesitter-reason'
 
     if packer_bootstrap then
         require('packer').sync()

@@ -34,6 +34,11 @@ vim.cmd [[
     au BufNewFile,BufRead *.frag,*.vert,*.glsl set filetype=glsl
 ]]
 
+-- NeoVim fails to identify the correct type for the `re` extension.
+vim.cmd [[
+    au BufNewFile,BufRead *.re set filetype=reason
+]]
+
 lsp_config.pyright.setup {
     settings = {
         python = {
@@ -92,6 +97,10 @@ lsp_config.clangd.setup {
         "--clang-tidy",
         "--header-insertion=iwyu",
     },
+}
+
+lsp_config.ocamllsp.setup {
+    cmd = { "ocamllsp" },
 }
 
 lsp.setup()

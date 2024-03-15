@@ -103,6 +103,14 @@ lsp_config.ocamllsp.setup {
     cmd = { "ocamllsp" },
 }
 
+lsp.on_attach(function(_, buffer_number)
+    lsp.default_keymaps({buffer = buffer_number})
+    local options = {buffer = buffer_number}
+    vim.keymap.set({'n', 'x'}, '<space>lf', function()
+        vim.lsp.buf.format({async = false, timeout_ms = 10000})
+    end, options)
+end)
+
 lsp.setup()
 
 vim.cmd [[

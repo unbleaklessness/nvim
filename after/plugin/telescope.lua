@@ -347,3 +347,10 @@ vim.api.nvim_set_keymap(
     ":Telescope help_tags<CR>",
     { noremap = true, silent = true }
 )
+
+vim.api.nvim_set_keymap(
+    "n",
+    "<leader>tm",
+    ":Telescope marks<CR>",
+    { noremap = true, silent = true }
+)

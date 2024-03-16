@@ -26,6 +26,13 @@ vim.api.nvim_set_keymap(
     { noremap = true, silent = true }
 )
 
+vim.api.nvim_set_keymap(
+    "n",
+    "<leader>h",
+    ":noh<CR>",
+    { noremap = true, silent = true }
+)
+
 -- vim.api.nvim_set_keymap("v", "y", "ygv<Esc>", { noremap = true, silent = true })
 -- vim.api.nvim_set_keymap("v", "Y", "Ygv<Esc>", { noremap = true, silent = true })
 --

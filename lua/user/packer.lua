@@ -99,12 +99,7 @@ return require('packer').startup(function (use)
         end,
     })
 
-    use({
-        "Pocco81/auto-save.nvim",
-        config = function()
-            require("auto-save").setup {}
-        end,
-    })
+    use { "Pocco81/auto-save.nvim" }
 
     use "lewis6991/gitsigns.nvim"
 
@@ -140,11 +135,19 @@ return require('packer').startup(function (use)
         branch = "v2",
     }
 
-    use { "mistricky/codesnap.nvim", run = "make" }
-
     use { "xiyaowong/transparent.nvim" }
 
     use 'danielo515/nvim-treesitter-reason'
+
+    use {
+        "folke/noice.nvim",
+        requires = {
+            "MunifTanjim/nui.nvim",
+            "rcarriga/nvim-notify",
+        },
+    }
+
+    use { "nvim-pack/nvim-spectre" }
 
     if packer_bootstrap then
         require('packer').sync()

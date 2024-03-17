@@ -109,6 +109,12 @@ telescope.setup {
                     ["<C-y>"] = require("telescope-undo.actions").restore,
                 },
             },
+            use_delta = true,
+            side_by_side = true,
+            layout_strategy = "vertical",
+            layout_config = {
+                preview_height = 0.7,
+            },
         },
     },
 }

@@ -29,14 +29,19 @@ lsp_config.lua_ls.setup(lsp.nvim_lua_ls())
 lsp_config.glslls.setup{
     cmd = { "glslls", "--stdin", "--target-env", "opengl" }
 }
--- NeoVim fails to identify the correct type for `frag` and `vert` extensions.
+-- NeoVim fails to identify the correct file type for the `frag` and `vert` extensions.
 vim.cmd [[
     au BufNewFile,BufRead *.frag,*.vert,*.glsl set filetype=glsl
 ]]
 
--- NeoVim fails to identify the correct type for the `re` extension.
+-- NeoVim fails to identify the correct file type for the `re` extension.
 vim.cmd [[
     au BufNewFile,BufRead *.re set filetype=reason
+]]
+
+-- NeoVim fails to identify the correct file type for the `rasi` extension.
+vim.cmd [[
+    au BufNewFile,BufRead *.rasi set filetype=rasi
 ]]
 
 lsp_config.pyright.setup {

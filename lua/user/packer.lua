@@ -155,17 +155,6 @@ return require('packer').startup(function (use)
 
     use { "nvim-pack/nvim-spectre" }
 
-    use({
-        "epwalsh/obsidian.nvim",
-        tag = "*",
-        requires = {
-            "nvim-lua/plenary.nvim",
-            "hrsh7th/nvim-cmp",
-            "nvim-telescope/telescope.nvim",
-            "nvim-treesitter/nvim-treesitter",
-        },
-    })
-
     if packer_bootstrap then
         require('packer').sync()
     end

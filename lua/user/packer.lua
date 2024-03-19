@@ -73,7 +73,13 @@ return require('packer').startup(function (use)
 
     use "lukas-reineke/indent-blankline.nvim"
 
-    use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } }
+    use {
+        "rcarriga/nvim-dap-ui",
+        requires = {
+            "mfussenegger/nvim-dap",
+            "nvim-neotest/nvim-nio",
+        }
+    }
 
     use {
         'numToStr/Comment.nvim',
@@ -148,6 +154,17 @@ return require('packer').startup(function (use)
     }
 
     use { "nvim-pack/nvim-spectre" }
+
+    use({
+        "epwalsh/obsidian.nvim",
+        tag = "*",
+        requires = {
+            "nvim-lua/plenary.nvim",
+            "hrsh7th/nvim-cmp",
+            "nvim-telescope/telescope.nvim",
+            "nvim-treesitter/nvim-treesitter",
+        },
+    })
 
     if packer_bootstrap then
         require('packer').sync()

@@ -116,6 +116,10 @@ return require('packer').startup(function (use)
 
     use 'nanozuki/tabby.nvim'
 
+    use { "akinsho/toggleterm.nvim", tag = '*' }
+
+    use { 'stevearc/overseer.nvim' }
+
     use 'Civitasv/cmake-tools.nvim'
 
     use 'voldikss/vim-mma'

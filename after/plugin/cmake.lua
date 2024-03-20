@@ -10,6 +10,52 @@ require("cmake-tools").setup({
         console = "integratedTerminal",
     },
     cmake_build_directory = "build/${variant:buildType}",
+    cmake_executor = {
+        name = "overseer",
+        -- name = "toggleterm",
+        default_opts = {
+            toggleterm = {
+                direction = "float",
+                close_on_exit = true,
+                auto_scroll = true,
+            },
+            overseer = {
+                new_task_opts = {
+                    strategy = {
+                        "toggleterm",
+                        direction = "float",
+                        auto_scroll = true,
+                        quit_on_exit = "success",
+                    }
+                },
+                on_new_task = function(_)
+                end,
+            },
+        },
+    },
+    cmake_runner = {
+        name = "overseer",
+        -- name = "toggleterm",
+        default_opts = {
+            toggleterm = {
+                direction = "float",
+                close_on_exit = true,
+                auto_scroll = true,
+            },
+            overseer = {
+                new_task_opts = {
+                    strategy = {
+                        "toggleterm",
+                        direction = "float",
+                        auto_scroll = true,
+                        quit_on_exit = "success",
+                    },
+                },
+                on_new_task = function(_)
+                end,
+            },
+        },
+    },
 })
 
 vim.api.nvim_set_keymap(
@@ -21,14 +67,14 @@ vim.api.nvim_set_keymap(
 
 vim.api.nvim_set_keymap(
     "n",
-    "<leader>ce",
+    "<leader>coe",
     ":CMakeOpenExecutor<CR>",
     { noremap = true, silent = true }
 )
 
 vim.api.nvim_set_keymap(
     "n",
-    "<leader>cR",
+    "<leader>cor",
     ":CMakeOpenRunner<CR>",
     { noremap = true, silent = true }
 )
@@ -56,13 +102,6 @@ vim.api.nvim_set_keymap(
 
 vim.api.nvim_set_keymap(
     "n",
-    "<leader>co",
-    ":CMakeOpen<CR>",
-    { noremap = true, silent = true }
-)
-
-vim.api.nvim_set_keymap(
-    "n",
     "<leader>cc",
     ":CMakeClean<CR>",
     { noremap = true, silent = true }
@@ -70,7 +109,7 @@ vim.api.nvim_set_keymap(
 
 vim.api.nvim_set_keymap(
     "n",
-    "<leader>cq",
+    "<leader>cx",
     ":CMakeStopExecutor<CR>:CMakeStopRunner<CR>",
     { noremap = true, silent = true }
 )
@@ -114,5 +153,12 @@ vim.api.nvim_set_keymap(
     "n",
     "<leader>cG",
     ":CMakeGenerate!<CR>",
+    { noremap = true, silent = true }
+)
+
+vim.api.nvim_set_keymap(
+    "n",
+    "<leader>cs",
+    ":CMakeSettings<CR>",
     { noremap = true, silent = true }
 )

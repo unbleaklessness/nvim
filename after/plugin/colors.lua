@@ -1,3 +1,4 @@
+--- @diagnostic disable-next-line: missing-fields
 require("tokyonight").setup({
     transparent = vim.g.transparent_enabled,
     styles = {
@@ -50,7 +51,7 @@ vim.cmd.colorscheme("tokyonight-night")
 --         endif
 --     endfunction
 --
---     augroup ExcludeBuffers
+--     augroup
 --         autocmd!
 --         autocmd WinEnter,BufEnter * call s:highlight_active()
 --         autocmd WinLeave,BufLeave * call s:highlight_inactive()

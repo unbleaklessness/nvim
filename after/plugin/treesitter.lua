@@ -1,11 +1,12 @@
-local large_files = require('user.large_files')
+local large_files = require("user.large_files")
 
-local function disable_function(language, buffer_number)
+local function disable_function(_, buffer_number)
     local size = vim.fn.getfsize(vim.api.nvim_buf_get_name(buffer_number))
-    return size > large_files.LARGE_FILE_SIZE and language == "cpp"
+    return size > large_files.LARGE_FILE_SIZE
 end
 
-require'nvim-treesitter.configs'.setup {
+--- @diagnostic disable-next-line: missing-fields
+require("nvim-treesitter.configs").setup({
     ensure_installed = {
         "javascript",
         "typescript",
@@ -26,12 +27,11 @@ require'nvim-treesitter.configs'.setup {
     auto_install = true,
     highlight = {
         enable = true,
-        additional_vim_regex_highlighting = { 'org' },
+        additional_vim_regex_highlighting = { "org" },
         disable = disable_function,
     },
     indent = {
         enable = true,
         disable = disable_function,
     },
-}
-
+})

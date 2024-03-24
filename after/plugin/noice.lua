@@ -1,4 +1,4 @@
-require("noice").setup {
+require("noice").setup({
     cmdline = {
         format = {
             cmdline = {
@@ -21,5 +21,14 @@ require("noice").setup {
     messages = {
         view = "mini",
     },
-}
-
+    routes = {
+        { -- Ignore `toggleterm` errors from `cmake-tools` plugin.
+            filter = {
+                event = "msg_show",
+                kind = "",
+                find = "start/toggleterm.nvim/lua/toggleterm/terminal.lua:374",
+            },
+            opts = { skip = true },
+        },
+    },
+})

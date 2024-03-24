@@ -1,17 +1,17 @@
 local theme = {
-    fill = 'TabLineFill',
-    head = 'TabLine',
-    current_tab = 'TabLineSel',
-    tab = 'TabLine',
-    window = 'TabLine',
-    tail = 'TabLine',
+    fill = "TabLineFill",
+    head = "TabLine",
+    current_tab = "TabLineSel",
+    tab = "TabLine",
+    window = "TabLine",
+    tail = "TabLine",
 }
 
-require('tabby.tabline').set(function(line)
+require("tabby.tabline").set(function(line)
     return {
         {
-            { '', hl = theme.head },
-            line.sep('', theme.head, theme.fill),
+            { "", hl = theme.head },
+            line.sep("", theme.head, theme.fill),
         },
         line.tabs().foreach(function(tab)
             local hl = tab.is_current() and theme.current_tab or theme.tab
@@ -24,18 +24,18 @@ require('tabby.tabline').set(function(line)
                 end
             end
             return {
-                line.sep('', hl, theme.fill),
+                line.sep("", hl, theme.fill),
                 tab.number(),
                 tab_name,
-                line.sep('', hl, theme.fill),
+                line.sep("", hl, theme.fill),
                 hl = hl,
-                margin = ' ',
+                margin = " ",
             }
         end),
         line.spacer(),
         {
-            line.sep('', theme.tail, theme.fill),
-            { '', hl = theme.tail },
+            line.sep("", theme.tail, theme.fill),
+            { "", hl = theme.tail },
         },
         hl = theme.fill,
     }

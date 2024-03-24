@@ -7,19 +7,21 @@ local function show_macro_recording()
     end
 end
 
-local lua_line = require('lualine')
+local lua_line = require("lualine")
 
 lua_line.setup({
     options = {
+        theme = "tokyonight",
         disabled_filetypes = {
-            'NvimTree',
-            'dapui_console',
-            'dap-repl',
-            'dapui_scopes',
-            'dapui_breakpoints',
-            'dapui_stacks',
-            'dapui_watches',
-            'spectre_panel',
+            "NvimTree",
+            "dapui_console",
+            "dap-repl",
+            "dapui_scopes",
+            "dapui_breakpoints",
+            "dapui_stacks",
+            "dapui_watches",
+            "spectre_panel",
+            "qf",
         },
     },
     sections = {
@@ -32,18 +34,18 @@ lua_line.setup({
         },
         lualine_c = {
             {
-                'filename',
+                "filename",
                 path = 0,
             },
             {
-                'filename',
+                "filename",
                 path = 1,
-            }
+            },
         },
         lualine_x = {
-            'encoding',
-            'filetype',
-        }
+            "encoding",
+            "filetype",
+        },
     },
 })
 

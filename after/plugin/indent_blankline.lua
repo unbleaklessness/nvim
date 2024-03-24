@@ -1,4 +1,4 @@
-local large_files = require('user.large_files')
+local large_files = require("user.large_files")
 
 local highlight = {
     "RainbowRed",
@@ -10,7 +10,7 @@ local highlight = {
     "RainbowCyan",
 }
 
-local hooks = require "ibl.hooks"
+local hooks = require("ibl.hooks")
 
 hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
     vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#E06C75" })
@@ -22,14 +22,14 @@ hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
     vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
 end)
 
-require("ibl").setup { indent = { highlight = highlight } }
+require("ibl").setup({ indent = { highlight = highlight } })
 
 local ibl_hooks = require("ibl.hooks")
 ibl_hooks.register(ibl_hooks.type.ACTIVE, function(buffer_number)
     local buffer_name = vim.api.nvim_buf_get_name(buffer_number)
-    local extension = vim.fn.expand('%:e')
+    -- local extension = vim.fn.expand('%:e')
     local ok, stats = pcall(vim.loop.fs_stat, buffer_name)
-    if ok and stats and stats.size > large_files.LARGE_FILE_SIZE and extension == "cpp" then
+    if ok and stats and stats.size > large_files.LARGE_FILE_SIZE then
         return false
     end
     return true

@@ -39,7 +39,7 @@ vim.opt.iminsert = 0 -- Do not use the Russian keyboard layout when NeoVim initi
 vim.opt.guifont = "JetBrainsMono Nerd Font:h15" -- Set font and font size for GUI NeoVim.
 
 -- vim.api.nvim_exec('language en_US', true) -- Set NeoVim language to English.
-vim.api.nvim_exec('language en_US.UTF-8', true) -- Set NeoVim language to English.
+vim.api.nvim_exec("language en_US.UTF-8", true) -- Set NeoVim language to English.
 
 -- Display whitespace characters.
 -- vim.opt.list = true
@@ -65,7 +65,7 @@ vim.cmd([[
 vim.cmd([[
     let g:english_layout = "us"
     let g:insert_mode_layout = g:english_layout
-    
+
     function s:leave_insert_mode()
         let g:insert_mode_layout = trim(system('xkb-switch'))
         call system('xkb-switch -s "' . g:english_layout . '"')

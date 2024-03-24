@@ -19,7 +19,7 @@ require("chatgpt").setup({
             -- delete_session = "<leader>ad",
             delete_session = "D",
             -- delete_message = "<leader>ad",
-            delete_message = "d",
+            delete_message = "dd",
             -- close = "<leader>aq",
             close = "<C-c>",
             -- yank_last_code = "<leader>ay",

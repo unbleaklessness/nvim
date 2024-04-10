@@ -1,10 +1,18 @@
 local conform = require("conform")
 
 conform.setup({
+    formatters = {
+        clang_format = {
+            prepend_args = { "--style={BasedOnStyle: Mozilla, IndentWidth: 4, ReflowComments: false}" },
+        },
+    },
     formatters_by_ft = {
         glsl = { "clang_format" },
+        cpp = { "clang_format" },
+        h = { "clang_format" },
         lua = { "stylua" },
         cmake = { "gersemi" },
+        xml = { "xmlformat" },
     },
 })
 

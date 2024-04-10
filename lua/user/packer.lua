@@ -145,7 +145,7 @@ return require("packer").startup(function(use)
         branch = "v2",
     })
 
-    use({ "xiyaowong/transparent.nvim" })
+    -- use({ "xiyaowong/transparent.nvim" })
 
     use("danielo515/nvim-treesitter-reason")
 

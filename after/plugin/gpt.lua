@@ -27,7 +27,7 @@ require("chatgpt").setup({
             -- yank_last = "<leader>aY",
             yank_last = "<C-S-y>",
             -- cycle_modes = "<leader>am",
-            cycle_modes = "<C-v>",
+            cycle_modes = "<C-\\>",
             -- toggle_settings = "<leader>as",
             toggle_settings = "<C-s>",
             -- next_message = "<leader>an",

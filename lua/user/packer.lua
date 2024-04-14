@@ -89,10 +89,6 @@ return require("packer").startup(function(use)
     })
 
     use({
-        "rmagatti/auto-session",
-    })
-
-    use({
         "rmagatti/session-lens",
         requires = { "rmagatti/auto-session", "nvim-telescope/telescope.nvim" },
     })
@@ -118,23 +114,23 @@ return require("packer").startup(function(use)
 
     use({ "akinsho/toggleterm.nvim", tag = "*" })
 
-    use({ "stevearc/overseer.nvim" })
+    -- use({ "stevearc/overseer.nvim" })
 
     use("Civitasv/cmake-tools.nvim")
 
     use("voldikss/vim-mma")
 
-    use("nvim-orgmode/orgmode")
+    -- use("nvim-orgmode/orgmode")
 
-    use({
-        "unbleaklessness/ChatGPT.nvim",
-        branch = "development",
-        requires = {
-            "MunifTanjim/nui.nvim",
-            "nvim-lua/plenary.nvim",
-            "nvim-telescope/telescope.nvim",
-        },
-    })
+    -- use({
+    --     "unbleaklessness/ChatGPT.nvim",
+    --     branch = "development",
+    --     requires = {
+    --         "MunifTanjim/nui.nvim",
+    --         "nvim-lua/plenary.nvim",
+    --         "nvim-telescope/telescope.nvim",
+    --     },
+    -- })
 
     use("Vimjas/vim-python-pep8-indent")
 
@@ -164,6 +160,8 @@ return require("packer").startup(function(use)
     -- use { "RRethy/vim-illuminate" }
 
     use({ "stevearc/conform.nvim" })
+
+    use({ "robitx/gp.nvim" })
 
     if packer_bootstrap then
         require("packer").sync()

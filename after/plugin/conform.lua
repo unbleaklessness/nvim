@@ -13,6 +13,7 @@ conform.setup({
         lua = { "stylua" },
         cmake = { "gersemi" },
         xml = { "xmlformat" },
+        python = { "black" },
     },
 })
 

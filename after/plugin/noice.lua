@@ -18,15 +18,55 @@ require("noice").setup({
         long_message_to_split = true,
         lsp_doc_border = true,
     },
-    messages = {
-        view = "mini",
-    },
+    -- messages = {
+    --     view = "mini",
+    -- },
     routes = {
         { -- Ignore `toggleterm` errors from `cmake-tools` plugin.
             filter = {
                 event = "msg_show",
                 kind = "",
                 find = "start/toggleterm.nvim/lua/toggleterm/terminal.lua:374",
+            },
+            opts = { skip = true },
+        },
+        { -- Ignore 'File written' messages.
+            filter = {
+                event = "msg_show",
+                kind = "",
+                find = "written",
+            },
+            opts = { skip = true },
+        },
+        { -- Ignore 'Indented' messages.
+            filter = {
+                event = "msg_show",
+                kind = "",
+                find = "indented",
+            },
+            opts = { skip = true },
+        },
+        { -- Ignore 'Yanked' messages.
+            filter = {
+                event = "msg_show",
+                kind = "",
+                find = "yanked",
+            },
+            opts = { skip = true },
+        },
+        { -- Ignore 'Fewer' messages.
+            filter = {
+                event = "msg_show",
+                kind = "",
+                find = "fewer",
+            },
+            opts = { skip = true },
+        },
+        { -- Ignore 'More' messages.
+            filter = {
+                event = "msg_show",
+                kind = "",
+                find = "more",
             },
             opts = { skip = true },
         },

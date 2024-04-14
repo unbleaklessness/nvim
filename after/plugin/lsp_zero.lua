@@ -7,6 +7,7 @@ require("mason-lspconfig").setup({
         "clang-format",
         "stylua",
         "gersemi",
+        "black",
     },
     handlers = {
         lsp.default_setup,

@@ -1,6 +1,6 @@
 require("gp").setup({
     openai_api_key = { "cat", "/home/sorokinoleg/gpt_api_key.txt" },
-    chat_finder_pattern = "",
+    chat_finder_pattern = "# topic: ",
     agents = {
         {
             name = "ChatGPT4",

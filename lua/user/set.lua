@@ -63,21 +63,22 @@ vim.cmd([[
 ]])
 
 vim.cmd([[
-    let g:english_layout = "us"
-    let g:insert_mode_layout = g:english_layout
-
-    function s:leave_insert_mode()
-        let g:insert_mode_layout = trim(system('xkb-switch'))
-        call system('xkb-switch -s "' . g:english_layout . '"')
-    endfunction
-
-    function s:enter_insert_mode()
-        call system('xkb-switch -s "' . g:insert_mode_layout . '"')
-    endfunction
-
-    augroup
+    augroup keyboard_layout_switch
         autocmd!
-        autocmd! InsertLeave * call s:leave_insert_mode()
-        autocmd! InsertEnter * call s:enter_insert_mode()
+
+        let g:english_layout = "us"
+        let g:insert_mode_layout = g:english_layout
+
+        function s:leave_insert_mode()
+            let g:insert_mode_layout = trim(system('xkb-switch'))
+            call system('xkb-switch -s "' . g:english_layout . '"')
+        endfunction
+
+        function s:enter_insert_mode()
+            call system('xkb-switch -s "' . g:insert_mode_layout . '"')
+        endfunction
+
+        autocmd InsertLeave * call s:leave_insert_mode()
+        autocmd InsertEnter * call s:enter_insert_mode()
     augroup END
 ]])

@@ -27,7 +27,6 @@ local plugins = {
 
     {
         "nvim-telescope/telescope.nvim",
-        -- version = "0.1.6",
         version = "0.1.6",
         dependencies = {
             { "nvim-lua/plenary.nvim" },
@@ -56,14 +55,9 @@ local plugins = {
         dependencies = {
             -- LSP Support
             { "neovim/nvim-lspconfig" }, -- Required
-            {
-                "WhoIsSethDaniel/mason-tool-installer.nvim",
-                dependencies = {
-                    { "williamboman/mason.nvim" }, -- Optional
-                    { "williamboman/mason-lspconfig.nvim" }, -- Optional
-                },
-            },
-            -- Autocompletion
+            { "williamboman/mason.nvim" }, -- Optional
+            { "williamboman/mason-lspconfig.nvim" }, -- Optional
+            { "zapling/mason-conform.nvim" }, -- Optional
             {
                 "hrsh7th/nvim-cmp",
                 opts = function(_, options)
@@ -73,7 +67,7 @@ local plugins = {
                         group_index = 0,
                     })
                 end,
-            }, -- Required
+            }, -- Autocompletion
             { "hrsh7th/cmp-nvim-lsp" }, -- Required
             { "L3MON4D3/LuaSnip" }, -- Required
             {

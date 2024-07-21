@@ -2,32 +2,19 @@ local LSP = require("lsp-zero")
 
 require("mason").setup()
 
-require("mason-tool-installer").setup({
+require("mason-lspconfig").setup({
     ensure_installed = {
-        "clang-format",
-        "stylua",
-        "gersemi",
-        "black",
         "lua_ls",
         "clangd",
-        "gopls",
+        -- "gopls",
         "neocmake",
         "pyright",
         "arduino_language_server",
         "emmet_ls",
         "clojure_lsp",
-        "glslls",
-    },
-    auto_update = true,
-    run_on_start = true,
-    debounce_hours = 24,
-    start_delay = 0, -- 1 second delay.
-    integrations = {
-        ["mason-lspconfig"] = true,
+        -- "glslls",
     },
 })
-
-require("mason-lspconfig").setup()
 
 vim.diagnostic.config({
     virtual_text = {

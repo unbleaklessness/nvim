@@ -8,7 +8,7 @@ local telescope = require("telescope")
 local plenary_path = require("plenary.path")
 local previewers = require("telescope.previewers")
 local previewers_utils = require("telescope.previewers.utils")
-local large_files = require("user.large_files")
+local large_files = require("config.large_files")
 
 local truncate_large_files = function(file_path, buffer_number, options)
     options = options or {}
@@ -82,7 +82,7 @@ telescope.setup({
 
                 "--exclude",
                 "worktrees/",
-            },
+           },
         },
         buffers = {
             sort_lastused = true,

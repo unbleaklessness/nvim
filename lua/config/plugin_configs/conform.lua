@@ -3,7 +3,7 @@ local conform = require("conform")
 conform.setup({
     formatters = {
         clang_format = {
-            prepend_args = { "--style={BasedOnStyle: Mozilla, IndentWidth: 4, ReflowComments: false}" },
+            prepend_args = { "--style={BasedOnStyle: Mozilla, IndentWidth: 4, ReflowComments: false, ColumnLimit: 0}" },
         },
     },
     formatters_by_ft = {
@@ -30,3 +30,4 @@ vim.api.nvim_create_user_command("ConformFormat", function(arguments)
 end, { range = true })
 
 vim.api.nvim_set_keymap("n", "<space>lf", ":ConformFormat<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("v", "<space>lf", ":ConformFormat<CR>", { noremap = true, silent = true })

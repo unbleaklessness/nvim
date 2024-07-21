@@ -1,0 +1,1 @@
+-- require("voldikss/vim-mma").setup()

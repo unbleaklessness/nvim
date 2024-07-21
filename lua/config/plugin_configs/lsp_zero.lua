@@ -1,32 +1,33 @@
-local lsp = require("lsp-zero")
+local LSP = require("lsp-zero")
 
 require("mason").setup()
 
-require("mason-lspconfig").setup({
+require("mason-tool-installer").setup({
     ensure_installed = {
         "clang-format",
         "stylua",
         "gersemi",
         "black",
+        "lua_ls",
+        "clangd",
+        "gopls",
+        "neocmake",
+        "pyright",
+        "arduino_language_server",
+        "emmet_ls",
+        "clojure_lsp",
+        "glslls",
     },
-    handlers = {
-        lsp.default_setup,
+    auto_update = true,
+    run_on_start = true,
+    debounce_hours = 24,
+    start_delay = 0, -- 1 second delay.
+    integrations = {
+        ["mason-lspconfig"] = true,
     },
 })
 
-lsp.preset("recommended")
-
-lsp.ensure_installed({
-    "lua_ls",
-    "clangd",
-    "gopls",
-    "neocmake",
-    "pyright",
-    "arduino_language_server",
-    "emmet_ls",
-    "clojure_lsp",
-    "glslls",
-})
+require("mason-lspconfig").setup()
 
 vim.diagnostic.config({
     virtual_text = {
@@ -34,13 +35,13 @@ vim.diagnostic.config({
     },
 })
 
-require("neodev").setup()
+local LSP_config = require("lspconfig")
 
-local lsp_config = require("lspconfig")
+LSP_config.lua_ls.setup(LSP.nvim_lua_ls())
 
-lsp_config.lua_ls.setup(lsp.nvim_lua_ls())
+require("lazydev").setup()
 
-lsp_config.glslls.setup({
+LSP_config.glslls.setup({
     cmd = { "glslls", "--stdin", "--target-env", "opengl" },
 })
 
@@ -59,7 +60,7 @@ vim.cmd([[
     au BufNewFile,BufRead *.rasi set filetype=rasi
 ]])
 
-lsp_config.pyright.setup({
+LSP_config.pyright.setup({
     settings = {
         python = {
             analysis = {
@@ -92,14 +93,14 @@ local function trim_string(s)
     return s:gsub("%s+", "")
 end
 
-lsp_config.arduino_language_server.setup({
+LSP_config.arduino_language_server.setup({
     on_new_config = function(config, _)
         local lines = read_lines(vim.fn.getcwd() .. "/.fqbn")
         local fqbn = "arduino:avr:uno"
         if #lines >= 1 then
             fqbn = trim_string(lines[1])
         end
-        require("notify")(("FQBN = %s"):format(fqbn), vim.log.levels.INFO, {
+        require("notify")(string.format("FQBN = %s", fqbn), vim.log.levels.INFO, {
             title = "Arduino Language Server",
             timeout = 5000,
             render = "simple",
@@ -112,9 +113,9 @@ lsp_config.arduino_language_server.setup({
     end,
 })
 
-lsp_config.tsserver.setup({})
+LSP_config.tsserver.setup({})
 
-lsp_config.clangd.setup({
+LSP_config.clangd.setup({
     cmd = {
         "clangd",
         "--background-index",
@@ -124,11 +125,11 @@ lsp_config.clangd.setup({
     },
 })
 
-lsp_config.ocamllsp.setup({
+LSP_config.ocamllsp.setup({
     cmd = { "ocamllsp" },
 })
 
-lsp.setup()
+LSP.setup()
 
 vim.cmd([[
     highlight! MyDiagnosticError guifg=#DB4B4B gui=bold
@@ -141,14 +142,14 @@ vim.cmd([[
     sign define DiagnosticSignHint text= texthl=DiagnosticSignHint linehl= numhl=MyDiagnosticHint
 ]])
 
-local cmp = require("cmp")
-local cmp_action = lsp.cmp_action()
+local CMP = require("cmp")
+local CMP_action = LSP.cmp_action()
 
-cmp.setup({
+CMP.setup({
     mapping = {
         -- Navigate between snippet placeholders.
-        ["<C-f>"] = cmp_action.luasnip_jump_forward(),
-        ["<C-b>"] = cmp_action.luasnip_jump_backward(),
+        ["<C-f>"] = CMP_action.luasnip_jump_forward(),
+        ["<C-b>"] = CMP_action.luasnip_jump_backward(),
     },
 })
 

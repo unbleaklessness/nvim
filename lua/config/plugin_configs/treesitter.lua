@@ -1,4 +1,4 @@
-local large_files = require("user.large_files")
+local large_files = require("config.large_files")
 
 local function disable_function(_, buffer_number)
     local size = vim.fn.getfsize(vim.api.nvim_buf_get_name(buffer_number))

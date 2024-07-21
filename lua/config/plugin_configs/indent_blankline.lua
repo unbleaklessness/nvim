@@ -1,4 +1,4 @@
-local large_files = require("user.large_files")
+local large_files = require("config.large_files")
 
 local highlight = {
     "RainbowRed",

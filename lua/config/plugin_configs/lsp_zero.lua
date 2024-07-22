@@ -1,5 +1,9 @@
 local LSP = require("lsp-zero")
 
+LSP.on_attach(function(client, buffer_number)
+    LSP.default_keymaps({ buffer = buffer_number })
+end)
+
 require("mason").setup()
 
 require("mason-lspconfig").setup({
@@ -133,10 +137,38 @@ local CMP = require("cmp")
 local CMP_action = LSP.cmp_action()
 
 CMP.setup({
+    sources = {
+        { name = 'nvim_lsp' },
+    },
     mapping = {
         -- Navigate between snippet placeholders.
         ["<C-f>"] = CMP_action.luasnip_jump_forward(),
         ["<C-b>"] = CMP_action.luasnip_jump_backward(),
+
+        -- Defaults.
+        ['<C-y>'] = CMP.mapping.confirm({ select = false }),
+        ['<C-e>'] = CMP.mapping.abort(),
+        ['<Up>'] = CMP.mapping.select_prev_item({ behavior = 'select' }),
+        ['<Down>'] = CMP.mapping.select_next_item({ behavior = 'select' }),
+        ['<C-p>'] = CMP.mapping(function()
+            if CMP.visible() then
+                CMP.select_prev_item({ behavior = 'insert' })
+            else
+                CMP.complete()
+            end
+        end),
+        ['<C-n>'] = CMP.mapping(function()
+            if CMP.visible() then
+                CMP.select_next_item({ behavior = 'insert' })
+            else
+                CMP.complete()
+            end
+        end),
+    },
+    snippet = {
+        expand = function(arguments)
+            require('luasnip').lsp_expand(arguments.body)
+        end,
     },
 })
 

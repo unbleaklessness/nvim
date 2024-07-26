@@ -144,26 +144,11 @@ CMP.setup({
         -- Navigate between snippet placeholders.
         ["<C-f>"] = CMP_action.luasnip_jump_forward(),
         ["<C-b>"] = CMP_action.luasnip_jump_backward(),
-
-        -- Defaults.
-        ['<C-y>'] = CMP.mapping.confirm({ select = false }),
-        ['<C-e>'] = CMP.mapping.abort(),
-        ['<Up>'] = CMP.mapping.select_prev_item({ behavior = 'select' }),
-        ['<Down>'] = CMP.mapping.select_next_item({ behavior = 'select' }),
-        ['<C-p>'] = CMP.mapping(function()
-            if CMP.visible() then
-                CMP.select_prev_item({ behavior = 'insert' })
-            else
-                CMP.complete()
-            end
-        end),
-        ['<C-n>'] = CMP.mapping(function()
-            if CMP.visible() then
-                CMP.select_next_item({ behavior = 'insert' })
-            else
-                CMP.complete()
-            end
-        end),
+        -- ['<C-Space>'] = CMP.mapping.complete(),
+        ['<CR>'] = CMP.mapping.confirm({ select = true }),
+        -- ['<C-e>'] = CMP.mapping.abort(),
+        ['<C-p>'] = CMP.mapping.select_prev_item({ behavior = 'select' }),
+        ['<C-n>'] = CMP.mapping.select_next_item({ behavior = 'select' }),
     },
     snippet = {
         expand = function(arguments)

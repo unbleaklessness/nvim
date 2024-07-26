@@ -11,7 +11,8 @@ local lua_line = require("lualine")
 
 lua_line.setup({
     options = {
-        theme = "tokyonight",
+        -- theme = "tokyonight",
+        theme = "gruvbox-material",
         disabled_filetypes = {
             "NvimTree",
             "dapui_console",

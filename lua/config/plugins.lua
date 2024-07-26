@@ -184,6 +184,8 @@ local plugins = {
     "stevearc/conform.nvim",
 
     "robitx/gp.nvim",
+
+    "sainnhe/gruvbox-material",
 }
 
 local options = {}

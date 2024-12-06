@@ -6,6 +6,7 @@ require("autoclose").setup({
         disabled_filetypes = {
             "TelescopePrompt",
             "chatgpt-input",
+            "off",
         },
     },
 })

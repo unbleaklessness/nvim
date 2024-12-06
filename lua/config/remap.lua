@@ -1,5 +1,10 @@
 vim.api.nvim_set_keymap("n", "<leader>tw", ":silent !kitty --single-instance<CR>", { noremap = true, silent = true })
 
+vim.api.nvim_set_keymap("n", "<leader>Dt", ":difft<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>Do", ":diffo!<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>Dg", ":diffg<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("v", "<leader>Dg", ":diffg<CR>", { noremap = true, silent = true })
+
 vim.api.nvim_set_keymap("n", "<leader>qc", ":cclose<CR>", { noremap = true, silent = true })
 
 vim.api.nvim_set_keymap("n", "<leader>qo", ":copen<CR>", { noremap = true, silent = true })

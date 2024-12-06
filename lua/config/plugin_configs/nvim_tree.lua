@@ -4,6 +4,15 @@
 --     value.color = "#A9B1D6"
 -- end
 
+local _, color = require 'nvim-web-devicons'.get_icon_color("source.cpp", "cpp")
+require("nvim-web-devicons").set_icon {
+    ipp = {
+        icon = "󰬐",
+        color = color,
+        name = "Ipp",
+    },
+}
+
 -- Disable NetRW.
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1

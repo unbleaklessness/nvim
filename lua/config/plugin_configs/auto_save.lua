@@ -4,4 +4,8 @@ require("auto-save").setup({
             return ""
         end,
     },
+    condition = function(buffer)
+        return not vim.b.large_buffer
+    end,
+    lockmarks = true, -- Keep the '[ and the '] marks.
 })

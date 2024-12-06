@@ -3,7 +3,21 @@ local conform = require("conform")
 conform.setup({
     formatters = {
         clang_format = {
-            prepend_args = { "--style={BasedOnStyle: Mozilla, IndentWidth: 4, ReflowComments: false, ColumnLimit: 0}" },
+            prepend_args = { "--style={"
+            .. "BasedOnStyle: Mozilla,"
+            .. "IndentWidth: 4,"
+            .. "ReflowComments: false,"
+            .. "ColumnLimit: 0,"
+            .. "SortIncludes: false,"
+            .. "AccessModifierOffset: -4,"
+            .. "ContinuationIndentWidth: 4,"
+            .. "ConstructorInitializerIndentWidth: 4,"
+            .. "}" },
+        },
+        xmlformat = {
+            prepend_args = {
+                "--indent=4",
+            },
         },
     },
     formatters_by_ft = {

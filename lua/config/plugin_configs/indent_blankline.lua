@@ -1,5 +1,3 @@
-local large_files = require("config.large_files")
-
 local highlight = {
     "RainbowRed",
     "RainbowYellow",
@@ -22,15 +20,8 @@ hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
     vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
 end)
 
-require("ibl").setup({ indent = { highlight = highlight } })
-
-local ibl_hooks = require("ibl.hooks")
-
-ibl_hooks.register(ibl_hooks.type.ACTIVE, function(buffer_number)
-    local buffer_name = vim.api.nvim_buf_get_name(buffer_number)
-    local ok, stats = pcall(vim.loop.fs_stat, buffer_name)
-    if ok and stats and stats.size > large_files.LARGE_FILE_SIZE then
-        return false
-    end
-    return true
+hooks.register(hooks.type.ACTIVE, function(buffer_number)
+    return not vim.b.large_buffer
 end, {})
+
+require("ibl").setup({ indent = { highlight = highlight } })

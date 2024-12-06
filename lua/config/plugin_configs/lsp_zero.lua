@@ -17,6 +17,9 @@ require("mason-lspconfig").setup({
         "emmet_ls",
         "clojure_lsp",
         -- "glslls",
+        "julials",
+        "rust_analyzer",
+        "matlab_ls",
     },
 })
 
@@ -30,6 +33,19 @@ local LSP_config = require("lspconfig")
 
 LSP_config.lua_ls.setup(LSP.nvim_lua_ls())
 
+LSP_config.rust_analyzer.setup({})
+
+LSP_config.neocmake.setup({})
+
+LSP_config.matlab_ls.setup({
+    settings = {
+        matlab = {
+            installPath = "/home/sorokinoleg/MATLAB",
+            indexWorkspace = true,
+        },
+    },
+})
+
 require("lazydev").setup()
 
 LSP_config.glslls.setup({
@@ -39,6 +55,16 @@ LSP_config.glslls.setup({
 -- NeoVim fails to identify the correct file type for the `frag` and `vert` extensions.
 vim.cmd([[
     au BufNewFile,BufRead *.frag,*.vert,*.glsl set filetype=glsl
+]])
+
+-- NeoVim fails to identify the correct file type for the `urdf` extensions.
+vim.cmd([[
+    au BufNewFile,BufRead *.urdf set filetype=xml
+]])
+
+-- Inline or template implementations for C++.
+vim.cmd([[
+    au BufNewFile,BufRead *.ipp set filetype=cpp
 ]])
 
 -- NeoVim fails to identify the correct file type for the `re` extension.
@@ -106,13 +132,18 @@ LSP_config.arduino_language_server.setup({
 
 LSP_config.tsserver.setup({})
 
+LSP_config.julials.setup({})
+
 LSP_config.clangd.setup({
     cmd = {
         "clangd",
         "--background-index",
-        "--suggest-missing-includes",
-        "--clang-tidy",
-        "--header-insertion=iwyu",
+        -- "--suggest-missing-includes",
+        -- "--clang-tidy",
+        -- "--header-insertion=iwyu",
+        "--header-insertion=never",
+        "--query-driver=**",
+        -- '--sysroot "/opt/poky/5.0.1/sysroots/corei7-64-poky-linux"',
     },
 })
 
@@ -145,7 +176,8 @@ CMP.setup({
         ["<C-f>"] = CMP_action.luasnip_jump_forward(),
         ["<C-b>"] = CMP_action.luasnip_jump_backward(),
         -- ['<C-Space>'] = CMP.mapping.complete(),
-        ['<CR>'] = CMP.mapping.confirm({ select = true }),
+        -- ['<CR>'] = CMP.mapping.confirm({ select = true }),
+        ['<C-y>'] = CMP.mapping.confirm({ select = true }),
         -- ['<C-e>'] = CMP.mapping.abort(),
         ['<C-p>'] = CMP.mapping.select_prev_item({ behavior = 'select' }),
         ['<C-n>'] = CMP.mapping.select_next_item({ behavior = 'select' }),
@@ -154,6 +186,13 @@ CMP.setup({
         expand = function(arguments)
             require('luasnip').lsp_expand(arguments.body)
         end,
+    },
+    matching = {
+        disallow_fuzzy_matching = false,
+        disallow_fullfuzzy_matching = false,
+        disallow_partial_fuzzy_matching = false,
+        disallow_partial_matching = false,
+        disallow_prefix_unmatching = false,
     },
 })
 

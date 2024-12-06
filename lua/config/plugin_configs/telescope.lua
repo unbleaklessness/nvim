@@ -8,7 +8,7 @@ local telescope = require("telescope")
 local plenary_path = require("plenary.path")
 local previewers = require("telescope.previewers")
 local previewers_utils = require("telescope.previewers.utils")
-local large_files = require("config.large_files")
+local large_buffers = require("config.large_buffers")
 
 local truncate_large_files = function(file_path, buffer_number, options)
     options = options or {}
@@ -20,7 +20,7 @@ local truncate_large_files = function(file_path, buffer_number, options)
         if not stats then
             return
         end
-        local max_size = large_files.LARGE_FILE_SIZE
+        local max_size = large_buffers.LARGE_BUFFER_SIZE
         if stats.size > max_size then
             local command = { "head", "-c", max_size, file_path }
             previewers_utils.job_maker(command, buffer_number, options)

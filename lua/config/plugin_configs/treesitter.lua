@@ -1,8 +1,5 @@
-local large_files = require("config.large_files")
-
 local function disable_function(_, buffer_number)
-    local size = vim.fn.getfsize(vim.api.nvim_buf_get_name(buffer_number))
-    return size > large_files.LARGE_FILE_SIZE
+    return vim.b.large_buffer
 end
 
 --- @diagnostic disable-next-line: missing-fields
@@ -28,7 +25,7 @@ require("nvim-treesitter.configs").setup({
     highlight = {
         enable = true,
         additional_vim_regex_highlighting = { "org" },
-        disable = disable_function,
+        disable = { disable_function, 'dockerfile' },
     },
     indent = {
         enable = true,

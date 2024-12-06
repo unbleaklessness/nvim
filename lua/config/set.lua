@@ -8,7 +8,8 @@ vim.opt.softtabstop = 4 -- Number of spaces that a <Tab> counts for while perfor
 vim.opt.shiftwidth = 4 -- Number of spaces to use for each step of (auto)indent.
 vim.opt.expandtab = true -- In Insert mode: Use the appropriate number of spaces to insert a <Tab>.
 
-vim.opt.smartindent = true -- Do smart autoindenting when starting a new line.
+-- vim.opt.smartindent = true -- Do smart autoindenting when starting a new line.
+vim.opt.smartindent = false -- Do smart autoindenting when starting a new line.
 
 -- Case-insensitive search, unless '\C' or a capital letter is present in the search.
 vim.o.ignorecase = true

@@ -47,8 +47,6 @@ local plugins = {
         },
     },
 
-    "tpope/vim-fugitive",
-
     {
         "VonHeikemen/lsp-zero.nvim",
         version = "v2.x",
@@ -123,7 +121,7 @@ local plugins = {
         end,
     },
 
-    "Pocco81/auto-save.nvim",
+    "okuuva/auto-save.nvim",
 
     "lewis6991/gitsigns.nvim",
 
@@ -186,6 +184,16 @@ local plugins = {
     "robitx/gp.nvim",
 
     "sainnhe/gruvbox-material",
+
+    "lambdalisue/vim-suda",
+
+    {
+        "FabijanZulj/blame.nvim",
+        lazy = false,
+        config = function()
+            require('blame').setup {}
+        end,
+    },
 }
 
 local options = {}

@@ -11,6 +11,19 @@
 
 -- vim.cmd.colorscheme("gruvbox-material")
 
+require("catppuccin").setup({
+    integrations = {
+        cmp = true,
+        gitsigns = true,
+        nvimtree = true,
+        treesitter = true,
+        notify = true,
+        mini = {
+            enabled = true,
+            indentscope_color = "",
+        },
+    }
+})
 vim.cmd.colorscheme("catppuccin")
 
 -- Make background of inactive buffers darker.
@@ -30,8 +43,8 @@ if true then
 
         " For Catppuccin theme.
 
-        highlight ActiveBufferBG guibg=#1F2335
-        highlight ActiveBufferFG guifg=#1F2335
+        highlight ActiveBufferBG guibg=#1e1e2e
+        highlight ActiveBufferFG guifg=#1e1e2e
     ]])
 
     vim.cmd([[

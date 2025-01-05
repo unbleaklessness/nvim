@@ -18,9 +18,9 @@ require("noice").setup({
         long_message_to_split = true,
         lsp_doc_border = true,
     },
-    -- messages = {
-    --     view = "mini",
-    -- },
+    messages = {
+        view = "mini",
+    },
     routes = {
         { -- Ignore `toggleterm` errors from `cmake-tools` plugin.
             filter = {
@@ -67,6 +67,13 @@ require("noice").setup({
                 event = "msg_show",
                 kind = "",
                 find = "more",
+            },
+            opts = { skip = true },
+        },
+        { -- Ignore search count messages.
+            filter = {
+                event = "msg_show",
+                kind = "search_count",
             },
             opts = { skip = true },
         },

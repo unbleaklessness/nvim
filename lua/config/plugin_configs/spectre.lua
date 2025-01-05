@@ -52,27 +52,27 @@ require("spectre").setup({
             desc = "Change result view mode",
         },
         ["change_replace_sed"] = {
-            map = "<leader>rtrs",
+            map = "<leader>rsrs",
             cmd = "<cmd>lua require('spectre').change_engine_replace('sed')<CR>",
             desc = "Use Sed to replace",
         },
         ["change_replace_oxi"] = {
-            map = "<leader>rtrs",
+            map = "<leader>rsro",
             cmd = "<cmd>lua require('spectre').change_engine_replace('oxi')<CR>",
             desc = "Use Oxi to replace",
         },
         ["toggle_live_update"] = {
-            map = "<leader>rtu",
+            map = "<leader>rsu",
             cmd = "<cmd>lua require('spectre').toggle_live_update()<CR>",
             desc = "Update when Vim writes to file",
         },
         ["toggle_ignore_case"] = {
-            map = "<leader>rti",
+            map = "<leader>rsi",
             cmd = "<cmd>lua require('spectre').change_options('ignore-case')<CR>",
             desc = "Toggle ignore case",
         },
         ["toggle_ignore_hidden"] = {
-            map = "<leader>rth",
+            map = "<leader>rsh",
             cmd = "<cmd>lua require('spectre').change_options('hidden')<CR>",
             desc = "Toggle search hidden",
         },
@@ -88,21 +88,14 @@ vim.keymap.set("n", "<leader>rt", '<cmd>lua require("spectre").toggle()<CR>', { 
 
 vim.keymap.set(
     "n",
-    "<leader>rw",
-    '<cmd>lua require("spectre").open_visual({select_word=true})<CR>',
+    "<leader>rf",
+    '<cmd>lua require("spectre").open_visual({ select_word = true })<CR>',
     { desc = "Search the current word" }
 )
 
 vim.keymap.set(
     "v",
-    "<leader>rw",
+    "<leader>rf",
     '<esc><cmd>lua require("spectre").open_visual()<CR>',
     { desc = "Search the current word" }
-)
-
-vim.keymap.set(
-    "n",
-    "<leader>rf",
-    '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>',
-    { desc = "Search the current file" }
 )

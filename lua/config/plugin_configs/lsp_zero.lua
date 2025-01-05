@@ -1,6 +1,6 @@
 local LSP = require("lsp-zero")
 
-LSP.on_attach(function(client, buffer_number)
+LSP.on_attach(function(_ --[[ Client. ]], buffer_number)
     LSP.default_keymaps({ buffer = buffer_number })
 end)
 
@@ -173,12 +173,14 @@ CMP.setup({
     },
     mapping = {
         -- Navigate between snippet placeholders.
-        ["<C-f>"] = CMP_action.luasnip_jump_forward(),
-        ["<C-b>"] = CMP_action.luasnip_jump_backward(),
+        ["<C-l>"] = CMP_action.luasnip_jump_forward(),
+        ["<C-h>"] = CMP_action.luasnip_jump_backward(),
         -- ['<C-Space>'] = CMP.mapping.complete(),
         -- ['<CR>'] = CMP.mapping.confirm({ select = true }),
-        ['<C-y>'] = CMP.mapping.confirm({ select = true }),
+        ['<C-j>'] = CMP.mapping.confirm({ select = true }),
+        -- ['<C-k>'] = CMP.mapping.confirm({ select = true }),
         -- ['<C-e>'] = CMP.mapping.abort(),
+        ['<C-k>'] = CMP.mapping.abort(),
         ['<C-p>'] = CMP.mapping.select_prev_item({ behavior = 'select' }),
         ['<C-n>'] = CMP.mapping.select_next_item({ behavior = 'select' }),
     },
@@ -193,6 +195,7 @@ CMP.setup({
         disallow_partial_fuzzy_matching = false,
         disallow_partial_matching = false,
         disallow_prefix_unmatching = false,
+        disallow_symbol_nonprefix_matching = true,
     },
 })
 
@@ -200,3 +203,4 @@ vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, { noremap = true, sil
 vim.keymap.set("n", "<leader>ln", vim.lsp.buf.rename, { noremap = true, silent = true })
 
 vim.api.nvim_set_keymap("n", "<leader>lh", ":ClangdSwitchSourceHeader<CR>", { noremap = true, silent = true })
+

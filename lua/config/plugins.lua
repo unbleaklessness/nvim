@@ -6,7 +6,7 @@ if not (vim.uv or vim.loop).fs_stat(lazy_path) then
     if vim.v.shell_error ~= 0 then
         vim.api.nvim_echo({
             { "Failed to clone `lazy.nvim`:\n", "ErrorMsg" },
-            { out, "WarningMsg" },
+            { out,                              "WarningMsg" },
             { "\nPress any key to exit..." },
         }, true, {})
         vim.fn.getchar()
@@ -17,6 +17,7 @@ end
 vim.opt.rtp:prepend(lazy_path)
 
 local plugins = {
+
     "wbthomason/packer.nvim",
 
     { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
@@ -52,10 +53,10 @@ local plugins = {
         version = "v2.x",
         dependencies = {
             -- LSP Support
-            { "neovim/nvim-lspconfig" }, -- Required
-            { "williamboman/mason.nvim" }, -- Optional
+            { "neovim/nvim-lspconfig" },             -- Required
+            { "williamboman/mason.nvim" },           -- Optional
             { "williamboman/mason-lspconfig.nvim" }, -- Optional
-            { "zapling/mason-conform.nvim" }, -- Optional
+            { "zapling/mason-conform.nvim" },        -- Optional
             {
                 "hrsh7th/nvim-cmp",
                 opts = function(_, options)
@@ -65,9 +66,9 @@ local plugins = {
                         group_index = 0,
                     })
                 end,
-            }, -- Autocompletion
+            },                          -- Autocompletion
             { "hrsh7th/cmp-nvim-lsp" }, -- Required
-            { "L3MON4D3/LuaSnip" }, -- Required
+            { "L3MON4D3/LuaSnip" },     -- Required
             {
                 "folke/lazydev.nvim",
                 ft = "lua",
@@ -142,16 +143,6 @@ local plugins = {
 
     -- "nvim-orgmode/orgmode",
 
-    -- {
-    --     "unbleaklessness/ChatGPT.nvim",
-    --     version = "development",
-    --     dependencies = {
-    --         "MunifTanjim/nui.nvim",
-    --         "nvim-lua/plenary.nvim",
-    --         "nvim-telescope/telescope.nvim",
-    --     },
-    -- },
-
     "Vimjas/vim-python-pep8-indent",
 
     "rcarriga/nvim-notify",
@@ -177,8 +168,6 @@ local plugins = {
 
     "HiPhish/rainbow-delimiters.nvim",
 
-    -- "RRethy/vim-illuminate",
-
     "stevearc/conform.nvim",
 
     "robitx/gp.nvim",
@@ -191,12 +180,9 @@ local plugins = {
         "FabijanZulj/blame.nvim",
         lazy = false,
         config = function()
-            require('blame').setup {}
+            require('blame').setup()
         end,
     },
 }
 
-local options = {}
-
-require("lazy").setup(plugins, options)
-
+require("lazy").setup(plugins, {})

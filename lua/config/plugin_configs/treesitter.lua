@@ -1,4 +1,4 @@
-local function disable_function(_, buffer_number)
+local function disable_function(_, _ --[[ Buffer number. ]])
     return vim.b.large_buffer
 end
 

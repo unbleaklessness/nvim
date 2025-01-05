@@ -243,13 +243,15 @@ end
 
 vim.keymap.set("n", "<leader>ff", builtin.find_files, { noremap = true, silent = true })
 
-vim.keymap.set("n", "<leader>fih", function()
-    find_in_directory({ path = vim.env.HOME .. "/" })
-end, { noremap = true, silent = true })
+-- UNUSED.
+-- vim.keymap.set("n", "<leader>fih", function()
+--     find_in_directory({ path = vim.env.HOME .. "/" })
+-- end, { noremap = true, silent = true })
 
-vim.keymap.set("n", "<leader>Fih", function()
-    find_in_directory({ path = vim.env.HOME .. "/", grep = true })
-end, { noremap = true, silent = true })
+-- UNUSED.
+-- vim.keymap.set("n", "<leader>Fih", function()
+--     find_in_directory({ path = vim.env.HOME .. "/", grep = true })
+-- end, { noremap = true, silent = true })
 
 vim.keymap.set("n", "<leader>fid", function()
     find_in_directory({ path = vim.fn.getcwd() .. "/" })
@@ -259,21 +261,25 @@ vim.keymap.set("n", "<leader>Fid", function()
     find_in_directory({ path = vim.fn.getcwd() .. "/", grep = true })
 end, { noremap = true, silent = true })
 
-vim.keymap.set("n", "<leader>fir", function()
-    find_in_directory({ path = "/" })
-end, { noremap = true, silent = true })
+-- UNUSED.
+-- vim.keymap.set("n", "<leader>fir", function()
+--     find_in_directory({ path = "/" })
+-- end, { noremap = true, silent = true })
 
-vim.keymap.set("n", "<leader>Fir", function()
-    find_in_directory({ path = "/", grep = true })
-end, { noremap = true, silent = true })
+-- UNUSED.
+-- vim.keymap.set("n", "<leader>Fir", function()
+--     find_in_directory({ path = "/", grep = true })
+-- end, { noremap = true, silent = true })
 
-vim.keymap.set("n", "<leader>fic", function()
-    builtin.find_files({ cwd = plenary_path.new(vim.env.MYVIMRC):parent().filename })
-end, { noremap = true, silent = true })
+-- UNUSED.
+-- vim.keymap.set("n", "<leader>fic", function()
+--     builtin.find_files({ cwd = plenary_path.new(vim.env.MYVIMRC):parent().filename })
+-- end, { noremap = true, silent = true })
 
-vim.keymap.set("n", "<leader>Fic", function()
-    builtin.find_files({ cwd = plenary_path.new(vim.env.MYVIMRC):parent().filename, grep = true })
-end, { noremap = true, silent = true })
+-- UNUSED.
+-- vim.keymap.set("n", "<leader>Fic", function()
+--     builtin.find_files({ cwd = plenary_path.new(vim.env.MYVIMRC):parent().filename, grep = true })
+-- end, { noremap = true, silent = true })
 
 vim.api.nvim_set_keymap("n", "<leader>fb", ":Telescope file_browser<CR>", { noremap = true, silent = true })
 
@@ -285,10 +291,6 @@ vim.api.nvim_set_keymap(
 )
 
 vim.api.nvim_set_keymap("n", "<leader>fg", ":Telescope live_grep<CR>", { noremap = true, silent = true })
-
-vim.keymap.set("n", "<leader>lr", function()
-    builtin.lsp_references({ trim_text = true, show_line = false })
-end, { noremap = true, silent = true })
 
 vim.api.nvim_set_keymap(
     "n",
@@ -322,3 +324,10 @@ end, { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>th", ":Telescope help_tags<CR>", { noremap = true, silent = true })
 
 vim.api.nvim_set_keymap("n", "<leader>tm", ":Telescope marks<CR>", { noremap = true, silent = true })
+
+local builtin = require("telescope.builtin")
+
+vim.keymap.set("n", "<leader>lr", function()
+    builtin.lsp_references({ trim_text = true, show_line = false })
+end, { noremap = true, silent = true })
+

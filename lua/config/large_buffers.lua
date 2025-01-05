@@ -12,7 +12,7 @@ local large_buffer = function()
     -- vim.opt_local.autoread = false
 
     local buffer_number = vim.api.nvim_get_current_buf()
-    local clients = vim.lsp.get_active_clients({ bufnr = buffer_number })
+    local clients = vim.lsp.get_clients({ bufnr = buffer_number })
     for _, client in ipairs(clients) do
         vim.lsp.stop_client(client.id)
     end
@@ -22,7 +22,7 @@ vim.api.nvim_create_user_command("LargeBuffer", large_buffer, {})
 
 vim.api.nvim_create_augroup("LargeBuffer", { clear = true })
 
-vim.api.nvim_create_autocmd({ "BufReadPre", "BufReadPost", "FileReadPre", "FileReadPost", "BufWinEnter", "BufEnter" }, {
+vim.api.nvim_create_autocmd({ "BufReadPre", "BufReadPost", "FileReadPre", "FileReadPost", "WinEnter", "BufEnter" }, {
     callback = function()
         vim.b.large_buffer = false
 

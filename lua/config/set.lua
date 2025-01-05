@@ -66,24 +66,12 @@ vim.opt.undolevels = 3000 -- Maximum number of changes that can be undone.
 vim.opt.autoread = true   -- When a file has been detected to have been changed outside of Vim and it has not been changed inside of Vim, automatically read it again.
 
 -- Reload the current file if it has been changed externally.
--- This works with Git.
-vim.api.nvim_create_augroup('AutoReadGroup', { clear = true })
-vim.api.nvim_create_autocmd('CursorHold', {
-    group = 'AutoReadGroup',
-    pattern = '*',
-    callback = function()
-        vim.cmd('checktime')
-        -- vim.api.nvim_feedkeys('lh', 'n', false)
-        vim.api.nvim_feedkeys("<C-[>", 'n', false)
-    end,
-})
-
--- Reload the current file if it has been changed externally.
--- This does not work with Git.
--- This works for automatic save.
 vim.cmd([[
     " autocmd FocusGained,WinEnter,BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
-    autocmd CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
+    " autocmd CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
+    " autocmd CursorHold,CursorHoldI * if mode() != 'c' | checktime | feedkeys("<C-[>") | endif
+    " autocmd CursorHold * if mode() != 'c' | checktime | feedkeys("lh") | endif
+    autocmd CursorHold * if mode() != 'c' | checktime | feedkeys("<C-[>") | endif
     autocmd FileChangedShellPost * echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
 ]])
 

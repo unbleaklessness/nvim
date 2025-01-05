@@ -40,7 +40,7 @@ vim.opt.iminsert = 0                            -- Do not use the Russian keyboa
 vim.opt.guifont = "JetBrainsMono Nerd Font:h15" -- Set font and font size for GUI NeoVim.
 
 -- vim.api.nvim_exec('language en_US', true) -- Set NeoVim language to English.
-vim.api.nvim_exec("language en_US.UTF-8", true) -- Set NeoVim language to English.
+vim.cmd("language en_US.UTF-8") -- Set NeoVim language to English.
 
 -- Display whitespace characters.
 -- vim.opt.list = true
@@ -65,7 +65,8 @@ vim.api.nvim_create_autocmd('CursorHold', {
     pattern = '*',
     callback = function()
         vim.cmd('checktime')
-        vim.api.nvim_feedkeys('lh', 'n', false)
+        -- vim.api.nvim_feedkeys('lh', 'n', false)
+        vim.api.nvim_feedkeys("<C-[>", 'n', false)
     end,
 })
 

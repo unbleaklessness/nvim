@@ -82,7 +82,8 @@ vim.api.nvim_create_autocmd('CursorHold', {
 -- This does not work with Git.
 -- This works for automatic save.
 vim.cmd([[
-    autocmd FocusGained,WinEnter,BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
+    " autocmd FocusGained,WinEnter,BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
+    autocmd CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
     autocmd FileChangedShellPost * echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
 ]])
 

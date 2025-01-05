@@ -9,7 +9,9 @@
 
 -- vim.cmd.colorscheme("tokyonight-night")
 
-vim.cmd.colorscheme("gruvbox-material")
+-- vim.cmd.colorscheme("gruvbox-material")
+
+vim.cmd.colorscheme("catppuccin")
 
 -- Make background of inactive buffers darker.
 
@@ -23,9 +25,13 @@ if true then
 
         " For Gruvbox Material theme.
 
-        highlight ActiveBufferBG guibg=#282828
-        highlight ActiveBufferFG guifg=#282828
+        " highlight ActiveBufferBG guibg=#282828
+        " highlight ActiveBufferFG guifg=#282828
 
+        " For Catppuccin theme.
+
+        highlight ActiveBufferBG guibg=#1F2335
+        highlight ActiveBufferFG guifg=#1F2335
     ]])
 
     vim.cmd([[
@@ -37,9 +43,13 @@ if true then
 
         " For Gruvbox Material theme.
 
+        " highlight InactiveBufferBG guibg=#010101
+        " highlight InactiveBufferFG guifg=#010101
+
+        " For Catppuccin theme.
+
         highlight InactiveBufferBG guibg=#010101
         highlight InactiveBufferFG guifg=#010101
-
     ]])
 
     vim.cmd([[

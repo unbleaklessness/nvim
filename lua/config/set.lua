@@ -45,6 +45,7 @@ vim.opt.shortmess:append { C = true }
 vim.opt.shortmess:append { s = true }
 vim.opt.shortmess:append { W = true }
 vim.opt.shortmess:append { I = true }
+vim.opt.shortmess:append { S = true }
 
 -- vim.api.nvim_exec('language en_US', true) -- Set NeoVim language to English.
 vim.cmd("language en_US.UTF-8") -- Set NeoVim language to English.

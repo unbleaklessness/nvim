@@ -70,6 +70,22 @@ require("noice").setup({
             },
             opts = { skip = true },
         },
+        { -- Ignore 'Less' messages.
+            filter = {
+                event = "msg_show",
+                kind = "",
+                find = "line less",
+            },
+            opts = { skip = true },
+        },
+        { -- Ignore 'Change' messages.
+            filter = {
+                event = "msg_show",
+                kind = "",
+                find = "change",
+            },
+            opts = { skip = true },
+        },
         { -- Ignore search count messages.
             filter = {
                 event = "msg_show",

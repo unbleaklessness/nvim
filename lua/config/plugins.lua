@@ -24,19 +24,24 @@ local plugins = {
 
     "nvim-treesitter/nvim-treesitter-context",
 
-    "nvim-treesitter/playground",
-
     {
         "nvim-telescope/telescope.nvim",
-        version = "0.1.6",
         dependencies = {
             { "nvim-lua/plenary.nvim" },
-            {
-                "nvim-telescope/telescope-fzf-native.nvim",
-                -- build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
-                build = "make",
-            },
-            { "debugloop/telescope-undo.nvim" },
+        },
+    },
+
+    {
+        "nvim-telescope/telescope-fzf-native.nvim",
+        -- build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
+        build = "make",
+    },
+
+    {
+        "debugloop/telescope-undo.nvim",
+        dependencies = {
+            "nvim-telescope/telescope.nvim",
+            "nvim-lua/plenary.nvim",
         },
     },
 
@@ -48,38 +53,64 @@ local plugins = {
         },
     },
 
+    -- LSP.
+    "neovim/nvim-lspconfig",
+    "hrsh7th/cmp-nvim-lsp",
+    "hrsh7th/nvim-cmp",
+    "williamboman/mason.nvim",
+    "williamboman/mason-lspconfig.nvim",
+    "zapling/mason-conform.nvim",
     {
-        "VonHeikemen/lsp-zero.nvim",
-        version = "v2.x",
-        dependencies = {
-            -- LSP Support
-            { "neovim/nvim-lspconfig" },             -- Required
-            { "williamboman/mason.nvim" },           -- Optional
-            { "williamboman/mason-lspconfig.nvim" }, -- Optional
-            { "zapling/mason-conform.nvim" },        -- Optional
-            {
-                "hrsh7th/nvim-cmp",
-                opts = function(_, options)
-                    options.sources = options.sources or {}
-                    table.insert(options.sources, {
-                        name = "lazydev",
-                        group_index = 0,
-                    })
-                end,
-            },                          -- Autocompletion
-            { "hrsh7th/cmp-nvim-lsp" }, -- Required
-            { "L3MON4D3/LuaSnip" },     -- Required
-            {
-                "folke/lazydev.nvim",
-                ft = "lua",
-                opts = {
-                    library = {
-                        { path = "luvit-meta/library", words = { "vim%.uv" } },
-                    },
-                },
+        "folke/lazydev.nvim",
+        ft = "lua",
+        opts = {
+            library = {
+                { path = "${3rd}/luv/library", words = { "vim%.uv" } },
             },
         },
     },
+    "L3MON4D3/LuaSnip",
+
+    {
+        'MeanderingProgrammer/render-markdown.nvim',
+        dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' },
+        opts = {
+            overrides = { buftype = { ["nofile"] = { enabled = false } } },
+        },
+    },
+
+    -- {
+    --     "VonHeikemen/lsp-zero.nvim",
+    --     version = "v2.x",
+    --     dependencies = {
+    --         -- LSP Support
+    --         { "neovim/nvim-lspconfig" },             -- Required
+    --         { "williamboman/mason.nvim" },           -- Optional
+    --         { "williamboman/mason-lspconfig.nvim" }, -- Optional
+    --         { "zapling/mason-conform.nvim" },        -- Optional
+    --         {
+    --             "hrsh7th/nvim-cmp",
+    --             opts = function(_, options)
+    --                 options.sources = options.sources or {}
+    --                 table.insert(options.sources, {
+    --                     name = "lazydev",
+    --                     group_index = 0,
+    --                 })
+    --             end,
+    --         },                          -- Autocompletion
+    --         { "hrsh7th/cmp-nvim-lsp" }, -- Required
+    --         { "L3MON4D3/LuaSnip" },     -- Required
+    --         {
+    --             "folke/lazydev.nvim",
+    --             ft = "lua",
+    --             opts = {
+    --                 library = {
+    --                     { path = "luvit-meta/library", words = { "vim%.uv" } },
+    --                 },
+    --             },
+    --         },
+    --     },
+    -- },
 
     {
         "nvim-tree/nvim-tree.lua",
@@ -88,30 +119,35 @@ local plugins = {
         },
     },
 
-    "folke/tokyonight.nvim",
+    -- "folke/tokyonight.nvim",
 
-    "m4xshen/autoclose.nvim",
+    -- "m4xshen/autoclose.nvim",
+    {
+        'windwp/nvim-autopairs',
+        event = "InsertEnter",
+        -- config = true,
+        -- opts = {
+        --     disabled_filetype = {
+        --         "TelescopePrompt",
+        --         "chatgpt-input",
+        --         "off",
+        --     },
+        -- },
+    },
 
     "lukas-reineke/indent-blankline.nvim",
 
-    {
-        "rcarriga/nvim-dap-ui",
-        dependencies = {
-            "mfussenegger/nvim-dap",
-            "nvim-neotest/nvim-nio",
-        },
-    },
+    -- {
+    --     "rcarriga/nvim-dap-ui",
+    --     dependencies = {
+    --         "mfussenegger/nvim-dap",
+    --         "nvim-neotest/nvim-nio",
+    --     },
+    -- },
 
     {
-        "numToStr/Comment.nvim",
-        config = function()
-            require("Comment").setup()
-        end,
-    },
-
-    {
-        "rmagatti/session-lens",
-        dependencies = { "rmagatti/auto-session", "nvim-telescope/telescope.nvim" },
+        'rmagatti/auto-session',
+        lazy = false,
     },
 
     {
@@ -133,36 +169,38 @@ local plugins = {
 
     "nanozuki/tabby.nvim",
 
-    "akinsho/toggleterm.nvim",
+    -- "akinsho/toggleterm.nvim",
 
     -- "stevearc/overseer.nvim",
 
-    "Civitasv/cmake-tools.nvim",
+    -- "Civitasv/cmake-tools.nvim",
 
     "voldikss/vim-mma",
 
     -- "nvim-orgmode/orgmode",
 
-    "Vimjas/vim-python-pep8-indent",
+    -- "Vimjas/vim-python-pep8-indent",
 
-    "rcarriga/nvim-notify",
+    -- "rcarriga/nvim-notify",
 
     {
         "Vonr/align.nvim",
         branch = "v2",
+        lazy = true,
     },
 
     -- "xiyaowong/transparent.nvim",
 
-    "danielo515/nvim-treesitter-reason",
+    -- "danielo515/nvim-treesitter-reason",
 
-    {
-        "folke/noice.nvim",
-        dependencies = {
-            "MunifTanjim/nui.nvim",
-            "rcarriga/nvim-notify",
-        },
-    },
+    -- {
+    --     "folke/noice.nvim",
+    --     event = "VeryLazy",
+    --     dependencies = {
+    --         "MunifTanjim/nui.nvim",
+    --         "rcarriga/nvim-notify",
+    --     },
+    -- },
 
     "nvim-pack/nvim-spectre",
 
@@ -172,11 +210,15 @@ local plugins = {
 
     "robitx/gp.nvim",
 
-    "sainnhe/gruvbox-material",
+    -- "sainnhe/gruvbox-material",
 
-    { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+    -- "lambdalisue/vim-suda",
 
-    "lambdalisue/vim-suda",
+    {
+        "catppuccin/nvim",
+        name = "catppuccin",
+        priority = 1000,
+    },
 
     {
         "FabijanZulj/blame.nvim",

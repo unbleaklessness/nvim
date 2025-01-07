@@ -17,12 +17,7 @@ require("catppuccin").setup({
         gitsigns = true,
         nvimtree = true,
         treesitter = true,
-        notify = true,
-        mini = {
-            enabled = true,
-            indentscope_color = "",
-        },
-    }
+    },
 })
 vim.cmd.colorscheme("catppuccin")
 
@@ -87,7 +82,7 @@ if true then
             endif
         endfunction
 
-        augroup
+        augroup highlight_inactive
             autocmd!
             autocmd WinEnter,BufEnter * call s:highlight_active()
             autocmd WinLeave,BufLeave * call s:highlight_inactive()

@@ -1,11 +1,10 @@
-local builtin = require("telescope.builtin")
+local built_in = require("telescope.builtin")
 local pickers = require("telescope.pickers")
 local finders = require("telescope.finders")
 local config = require("telescope.config").values
 local actions = require("telescope.actions")
 local action_state = require("telescope.actions.state")
 local telescope = require("telescope")
-local plenary_path = require("plenary.path")
 local previewers = require("telescope.previewers")
 local previewers_utils = require("telescope.previewers.utils")
 local large_buffers = require("config.large_buffers")
@@ -230,9 +229,9 @@ local find_in_directory = function(options)
                         return
                     end
                     if grep then
-                        builtin.live_grep({ cwd = selection[1] })
+                        built_in.live_grep({ cwd = selection[1] })
                     else
-                        builtin.find_files({ cwd = selection[1] })
+                        built_in.find_files({ cwd = selection[1] })
                     end
                 end)
                 return true
@@ -241,7 +240,7 @@ local find_in_directory = function(options)
         :find()
 end
 
-vim.keymap.set("n", "<leader>ff", builtin.find_files, { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>ff", built_in.find_files, { noremap = true, silent = true })
 
 -- UNUSED.
 -- vim.keymap.set("n", "<leader>fih", function()
@@ -325,9 +324,9 @@ vim.api.nvim_set_keymap("n", "<leader>th", ":Telescope help_tags<CR>", { noremap
 
 vim.api.nvim_set_keymap("n", "<leader>tm", ":Telescope marks<CR>", { noremap = true, silent = true })
 
-local builtin = require("telescope.builtin")
-
-vim.keymap.set("n", "<leader>lr", function()
-    builtin.lsp_references({ trim_text = true, show_line = false })
+-- vim.keymap.set("n", "<leader>lr", function()
+--     builtin.lsp_references({ trim_text = true, show_line = false })
+-- end, { noremap = true, silent = true })
+vim.keymap.set("n", "gr", function()
+    built_in.lsp_references({ trim_text = true, show_line = false })
 end, { noremap = true, silent = true })
-

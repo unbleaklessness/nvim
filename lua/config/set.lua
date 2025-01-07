@@ -1,5 +1,9 @@
 vim.g.mapleader = " "
 
+-- Disable NetRW.
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 vim.opt.nu = true             -- Enable line numbers.
 vim.opt.relativenumber = true -- Enable negative line numbers.
 
@@ -40,12 +44,15 @@ vim.opt.iminsert = 0                            -- Do not use the Russian keyboa
 vim.opt.guifont = "JetBrainsMono Nerd Font:h15" -- Set font and font size for GUI NeoVim.
 
 -- Not working. Why?!
-vim.opt.shortmess:append { c = true }
-vim.opt.shortmess:append { C = true }
-vim.opt.shortmess:append { s = true }
-vim.opt.shortmess:append { W = true }
-vim.opt.shortmess:append { I = true }
-vim.opt.shortmess:append { S = true }
+-- vim.opt.shortmess:append { c = true }
+-- vim.opt.shortmess:append { C = true }
+-- vim.opt.shortmess:append { s = true }
+-- vim.opt.shortmess:append { W = true }
+-- vim.opt.shortmess:append { I = true }
+-- vim.opt.shortmess:append { S = true }
+
+-- vim.opt.shortmess:append { a = true }
+-- vim.opt.shortmess:append { F = true }
 
 -- vim.api.nvim_exec('language en_US', true) -- Set NeoVim language to English.
 vim.cmd("language en_US.UTF-8") -- Set NeoVim language to English.
@@ -65,15 +72,15 @@ vim.opt.undolevels = 3000 -- Maximum number of changes that can be undone.
 
 vim.opt.autoread = true   -- When a file has been detected to have been changed outside of Vim and it has not been changed inside of Vim, automatically read it again.
 
--- Reload the current file if it has been changed externally.
-vim.cmd([[
-    " autocmd FocusGained,WinEnter,BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
-    " autocmd CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
-    " autocmd CursorHold,CursorHoldI * if mode() != 'c' | checktime | feedkeys("<C-[>") | endif
-    " autocmd CursorHold * if mode() != 'c' | checktime | feedkeys("lh") | endif
-    autocmd CursorHold * if mode() != 'c' | checktime | feedkeys("<C-[>") | endif
-    autocmd FileChangedShellPost * echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
-]])
+-- -- Reload the current file if it has been changed externally.
+-- vim.cmd([[
+--     " autocmd FocusGained,WinEnter,BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
+--     " autocmd CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
+--     " autocmd CursorHold,CursorHoldI * if mode() != 'c' | checktime | feedkeys("<C-[>") | endif
+--     " autocmd CursorHold * if mode() != 'c' | checktime | feedkeys("lh") | endif
+--     autocmd CursorHold * if mode() != 'c' | checktime | feedkeys("<C-[>") | endif
+--     autocmd FileChangedShellPost * echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
+-- ]])
 
 vim.cmd([[
     augroup keyboard_layout_switch

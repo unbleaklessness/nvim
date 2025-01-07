@@ -2,14 +2,14 @@ local rainbow_delimiters = require("rainbow-delimiters")
 
 vim.g.rainbow_delimiters = {
     strategy = {
-        [""] = function(buffer_number)
+        [""] = function(_ --[[ Buffer number. ]])
             if vim.b.large_buffer then
                 return nil
             else
                 return rainbow_delimiters.strategy["global"]
             end
         end,
-        vim = function(buffer_number)
+        vim = function(_ --[[ Buffer number. ]])
             if vim.b.large_buffer then
                 return nil
             else
@@ -27,8 +27,8 @@ vim.g.rainbow_delimiters = {
         -- lua = 210,
 
         -- These priorities work nicely with the `treesitter-context`.
-        [""] = 210,
-        lua = 410,
+        [""] = 1000,
+        lua = 1500,
     },
     highlight = {
         "RainbowDelimiterRed",

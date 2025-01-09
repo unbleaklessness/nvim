@@ -20,6 +20,7 @@ require("mason-lspconfig").setup({
         "julials",
         "rust_analyzer",
         "matlab_ls",
+        "bashls",
     },
 })
 
@@ -85,6 +86,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 -- LSP_config.lua_ls.setup(LSP.nvim_lua_ls())
 LSP_config.lua_ls.setup({})
+
+LSP_config.bashls.setup({})
 
 LSP_config.rust_analyzer.setup({})
 

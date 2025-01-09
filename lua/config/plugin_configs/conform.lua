@@ -28,6 +28,8 @@ conform.setup({
         cmake = { "gersemi" },
         xml = { "xmlformat" },
         python = { "black" },
+        sh = { "beautysh" },
+        json = { "fixjson" },
     },
 })
 

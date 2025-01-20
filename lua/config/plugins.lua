@@ -170,11 +170,11 @@ local plugins = {
 
     "nanozuki/tabby.nvim",
 
-    -- "akinsho/toggleterm.nvim",
+    "akinsho/toggleterm.nvim",
 
     -- "stevearc/overseer.nvim",
 
-    -- "Civitasv/cmake-tools.nvim",
+    "Civitasv/cmake-tools.nvim",
 
     "voldikss/vim-mma",
 

@@ -90,12 +90,26 @@ vim.keymap.set(
     "n",
     "<leader>rf",
     '<cmd>lua require("spectre").open_visual({ select_word = true })<CR>',
-    { desc = "Search the current word" }
+    { desc = "Global search current word" }
 )
 
 vim.keymap.set(
     "v",
     "<leader>rf",
     '<esc><cmd>lua require("spectre").open_visual()<CR>',
-    { desc = "Search the current word" }
+    { desc = "Global search selection" }
+)
+
+vim.keymap.set(
+    "n",
+    "<leader>rc",
+    '<cmd>lua require("spectre").open_file_search({ select_word = true })<CR>',
+    { desc = "Current file search current word" }
+)
+
+vim.keymap.set(
+    "v",
+    "<leader>rc",
+    '<esc><cmd>lua require("spectre").open_file_search()<CR>',
+    { desc = "Current file search selection" }
 )

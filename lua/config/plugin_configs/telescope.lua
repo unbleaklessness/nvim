@@ -47,8 +47,8 @@ telescope.setup({
 
                 -- Other.
                 "--strip-cwd-prefix", -- Do not show the `./` prefix.
-                "--hidden", -- Show hidden files (such as dot files).
-                "--no-ignore", -- Show files ignored by `.gitignore`.
+                "--hidden",           -- Show hidden files (such as dot files).
+                "--no-ignore",        -- Show files ignored by `.gitignore`.
 
                 -- Exclude from find.
 
@@ -81,7 +81,7 @@ telescope.setup({
 
                 "--exclude",
                 "worktrees/",
-           },
+            },
         },
         buffers = {
             sort_lastused = true,
@@ -101,7 +101,7 @@ telescope.setup({
 
             -- Other.
             "--smart-case",
-            "--hidden", -- Show hidden files (such as dot files).
+            "--hidden",        -- Show hidden files (such as dot files).
             "--no-ignore-vcs", -- Show files ignored by `.gitignore`.
 
             -- Exclude from grep.
@@ -192,7 +192,7 @@ local find_in_directory = function(options)
                 -- Other.
                 -- "--max-depth",
                 -- "3",
-                "--hidden", -- Show hidden files (such as dot files).
+                "--hidden",    -- Show hidden files (such as dot files).
                 "--no-ignore", -- Show files ignored by `.gitignore`.
 
                 -- Exclude from find.
@@ -250,12 +250,26 @@ vim.keymap.set("n", "<leader>ff", built_in.find_files, { noremap = true, silent 
 --     find_in_directory({ path = vim.env.HOME .. "/", grep = true })
 -- end, { noremap = true, silent = true })
 
+local function get_current_buffer_directory_path()
+    local buffer_absolute_path = vim.api.nvim_buf_get_name(0)
+    local buffer_directory_path = vim.fn.fnamemodify(buffer_absolute_path, ":p:h")
+    return buffer_directory_path
+end
+
 vim.keymap.set("n", "<leader>fidg", function()
-    find_in_directory({ path = vim.fn.getcwd() .. "/", grep = true })
+    find_in_directory({ path = vim.fn.getcwd(), grep = true })
+end, { noremap = true, silent = true })
+
+vim.keymap.set("n", "<leader>ficg", function()
+    built_in.live_grep({ cwd = get_current_buffer_directory_path() })
 end, { noremap = true, silent = true })
 
 vim.keymap.set("n", "<leader>fidf", function()
-    find_in_directory({ path = vim.fn.getcwd() .. "/", grep = false })
+    find_in_directory({ path = vim.fn.getcwd(), grep = false })
+end, { noremap = true, silent = true })
+
+vim.keymap.set("n", "<leader>ficf", function()
+    built_in.find_files({ cwd = get_current_buffer_directory_path() })
 end, { noremap = true, silent = true })
 
 -- UNUSED.

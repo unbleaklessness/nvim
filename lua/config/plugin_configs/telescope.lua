@@ -171,7 +171,6 @@ local find_in_directory = function(options)
     pickers
         .new(options, {
             prompt_title = "Find in Directory",
-            default_text = path,
             sorter = config.generic_sorter({}),
             previewer = config.file_previewer({}),
 
@@ -181,7 +180,6 @@ local find_in_directory = function(options)
                 -- Required by this.
                 "--base-directory",
                 path,
-                "--absolute-path",
 
                 -- Required by Telescope.
                 "--color",
@@ -192,8 +190,8 @@ local find_in_directory = function(options)
                 "directory",
 
                 -- Other.
-                "--max-depth",
-                "3",
+                -- "--max-depth",
+                -- "3",
                 "--hidden", -- Show hidden files (such as dot files).
                 "--no-ignore", -- Show files ignored by `.gitignore`.
 
@@ -252,12 +250,12 @@ vim.keymap.set("n", "<leader>ff", built_in.find_files, { noremap = true, silent 
 --     find_in_directory({ path = vim.env.HOME .. "/", grep = true })
 -- end, { noremap = true, silent = true })
 
-vim.keymap.set("n", "<leader>fid", function()
-    find_in_directory({ path = vim.fn.getcwd() .. "/" })
+vim.keymap.set("n", "<leader>fidg", function()
+    find_in_directory({ path = vim.fn.getcwd() .. "/", grep = true })
 end, { noremap = true, silent = true })
 
-vim.keymap.set("n", "<leader>Fid", function()
-    find_in_directory({ path = vim.fn.getcwd() .. "/", grep = true })
+vim.keymap.set("n", "<leader>fidf", function()
+    find_in_directory({ path = vim.fn.getcwd() .. "/", grep = false })
 end, { noremap = true, silent = true })
 
 -- UNUSED.

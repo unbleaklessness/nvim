@@ -40,7 +40,7 @@ vim.api.nvim_create_autocmd({ "BufReadPre", "BufReadPost", "FileReadPre", "FileR
             end
         end
 
-        if ok and stats and (stats.size > LARGE_BUFFER_SIZE or long_lines) then
+        if ok and stats and (stats.size > LARGE_BUFFER_SIZE or long_lines and not vim.bo.filetype == 'md') then
             vim.b.large_buffer = true
             large_buffer()
         end

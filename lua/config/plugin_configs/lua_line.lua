@@ -9,6 +9,14 @@ end
 
 local lua_line = require("lualine")
 
+local function getWords()
+    if vim.fn.mode() == "v" or vim.fn.mode() == "V" or vim.fn.mode() == "" then
+        return vim.fn.wordcount().visual_words .. " words"
+    else
+        return vim.fn.wordcount().words .. " words"
+    end
+end
+
 lua_line.setup({
     options = {
         -- theme = "tokyonight",
@@ -45,6 +53,7 @@ lua_line.setup({
             },
         },
         lualine_x = {
+            { getWords },
             "encoding",
             "filetype",
         },

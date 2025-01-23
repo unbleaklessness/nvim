@@ -86,30 +86,30 @@ require("spectre").setup({
 
 vim.keymap.set("n", "<leader>rt", '<cmd>lua require("spectre").toggle()<CR>', { desc = "Toggle Spectre" })
 
+-- vim.keymap.set(
+--     "n",
+--     "<leader>rf",
+--     '<cmd>lua require("spectre").open_visual({ select_word = true })<CR>',
+--     { desc = "Global search current word" }
+-- )
+--
+-- vim.keymap.set(
+--     "v",
+--     "<leader>rf",
+--     '<esc><cmd>lua require("spectre").open_visual()<CR>',
+--     { desc = "Global search selection" }
+-- )
+
 vim.keymap.set(
     "n",
     "<leader>rf",
-    '<cmd>lua require("spectre").open_visual({ select_word = true })<CR>',
-    { desc = "Global search current word" }
-)
-
-vim.keymap.set(
-    "v",
-    "<leader>rf",
-    '<esc><cmd>lua require("spectre").open_visual()<CR>',
-    { desc = "Global search selection" }
-)
-
-vim.keymap.set(
-    "n",
-    "<leader>rc",
     '<cmd>lua require("spectre").open_file_search({ select_word = true })<CR>',
     { desc = "Current file search current word" }
 )
 
 vim.keymap.set(
     "v",
-    "<leader>rc",
+    "<leader>rf",
     '<esc><cmd>lua require("spectre").open_file_search()<CR>',
     { desc = "Current file search selection" }
 )

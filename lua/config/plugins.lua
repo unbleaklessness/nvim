@@ -138,13 +138,13 @@ local plugins = {
 
     "lukas-reineke/indent-blankline.nvim",
 
-    -- {
-    --     "rcarriga/nvim-dap-ui",
-    --     dependencies = {
-    --         "mfussenegger/nvim-dap",
-    --         "nvim-neotest/nvim-nio",
-    --     },
-    -- },
+    {
+        "rcarriga/nvim-dap-ui",
+        dependencies = {
+            "mfussenegger/nvim-dap",
+            "nvim-neotest/nvim-nio",
+        },
+    },
 
     {
         'rmagatti/auto-session',

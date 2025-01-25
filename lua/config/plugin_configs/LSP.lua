@@ -34,7 +34,7 @@ vim.api.nvim_create_user_command("MasonInstallAll", function()
     -- vim.cmd("Lazy load all")
     -- vim.cmd("Mason")
     -- vim.cmd("MasonUpdate")
-    --
+
     local lazy = require("lazy.core.config")
 
     local nvim_lsp = lazy.plugins["nvim-lspconfig"]
@@ -113,8 +113,8 @@ vim.api.nvim_create_user_command("MasonInstallAll", function()
     -- Install them one by one
     -- for _, v in ipairs(mason_stuff) do
     for _, v in ipairs(already_installed) do
-        install_mason_package(v)
-        -- vim.cmd("MasonInstall " .. v)
+        -- install_mason_package(v)
+        vim.cmd("MasonInstall " .. v)
         -- os.exit(1)
     end
 end, {})

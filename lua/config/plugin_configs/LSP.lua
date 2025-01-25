@@ -10,7 +10,7 @@ local ensure_installed = {
     "lua_ls",
     "clangd",
     -- "gopls",
-    "neocmake",
+    -- "neocmake",
     "pyright",
     "arduino_language_server",
     "emmet_ls",

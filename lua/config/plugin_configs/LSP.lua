@@ -6,23 +6,27 @@
 
 require("mason").setup()
 
-require("mason-lspconfig").setup({
-    ensure_installed = {
-        "lua_ls",
-        "clangd",
-        -- "gopls",
-        "neocmake",
-        "pyright",
-        "arduino_language_server",
-        "emmet_ls",
-        "clojure_lsp",
-        -- "glslls",
-        "julials",
-        "rust_analyzer",
-        "matlab_ls",
-        "bashls",
-    },
-})
+local ensure_installed = {
+    "lua_ls",
+    "clangd",
+    -- "gopls",
+    "neocmake",
+    "pyright",
+    "arduino_language_server",
+    "emmet_ls",
+    "clojure_lsp",
+    -- "glslls",
+    "julials",
+    "rust_analyzer",
+    "matlab_ls",
+    "bashls",
+}
+
+require("mason-lspconfig").setup({ ensure_installed = ensure_installed })
+
+vim.api.nvim_create_user_command("MasonInstallAll", function()
+    vim.cmd("MasonInstall " .. table.concat(ensure_installed, " "))
+end, {})
 
 vim.diagnostic.config({
     virtual_text = {

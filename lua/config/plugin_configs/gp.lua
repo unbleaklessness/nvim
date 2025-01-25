@@ -2,7 +2,7 @@ require("gp").setup({
     providers = {
         openai = {
             endpoint = "http://45.138.74.123:9000/v1/chat/completions",
-            secret = { "cat", "/home/sorokinoleg/gpt_api_key.txt" },
+            -- secret = { "cat", "/home/sorokinoleg/gpt_api_key.txt" },
         },
     },
     chat_finder_pattern = "# topic: ",

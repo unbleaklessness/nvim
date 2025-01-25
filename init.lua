@@ -90,6 +90,6 @@ vim.api.nvim_create_user_command("MasonInstallAll", function()
     for _, v in ipairs(mason_stuff) do
         -- install_mason_package(v)
         vim.cmd("MasonInstall " .. v)
-        os.exit(-1)
+        error('Error')
     end
 end, {})

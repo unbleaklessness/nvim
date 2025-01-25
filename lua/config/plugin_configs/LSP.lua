@@ -34,7 +34,7 @@ vim.api.nvim_create_user_command("MasonInstallAll", function()
             local pkg = registry.get_package(Package.Parse(package))
             if not pkg:is_installed() then
                 local handle = pkg:install()
-                handle:wait()
+                -- handle:wait()
             end
         end
     end)

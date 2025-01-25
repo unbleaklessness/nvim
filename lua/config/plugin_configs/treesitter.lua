@@ -35,9 +35,3 @@ require("nvim-treesitter.configs").setup({
         disable = disable_function,
     },
 })
-
-vim.api.nvim_create_user_command("TSInstallAll", function()
-    for _, v in ipairs(ensure_installed) do
-        vim.cmd("TSInstallSync " .. v)
-    end
-end, {})

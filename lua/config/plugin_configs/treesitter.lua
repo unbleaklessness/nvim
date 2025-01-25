@@ -21,7 +21,7 @@ require("nvim-treesitter.configs").setup({
         "markdown_inline",
         "doxygen",
     },
-    sync_install = false,
+    sync_install = true,
     auto_install = true,
     highlight = {
         enable = true,

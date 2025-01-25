@@ -24,39 +24,39 @@ local ensure_installed = {
 
 require("mason-lspconfig").setup({ ensure_installed = ensure_installed })
 
--- vim.api.nvim_create_user_command("MasonInstallAll", function()
---     local registry = require("mason-registry")
---     local Package = require("mason-core.package")
---     local async = require("mason-core.async")
---
---     async.run_blocking(function()
---         for _, package in ipairs(ensure_installed) do
---             local pkg = registry.get_package(Package.Parse(package))
---             if not pkg:is_installed() then
---                 local handle = pkg:install()
---                 handle:wait()
---             end
---         end
---     end)
--- end, { desc = "Install all packages specified in the config." })
-
 vim.api.nvim_create_user_command("MasonInstallAll", function()
-        local lspconfig_to_package = require("mason-lspconfig.mappings.server").lspconfig_to_package
+    local registry = require("mason-registry")
+    local Package = require("mason-core.package")
+    local async = require("mason-core.async")
+
+    async.run_blocking(function()
         for _, package in ipairs(ensure_installed) do
-            local server_name = lspconfig_to_package[package]
-            if server_name then
-                vim.cmd("MasonInstall " .. server_name)
-                vim.notify("Installed LSP package: " .. server_name, vim.log.levels.INFO)
-            else
-                vim.cmd("MasonInstall " .. package)
-                vim.notify("Installed regular package: " .. package, vim.log.levels.INFO)
+            local pkg = registry.get_package(Package.Parse(package))
+            if not pkg:is_installed() then
+                local handle = pkg:install()
+                handle:wait()
             end
         end
-    end,
-    {
-        desc = "Install all packages specified in the config.",
-        nargs = 0,
-    })
+    end)
+end, { desc = "Install all packages specified in the config." })
+
+-- vim.api.nvim_create_user_command("MasonInstallAll", function()
+--         local lspconfig_to_package = require("mason-lspconfig.mappings.server").lspconfig_to_package
+--         for _, package in ipairs(ensure_installed) do
+--             local server_name = lspconfig_to_package[package]
+--             if server_name then
+--                 vim.cmd("MasonInstall " .. server_name)
+--                 vim.notify("Installed LSP package: " .. server_name, vim.log.levels.INFO)
+--             else
+--                 vim.cmd("MasonInstall " .. package)
+--                 vim.notify("Installed regular package: " .. package, vim.log.levels.INFO)
+--             end
+--         end
+--     end,
+--     {
+--         desc = "Install all packages specified in the config.",
+--         nargs = 0,
+--     })
 
 -- vim.api.nvim_create_user_command("MasonInstallAll", function()
 --     for v in ensure_installed do

@@ -12,7 +12,7 @@ local ensure_installed = {
     "clangd",
     -- "fixjson",
     -- "gopls",
-    -- "neocmake",
+    "neocmake",
     "pyright",
     "arduino_language_server",
     "emmet_ls",
@@ -57,128 +57,7 @@ vim.api.nvim_create_user_command("MasonInstallAll", function()
     end
 end, {
     desc = "Install all packages specified in the config, handling LSP server mappings.",
-    nargs = 0,
 })
-
--- vim.api.nvim_create_user_command("MasonInstallAll", function()
---         local lspconfig_to_package = require("mason-lspconfig.mappings.server").lspconfig_to_package
---         for _, package in ipairs(ensure_installed) do
---             local server_name = lspconfig_to_package[package]
---             if server_name then
---                 vim.cmd("MasonInstall " .. server_name)
---                 vim.notify("Installed LSP package: " .. server_name, vim.log.levels.INFO)
---             else
---                 vim.cmd("MasonInstall " .. package)
---                 vim.notify("Installed regular package: " .. package, vim.log.levels.INFO)
---             end
---         end
---     end,
---     {
---         desc = "Install all packages specified in the config.",
---         nargs = 0,
---     })
-
--- vim.api.nvim_create_user_command("MasonInstallAll", function()
---     for v in ensure_installed do
---         vim.cmd("MasonInstall " .. v)
---     end
---
---     -- -- vim.cmd("MasonInstall " .. table.concat(ensure_installed, " "))
---     -- -- error("Error")
---     -- -- print('lalal')
---     -- -- os.exit(-1)
---     --
---     -- -- vim.cmd("Lazy! install all")
---     -- -- vim.cmd("Lazy load all")
---     -- -- vim.cmd("Mason")
---     -- -- vim.cmd("MasonUpdate")
---     --
---     -- local lazy = require("lazy.core.config")
---     --
---     -- local nvim_lsp = lazy.plugins["nvim-lspconfig"]
---     -- local mason = lazy.plugins["mason.nvim"]
---     --
---     -- local registry = require("mason-registry")
---     --
---     -- local function contains(array, element)
---     --     for _, value in ipairs(array) do
---     --         if value == element then
---     --             return true
---     --         end
---     --     end
---     --     return false
---     -- end
---     --
---     -- -- Stuff below is for converting package aliases to names
---     -- local all_package_names = registry.get_all_package_names()
---     -- local alias_to_name = {}
---     --
---     -- for _, package_name in pairs(all_package_names) do
---     --     local aliases = registry.get_package_aliases(package_name)
---     --     if aliases then
---     --         for _, alias in pairs(aliases) do
---     --             alias_to_name[alias] = package_name
---     --         end
---     --         alias_to_name[package_name] = package_name
---     --     end
---     -- end
---     --
---     -- -- local already_installed = registry.get_installed_package_names()
---     -- local already_installed = ensure_installed
---     -- local new_already_installed = {}
---     -- for idx, v in ipairs(already_installed) do
---     --     -- already_installed[idx] = alias_to_name[v]
---     --     new_already_installed[idx] = alias_to_name[v]
---     -- end
---     --
---     -- -- Load all packages into a list
---     -- local mason_stuff = {}
---     --
---     -- -- -- LSP packages installed via `nvim-lspconfig`
---     -- -- local servers = nvim_lsp._.cache.opts.servers
---     -- -- for server_name, _ in pairs(servers) do
---     -- --     server_name = alias_to_name[server_name]
---     -- --     if not contains(already_installed, server_name) then
---     -- --         table.insert(mason_stuff, server_name)
---     -- --     end
---     -- -- end
---     --
---     -- -- -- Mason apps installed
---     -- -- local mason_apps = ensure_installed
---     -- -- for _, mason_app in pairs(mason_apps) do
---     -- --     mason_app = alias_to_name[mason_app]
---     -- --     if not contains(already_installed, mason_app) then
---     -- --         table.insert(mason_stuff, mason_app)
---     -- --     end
---     -- -- end
---     --
---     -- local function install_mason_package(package_name)
---     --     local job_id = vim.fn.jobstart(vim.cmd("MasonInstall " .. package_name), {
---     --         on_exit = function(_, code)
---     --             if code == 0 then
---     --                 print("Installed " .. package_name)
---     --             else
---     --                 print("Failed to install " .. package_name)
---     --             end
---     --         end,
---     --     })
---     --
---     --     vim.fn.jobwait({ job_id }, -1)
---     --     -- if job_id > 0 then
---     --     --     vim.fn.jobwait({ job_id }, -1)
---     --     -- else
---     --     --     print("Failed to start job for " .. package_name)
---     --     -- end
---     -- end
---     --
---     -- -- Install them one by one
---     -- -- for _, v in ipairs(mason_stuff) do
---     -- for _, v in ipairs(new_already_installed) do
---     --     install_mason_package(v)
---     --     -- vim.cmd("MasonInstall " .. v)
---     --     -- os.exit(1)
---     -- end
--- end, {})
 
 vim.diagnostic.config({
     virtual_text = {
@@ -219,24 +98,21 @@ function vim.lsp.util.open_floating_preview(contents, syntax, options, ...)
 end
 
 local LSP_config_defaults = LSP_config.util.default_config
-LSP_config_defaults.capabilities = vim.tbl_deep_extend(
-    'force',
-    LSP_config_defaults.capabilities,
-    require('cmp_nvim_lsp').default_capabilities()
-)
+LSP_config_defaults.capabilities =
+    vim.tbl_deep_extend("force", LSP_config_defaults.capabilities, require("cmp_nvim_lsp").default_capabilities())
 
-vim.api.nvim_create_autocmd('LspAttach', {
-    desc = 'LSP actions',
+vim.api.nvim_create_autocmd("LspAttach", {
+    desc = "LSP actions",
     callback = function(event)
         local options = { buffer = event.buf }
-        vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', options)
-        vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', options)
-        vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', options)
-        vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', options)
-        vim.keymap.set('n', 'go', '<cmd>lua vim.lsp.buf.type_definition()<cr>', options)
+        vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", options)
+        vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", options)
+        vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", options)
+        vim.keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>", options)
+        vim.keymap.set("n", "go", "<cmd>lua vim.lsp.buf.type_definition()<cr>", options)
         -- vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
-        vim.keymap.set('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>', options)
-        vim.keymap.set('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<cr>', options)
+        vim.keymap.set("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", options)
+        vim.keymap.set("n", "gl", "<cmd>lua vim.diagnostic.open_float()<cr>", options)
     end,
 })
 
@@ -382,8 +258,8 @@ CMP.setup({
     sources = {
         { name = "lazydev", group_index = 0 },
         -- { name = 'nvim_lsp_signature_help' },
-        { name = 'nvim_lsp' },
-        { name = 'luasnip' },
+        { name = "nvim_lsp" },
+        { name = "luasnip" },
     },
     window = {
         completion = CMP.config.window.bordered(),
@@ -414,7 +290,7 @@ CMP.setup({
         -- ['<C-Space>'] = CMP.mapping.complete(),
         -- ['<CR>'] = CMP.mapping.confirm({ select = true }),
         -- ['<C-j>'] = CMP.mapping.confirm({ select = true }),
-        ['<C-j>'] = CMP.mapping(function(fallback)
+        ["<C-j>"] = CMP.mapping(function(fallback)
             if CMP.visible() then
                 if Lua_snip.expandable() then
                     Lua_snip.expand()
@@ -429,9 +305,9 @@ CMP.setup({
         end),
         -- ['<C-k>'] = CMP.mapping.confirm({ select = true }),
         -- ['<C-e>'] = CMP.mapping.abort(),
-        ['<C-k>'] = CMP.mapping.abort(),
-        ['<C-p>'] = CMP.mapping.select_prev_item({ behavior = 'select' }),
-        ['<C-n>'] = CMP.mapping.select_next_item({ behavior = 'select' }),
+        ["<C-k>"] = CMP.mapping.abort(),
+        ["<C-p>"] = CMP.mapping.select_prev_item({ behavior = "select" }),
+        ["<C-n>"] = CMP.mapping.select_next_item({ behavior = "select" }),
     },
     snippet = {
         expand = function(arguments)

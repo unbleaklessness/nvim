@@ -12,7 +12,7 @@ local ensure_installed = {
     "clangd",
     -- "fixjson",
     -- "gopls",
-    "neocmake",
+    -- "neocmake",
     "pyright",
     "arduino_language_server",
     "emmet_ls",
@@ -39,6 +39,7 @@ for _, v in ipairs(ensure_installed) do
     table.insert(all_packages, v)
 end
 
+--- @diagnostic disable-next-line: missing-fields
 require("mason-lspconfig").setup({ ensure_installed = ensure_installed })
 
 vim.api.nvim_create_user_command("MasonInstallAll", function()

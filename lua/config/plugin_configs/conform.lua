@@ -19,6 +19,11 @@ conform.setup({
                 "--indent=4",
             },
         },
+        jq = {
+            prepend_args = {
+                "--indent", "4",
+            },
+        },
     },
     formatters_by_ft = {
         glsl = { "clang_format" },
@@ -29,7 +34,7 @@ conform.setup({
         xml = { "xmlformat" },
         python = { "black" },
         sh = { "beautysh" },
-        json = { "fixjson" },
+        json = { "jq" },
     },
 })
 

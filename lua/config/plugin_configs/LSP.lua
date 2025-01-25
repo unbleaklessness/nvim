@@ -9,6 +9,13 @@ require("mason").setup()
 local ensure_installed = {
     "lua_ls",
     "clangd",
+    "clang-format",
+    "stylua",
+    "gersemi",
+    "xmlformatter",
+    "black",
+    "beautysh",
+    "fixjson",
     -- "gopls",
     -- "neocmake",
     "pyright",
@@ -24,47 +31,19 @@ local ensure_installed = {
 
 require("mason-lspconfig").setup({ ensure_installed = ensure_installed })
 
--- vim.api.nvim_create_user_command("MasonInstallAll", function()
---     local registry = require("mason-registry")
---     local Package = require("mason-core.package")
---     local async = require("mason-core.async")
---
---     async.run_blocking(function()
---         for _, package in ipairs(ensure_installed) do
---             local pkg = registry.get_package(Package.Parse(package))
---             if not pkg:is_installed() then
---                 local handle = pkg:install()
---                 -- handle:wait()
---             end
---         end
---     end)
--- end, { desc = "Install all packages specified in the config." })
-
 vim.api.nvim_create_user_command("MasonInstallAll", function()
     local mappings = require("mason-lspconfig.mappings.server")
-    local lspconfig_to_package = mappings.lspconfig_to_package
+    local to_package = mappings.lspconfig_to_package
 
-    -- Collect all package names, converting server names to their Mason packages
     local packages_to_install = {}
     for _, entry in ipairs(ensure_installed) do
-        local package = lspconfig_to_package[entry] or entry
+        local package = to_package[entry] or entry
         table.insert(packages_to_install, package)
     end
 
-    -- Remove duplicate packages
-    local seen = {}
-    local unique_packages = {}
-    for _, pkg in ipairs(packages_to_install) do
-        if not seen[pkg] then
-            seen[pkg] = true
-            table.insert(unique_packages, pkg)
-        end
-    end
-
-    -- Install each unique package
-    for _, pkg in ipairs(unique_packages) do
-        vim.cmd("MasonInstall " .. pkg)
-        vim.notify("Installed package: " .. pkg, vim.log.levels.INFO)
+    for _, p in ipairs(packages_to_install) do
+        vim.cmd("MasonInstall " .. p)
+        vim.notify("Installed package: " .. p, vim.log.levels.INFO)
     end
 end, {
     desc = "Install all packages specified in the config, handling LSP server mappings.",

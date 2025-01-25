@@ -103,18 +103,19 @@ vim.api.nvim_create_user_command("MasonInstallAll", function()
             end,
         })
 
-        if job_id > 0 then
-            vim.fn.jobwait({ job_id }, -1)
-        else
-            print("Failed to start job for " .. package_name)
-        end
+        vim.fn.jobwait({ job_id }, -1)
+        -- if job_id > 0 then
+        --     vim.fn.jobwait({ job_id }, -1)
+        -- else
+        --     print("Failed to start job for " .. package_name)
+        -- end
     end
 
     -- Install them one by one
     -- for _, v in ipairs(mason_stuff) do
     for _, v in ipairs(already_installed) do
-        -- install_mason_package(v)
-        vim.cmd("MasonInstall " .. v)
+        install_mason_package(v)
+        -- vim.cmd("MasonInstall " .. v)
         -- os.exit(1)
     end
 end, {})

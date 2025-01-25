@@ -190,7 +190,7 @@ local plugins = {
         lazy = true,
     },
 
-    -- "xiyaowong/transparent.nvim",
+    "xiyaowong/transparent.nvim",
 
     -- "danielo515/nvim-treesitter-reason",
 

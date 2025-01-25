@@ -67,8 +67,10 @@ vim.api.nvim_create_user_command("MasonInstallAll", function()
 
     -- local already_installed = registry.get_installed_package_names()
     local already_installed = ensure_installed
+    local new_already_installed = {}
     for idx, v in ipairs(already_installed) do
-        already_installed[idx] = alias_to_name[v]
+        -- already_installed[idx] = alias_to_name[v]
+        new_already_installed[idx] = alias_to_name[v]
     end
 
     -- Load all packages into a list
@@ -113,7 +115,7 @@ vim.api.nvim_create_user_command("MasonInstallAll", function()
 
     -- Install them one by one
     -- for _, v in ipairs(mason_stuff) do
-    for _, v in ipairs(already_installed) do
+    for _, v in ipairs(new_already_installed) do
         install_mason_package(v)
         -- vim.cmd("MasonInstall " .. v)
         -- os.exit(1)

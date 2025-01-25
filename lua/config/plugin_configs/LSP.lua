@@ -6,16 +6,10 @@
 
 require("mason").setup()
 
+-- LSPs only.
 local ensure_installed = {
     "lua_ls",
     "clangd",
-    "clang-format",
-    "stylua",
-    "gersemi",
-    "xmlformatter",
-    "black",
-    "beautysh",
-    "jq",
     -- "fixjson",
     -- "gopls",
     -- "neocmake",
@@ -30,6 +24,21 @@ local ensure_installed = {
     "bashls",
 }
 
+-- LSPs + everything else.
+local all_packages = {
+    "clang-format",
+    "jq",
+    "beautysh",
+    "black",
+    "xmlformatter",
+    "gersemi",
+    "stylua",
+}
+
+for _, v in ipairs(ensure_installed) do
+    table.insert(all_packages, v)
+end
+
 require("mason-lspconfig").setup({ ensure_installed = ensure_installed })
 
 vim.api.nvim_create_user_command("MasonInstallAll", function()
@@ -37,7 +46,7 @@ vim.api.nvim_create_user_command("MasonInstallAll", function()
     local to_package = mappings.lspconfig_to_package
 
     local packages_to_install = {}
-    for _, entry in ipairs(ensure_installed) do
+    for _, entry in ipairs(all_packages) do
         local package = to_package[entry] or entry
         table.insert(packages_to_install, package)
     end

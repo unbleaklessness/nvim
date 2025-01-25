@@ -2,25 +2,27 @@ local function disable_function(_, _ --[[ Buffer number. ]])
     return vim.b.large_buffer
 end
 
+local ensure_installed = {
+    "javascript",
+    "typescript",
+    "rust",
+    "c",
+    "lua",
+    "vim",
+    "vimdoc",
+    "query",
+    "python",
+    "bash",
+    -- "reason",
+    "regex",
+    "markdown",
+    "markdown_inline",
+    "doxygen",
+}
+
 --- @diagnostic disable-next-line: missing-fields
 require("nvim-treesitter.configs").setup({
-    ensure_installed = {
-        "javascript",
-        "typescript",
-        "rust",
-        "c",
-        "lua",
-        "vim",
-        "vimdoc",
-        "query",
-        "python",
-        "bash",
-        -- "reason",
-        "regex",
-        "markdown",
-        "markdown_inline",
-        "doxygen",
-    },
+    ensure_installed = ensure_installed,
     sync_install = true,
     auto_install = true,
     highlight = {
@@ -33,3 +35,9 @@ require("nvim-treesitter.configs").setup({
         disable = disable_function,
     },
 })
+
+vim.api.nvim_create_user_command("TSInstallAll", function()
+    for v in ensure_installed do
+        vim.cmd("TSInstallSync " .. v)
+    end
+end, {})

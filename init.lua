@@ -7,6 +7,11 @@ require("config.plugin_configs")
 vim.api.nvim_create_user_command("MasonInstallAll", function()
     -- vim.cmd("MasonInstall " .. table.concat(ensure_installed, " "))
 
+    vim.cmd("Lazy! install all")
+    vim.cmd("Lazy load all")
+    vim.cmd("Mason")
+    vim.cmd("MasonUpdate")
+
     local lazy = require("lazy.core.config")
 
     local nvim_lsp = lazy.plugins["nvim-lspconfig"]

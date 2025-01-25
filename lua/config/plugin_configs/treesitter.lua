@@ -7,6 +7,7 @@ local ensure_installed = {
     "typescript",
     "rust",
     "c",
+    "cpp",
     "lua",
     "vim",
     "vimdoc",

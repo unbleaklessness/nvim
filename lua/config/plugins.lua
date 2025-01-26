@@ -6,7 +6,7 @@ if not (vim.uv or vim.loop).fs_stat(lazy_path) then
     if vim.v.shell_error ~= 0 then
         vim.api.nvim_echo({
             { "Failed to clone `lazy.nvim`:\n", "ErrorMsg" },
-            { out,                              "WarningMsg" },
+            { out, "WarningMsg" },
             { "\nPress any key to exit..." },
         }, true, {})
         vim.fn.getchar()
@@ -73,8 +73,8 @@ local plugins = {
     "L3MON4D3/LuaSnip",
 
     {
-        'MeanderingProgrammer/render-markdown.nvim',
-        dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' },
+        "MeanderingProgrammer/render-markdown.nvim",
+        dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
         opts = {
             overrides = { buftype = { ["nofile"] = { enabled = false } } },
         },
@@ -124,7 +124,7 @@ local plugins = {
 
     -- "m4xshen/autoclose.nvim",
     {
-        'windwp/nvim-autopairs',
+        "windwp/nvim-autopairs",
         event = "InsertEnter",
         -- config = true,
         -- opts = {
@@ -147,7 +147,7 @@ local plugins = {
     },
 
     {
-        'rmagatti/auto-session',
+        "rmagatti/auto-session",
         lazy = false,
     },
 
@@ -225,7 +225,7 @@ local plugins = {
         "FabijanZulj/blame.nvim",
         lazy = false,
         config = function()
-            require('blame').setup()
+            require("blame").setup()
         end,
     },
 }

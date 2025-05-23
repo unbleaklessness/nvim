@@ -140,37 +140,36 @@ local server_configs = {
     },
     ocamllsp = {
         cmd = { "ocamllsp" },
+    },
+    arduino_language_server = {
+        on_new_config = function(config, _)
+            -- Helper functions (file_exists, read_lines, trim_string) are defined globally in this file.
+            local lines = read_lines(vim.fn.getcwd() .. "/.fqbn")
+            local fqbn = "arduino:avr:uno" -- Default FQBN
+            if #lines >= 1 then
+                local trimmed_line = trim_string(lines[1])
+                if trimmed_line ~= "" then
+                    fqbn = trimmed_line
+                end
+            end
+            vim.notify(string.format("Arduino LSP: Using FQBN = %s", fqbn), vim.log.levels.INFO, {
+                title = "Arduino Language Server",
+                timeout = 5000,
+            })
+            config.cmd = {
+                "arduino-language-server",
+                "-fqbn",
+                fqbn,
+            }
+        end,
     }
-    -- Note: arduino_language_server is handled specially in the loop
     -- lua_ls, bashls, rust_analyzer, neocmake, tsserver, julials will use default {}
 }
 
 -- Setup LSPs based on user_lsp_servers
 for _, server_name in ipairs(user_lsp_servers) do
     local setup_opts = server_configs[server_name] or {}
-    if server_name == "arduino_language_server" then
-        LSP_config.arduino_language_server.setup({
-            on_new_config = function(config, _)
-                local lines = read_lines(vim.fn.getcwd() .. "/.fqbn")
-                local fqbn = "arduino:avr:uno" -- Default FQBN
-                if #lines >= 1 then
-                    local trimmed_line = trim_string(lines[1])
-                    if trimmed_line ~= "" then
-                        fqbn = trimmed_line
-                    end
-                end
-                vim.notify(string.format("Arduino LSP: Using FQBN = %s", fqbn), vim.log.levels.INFO, {
-                    title = "Arduino Language Server",
-                    timeout = 5000,
-                })
-                config.cmd = {
-                    "arduino-language-server",
-                    "-fqbn",
-                    fqbn,
-                }
-            end,
-        })
-    elseif LSP_config[server_name] then
+    if LSP_config[server_name] then
         LSP_config[server_name].setup(setup_opts)
     else
         vim.notify("LSP: Configuration not found for " .. server_name .. ", skipping.", vim.log.levels.WARN, { title = "LSP Configuration" })

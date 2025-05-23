@@ -4,29 +4,49 @@
 --     LSP.default_keymaps({ buffer = buffer_number })
 -- end)
 
+-- Load user-defined LSP servers
+local user_lsp_servers = {}
+local ok, result = pcall(require, "config.user_lsp_servers")
+if ok and type(result) == "table" and #result > 0 then
+    user_lsp_servers = result
+else
+    -- Default to lua_ls if user config is missing, empty, or invalid
+    vim.notify("LSP: user_lsp_servers.lua not found or empty, defaulting to lua_ls.", vim.log.levels.WARN, { title = "LSP Configuration" })
+    user_lsp_servers = { "lua_ls" }
+end
+
 require("mason").setup()
 
-local ensure_installed = {
-    "lua_ls",
-    "clangd",
-    -- "gopls",
-    "neocmake",
-    "pyright",
-    "arduino_language_server",
-    "emmet_ls",
-    "clojure_lsp",
-    -- "glslls",
-    "julials",
-    "rust_analyzer",
-    "matlab_ls",
-    "bashls",
-}
-
-require("mason-lspconfig").setup({ ensure_installed = ensure_installed })
+-- Use user_lsp_servers for mason-lspconfig
+require("mason-lspconfig").setup({ ensure_installed = user_lsp_servers })
 
 vim.api.nvim_create_user_command("MasonInstallAll", function()
-    vim.cmd("MasonInstall " .. table.concat(ensure_installed, " "))
+    vim.cmd("MasonInstall " .. table.concat(user_lsp_servers, " "))
 end, {})
+
+-- Helper functions (needed for arduino_language_server)
+local function file_exists(file_path)
+    local file = io.open(file_path, "rb")
+    if file then
+        file:close()
+    end
+    return file ~= nil
+end
+
+local function read_lines(file_path)
+    if not file_exists(file_path) then
+        return {}
+    end
+    local lines = {}
+    for line in io.lines(file_path) do
+        lines[#lines + 1] = line
+    end
+    return lines
+end
+
+local function trim_string(s)
+    return s:gsub("^%s*(.-)%s*$", "%1") -- More robust trim
+end
 
 vim.diagnostic.config({
     virtual_text = {
@@ -88,27 +108,74 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end,
 })
 
--- LSP_config.lua_ls.setup(LSP.nvim_lua_ls())
-LSP_config.lua_ls.setup({})
-
-LSP_config.bashls.setup({})
-
-LSP_config.rust_analyzer.setup({})
-
-LSP_config.neocmake.setup({})
-
-LSP_config.matlab_ls.setup({
-    settings = {
-        matlab = {
-            installPath = "/home/sorokinoleg/MATLAB",
-            indexWorkspace = true,
+-- Server configurations table
+local server_configs = {
+    matlab_ls = {
+        settings = {
+            matlab = {
+                installPath = "/home/sorokinoleg/MATLAB", -- This path might need to be user-configurable in the future
+                indexWorkspace = true,
+            },
         },
     },
-})
+    glslls = {
+        cmd = { "glslls", "--stdin", "--target-env", "opengl" },
+    },
+    pyright = {
+        settings = {
+            python = {
+                analysis = {
+                    typeCheckingMode = "off",
+                },
+            },
+        },
+    },
+    clangd = {
+        cmd = {
+            "clangd",
+            "--background-index",
+            "--header-insertion=never",
+            "--query-driver=**",
+        },
+    },
+    ocamllsp = {
+        cmd = { "ocamllsp" },
+    }
+    -- Note: arduino_language_server is handled specially in the loop
+    -- lua_ls, bashls, rust_analyzer, neocmake, tsserver, julials will use default {}
+}
 
-LSP_config.glslls.setup({
-    cmd = { "glslls", "--stdin", "--target-env", "opengl" },
-})
+-- Setup LSPs based on user_lsp_servers
+for _, server_name in ipairs(user_lsp_servers) do
+    local setup_opts = server_configs[server_name] or {}
+    if server_name == "arduino_language_server" then
+        LSP_config.arduino_language_server.setup({
+            on_new_config = function(config, _)
+                local lines = read_lines(vim.fn.getcwd() .. "/.fqbn")
+                local fqbn = "arduino:avr:uno" -- Default FQBN
+                if #lines >= 1 then
+                    local trimmed_line = trim_string(lines[1])
+                    if trimmed_line ~= "" then
+                        fqbn = trimmed_line
+                    end
+                end
+                vim.notify(string.format("Arduino LSP: Using FQBN = %s", fqbn), vim.log.levels.INFO, {
+                    title = "Arduino Language Server",
+                    timeout = 5000,
+                })
+                config.cmd = {
+                    "arduino-language-server",
+                    "-fqbn",
+                    fqbn,
+                }
+            end,
+        })
+    elseif LSP_config[server_name] then
+        LSP_config[server_name].setup(setup_opts)
+    else
+        vim.notify("LSP: Configuration not found for " .. server_name .. ", skipping.", vim.log.levels.WARN, { title = "LSP Configuration" })
+    end
+end
 
 -- NeoVim fails to identify the correct file type for the `frag` and `vert` extensions.
 vim.cmd([[
@@ -135,79 +202,22 @@ vim.cmd([[
     au BufNewFile,BufRead *.rasi set filetype=rasi
 ]])
 
-LSP_config.pyright.setup({
-    settings = {
-        python = {
-            analysis = {
-                typeCheckingMode = "off",
-            },
-        },
-    },
-})
-
--- local function file_exists(file_path)
---     local file = io.open(file_path, "rb")
---     if file then
---         file:close()
---     end
---     return file ~= nil
--- end
-
--- local function read_lines(file_path)
---     if not file_exists(file_path) then
---         return {}
---     end
---     local lines = {}
---     for line in io.lines(file_path) do
---         lines[#lines + 1] = line
---     end
---     return lines
--- end
-
--- local function trim_string(s)
---     return s:gsub("%s+", "")
--- end
-
--- LSP_config.arduino_language_server.setup({
---     on_new_config = function(config, _)
---         local lines = read_lines(vim.fn.getcwd() .. "/.fqbn")
---         local fqbn = "arduino:avr:uno"
---         if #lines >= 1 then
---             fqbn = trim_string(lines[1])
---         end
---         require("notify")(string.format("FQBN = %s", fqbn), vim.log.levels.INFO, {
---             title = "Arduino Language Server",
---             timeout = 5000,
---             render = "simple",
---         })
---         config.cmd = {
---             "arduino-language-server",
---             "-fqbn",
---             fqbn,
---         }
---     end,
--- })
-
-LSP_config.tsserver.setup({})
-
-LSP_config.julials.setup({})
-
-LSP_config.clangd.setup({
-    cmd = {
-        "clangd",
-        "--background-index",
-        -- "--suggest-missing-includes",
-        -- "--clang-tidy",
-        -- "--header-insertion=iwyu",
-        "--header-insertion=never",
-        "--query-driver=**",
-        -- '--sysroot "/opt/poky/5.0.1/sysroots/corei7-64-poky-linux"',
-    },
-})
-
-LSP_config.ocamllsp.setup({
-    cmd = { "ocamllsp" },
-})
+-- Individual LSP_config.<server_name>.setup calls are now handled by the loop above.
+-- Commenting out the old individual setup calls:
+--
+-- LSP_config.lua_ls.setup({})
+-- LSP_config.bashls.setup({})
+-- LSP_config.rust_analyzer.setup({})
+-- LSP_config.neocmake.setup({})
+--
+-- LSP_config.matlab_ls.setup({ ... }) -- Handled by server_configs
+-- LSP_config.glslls.setup({ ... }) -- Handled by server_configs
+-- LSP_config.pyright.setup({ ... }) -- Handled by server_configs
+-- LSP_config.arduino_language_server.setup({ ... }) -- Handled by special case in loop
+-- LSP_config.tsserver.setup({})
+-- LSP_config.julials.setup({})
+-- LSP_config.clangd.setup({ ... }) -- Handled by server_configs
+-- LSP_config.ocamllsp.setup({ ... }) -- Handled by server_configs
 
 -- LSP.setup()
 

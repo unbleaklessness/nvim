@@ -103,13 +103,42 @@ vim.keymap.set("n", "<leader>rt", '<cmd>lua require("spectre").toggle()<CR>', { 
 vim.keymap.set(
     "n",
     "<leader>rf",
-    '<cmd>lua require("spectre").open_file_search({ select_word = true })<CR>',
+    '<cmd>lua require("spectre").open_file_search({ select_word = true, replace_text = vim.fn.expand("<cword>") })<CR>',
     { desc = "Current file search current word" }
 )
+
+-- This function does not work correctly:
+function get_selected_text()
+    local mode = vim.api.nvim_get_mode().mode
+
+    if mode ~= "v" and mode ~= "V" and mode ~= "\22" then
+        return ""
+    end
+
+    local start_position = vim.fn.getpos("v")
+    local stop_position = vim.fn.getpos(".")
+
+    if
+        start_position[2] > stop_position[2]
+        or (start_position[2] == stop_position[2] and start_position[3] > stop_position[3])
+    then
+        local temporary = start_position
+        start_position = stop_position
+        stop_position = temporary
+    end
+
+    local lines = vim.fn.getregion(0, start_position, stop_position)
+
+    if lines == nil or #lines == 0 then
+        return ""
+    end
+
+    return table.concat(lines, "\n")
+end
 
 vim.keymap.set(
     "v",
     "<leader>rf",
-    '<esc><cmd>lua require("spectre").open_file_search()<CR>',
+    '<esc><cmd>lua require("spectre").open_file_search({ replace_text = get_selected_text() })<CR>',
     { desc = "Current file search selection" }
 )

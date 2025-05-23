@@ -34,6 +34,7 @@ conform.setup({
         xml = { "xmlformat" },
         python = { "black" },
         sh = { "beautysh" },
+        zsh = { "beautysh" },
         json = { "jq" },
     },
 })

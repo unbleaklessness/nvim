@@ -17,9 +17,9 @@ function Select_inside_code_fence()
         end
     end
 
-    if start_line and end_line and current_line <= start_line and current_line <= end_line then
+    if start_line and end_line and current_line >= start_line and current_line <= end_line then
         vim.fn.setpos("'<", { 0, start_line, 1, 0 })
-        vim.fn.setpos("'>", { 0, end_line + 1, 1, 0 })
+        vim.fn.setpos("'>", { 0, end_line, #lines[end_line], 0 })
         vim.cmd('normal! gv')
     end
 end

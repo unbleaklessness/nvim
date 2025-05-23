@@ -30,6 +30,8 @@ require("transparent").setup({
         "NvimTreeNormal",
         "NvimTreeNormalNC",
         "NvimTreeWinSeparator",
+        "NvimTreeEndOfBuffer",
+        "NvimTreeCursorLine",
 
         "TelescopeBorder",
         "TelescopeNormal",

@@ -8,35 +8,35 @@ require("mason").setup()
 
 -- LSPs only.
 local ensure_installed = {
-    "lua_ls",
-    "clangd",
+    "matlab_ls@97d43dbed952c3b0b095522d422b227abb27cf0b",
+    "lua_ls@3.13.5",
+    "clangd@19.1.2",
     -- "fixjson",
     -- "gopls",
     -- "neocmake",
-    "pyright",
-    "arduino_language_server",
-    "emmet_ls",
-    "clojure_lsp",
+    "pyright@1.1.392",
+    "arduino_language_server@0.7.6",
+    "emmet_ls@0.4.2",
+    "clojure_lsp@2025.01.22-23.28.23",
     -- "glslls",
-    "julials",
-    "rust_analyzer",
-    "matlab_ls",
-    "bashls",
+    "julials@v1.127.2",
+    "rust_analyzer@2025-01-20",
+    "bashls@5.4.3",
 }
 
 -- LSPs + everything else.
-local all_packages = {
-    "clang-format",
-    "jq",
-    "beautysh",
-    "black",
-    "xmlformatter",
-    "gersemi",
-    "stylua",
+local all_ensure_installed = {
+    "clang-format@19.1.7",
+    "jq@jq-1.7",
+    "beautysh@386e46cf6e6e68e26e90a6c0e8c3d0f0d30c101c",
+    "black@24.10.0",
+    "xmlformatter@0.2.8",
+    "gersemi@0.18.2",
+    "stylua@v2.0.2",
 }
 
 for _, v in ipairs(ensure_installed) do
-    table.insert(all_packages, v)
+    table.insert(all_ensure_installed, v)
 end
 
 --- @diagnostic disable-next-line: missing-fields
@@ -47,9 +47,20 @@ vim.api.nvim_create_user_command("MasonInstallAll", function()
     local to_package = mappings.lspconfig_to_package
 
     local packages_to_install = {}
-    for _, entry in ipairs(all_packages) do
-        local package = to_package[entry] or entry
-        table.insert(packages_to_install, package)
+    for _, entry in ipairs(all_ensure_installed) do
+        if string.find(entry, '@') then -- Version is specified.
+            local name = entry:match("^(.-)@")
+            local version = entry:match("@(.+)$")
+            local package_name = to_package[name]
+            if package_name then
+                table.insert(packages_to_install, package_name .. "@" .. version)
+            else
+                table.insert(packages_to_install, entry)
+            end
+        else
+            local package_name = to_package[entry] or entry
+            table.insert(packages_to_install, package_name)
+        end
     end
 
     for _, p in ipairs(packages_to_install) do

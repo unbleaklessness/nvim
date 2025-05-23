@@ -211,7 +211,7 @@ local plugins = {
 
     "robitx/gp.nvim",
 
-    -- "sainnhe/gruvbox-material",
+    "sainnhe/gruvbox-material",
 
     -- "lambdalisue/vim-suda",
 

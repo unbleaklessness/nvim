@@ -9,38 +9,38 @@
 
 -- vim.cmd.colorscheme("tokyonight-night")
 
--- vim.cmd.colorscheme("gruvbox-material")
+vim.cmd.colorscheme("gruvbox-material")
 
-require("catppuccin").setup({
-    integrations = {
-        cmp = true,
-        gitsigns = true,
-        nvimtree = true,
-        treesitter = true,
-    },
-    transparent_background = true,
-})
-vim.cmd.colorscheme("catppuccin")
+-- require("catppuccin").setup({
+--     integrations = {
+--         cmp = true,
+--         gitsigns = true,
+--         nvimtree = true,
+--         treesitter = true,
+--     },
+--     -- transparent_background = true,
+-- })
+-- vim.cmd.colorscheme("catppuccin")
 
 -- Make background of inactive buffers darker.
 
-if true then
+if false then
     vim.cmd([[
 
         " For Tokyo Night theme.
 
-        " highlight ActiveBufferBG guibg=#1A1B26
-        " highlight ActiveBufferFG guifg=#1A1B26
+        "highlight ActiveBufferBG guibg=#1A1B26
+        "highlight ActiveBufferFG guifg=#1A1B26
 
         " For Gruvbox Material theme.
 
-        " highlight ActiveBufferBG guibg=#282828
-        " highlight ActiveBufferFG guifg=#282828
+        highlight ActiveBufferBG guibg=#282828
+        highlight ActiveBufferFG guifg=#282828
 
         " For Catppuccin theme.
 
-        highlight ActiveBufferBG guibg=#1e1e2e
-        highlight ActiveBufferFG guifg=#1e1e2e
+        "highlight ActiveBufferBG guibg=#1e1e2e
+        "highlight ActiveBufferFG guifg=#1e1e2e
     ]])
 
     vim.cmd([[
@@ -52,13 +52,13 @@ if true then
 
         " For Gruvbox Material theme.
 
-        " highlight InactiveBufferBG guibg=#010101
-        " highlight InactiveBufferFG guifg=#010101
+        highlight InactiveBufferBG guibg=#010101
+        highlight InactiveBufferFG guifg=#010101
 
         " For Catppuccin theme.
 
-        highlight InactiveBufferBG guibg=#010101
-        highlight InactiveBufferFG guifg=#010101
+        "highlight InactiveBufferBG guibg=#010101
+        "highlight InactiveBufferFG guifg=#010101
     ]])
 
     vim.cmd([[

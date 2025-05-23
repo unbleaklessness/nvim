@@ -81,6 +81,9 @@ telescope.setup({
 
                 "--exclude",
                 "worktrees/",
+
+                "--exclude",
+                "workspaces/",
             },
         },
         buffers = {
@@ -135,6 +138,9 @@ telescope.setup({
 
             "--glob",
             "!worktrees/",
+
+            "--glob",
+            "!workspaces/",
         },
         buffer_previewer_maker = truncate_large_files,
     },

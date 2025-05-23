@@ -20,8 +20,8 @@ end
 lua_line.setup({
     options = {
         -- theme = "tokyonight",
-        -- theme = "gruvbox-material",
-        theme = "catppuccin",
+        theme = "gruvbox-material",
+        -- theme = "catppuccin",
         disabled_filetypes = {
             "NvimTree",
             "dapui_console",
